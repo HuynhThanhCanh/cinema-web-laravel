@@ -5,13 +5,13 @@
 2. Bật Laragon và nhấn nút **Start all**
 3. Nhấn nút **Terminal** và trỏ đường dẫn đến thư mục chứa project vừa mới clone về.
    ```sh 
-   Nó có cấu trúc tương tự như dòng này: **E:\Laragon\www\cinema-web-laravel (master)** 
+   Nó có cấu trúc tương tự như dòng này: E:\Laragon\www\cinema-web-laravel (master)
    ```
 4. Chạy lần lượt 2 dòng lệnh bên dưới
    ```sh
-   **composer install**
+   composer install
    và
-   **php artisan key:generate**
+   php artisan key:generate
    ```
 5. Quay lại giao diện chính của Laragon, click chuột phải -> www -> cinema-web-laravel để chạy project
 
