@@ -1,8 +1,8 @@
 **Lưu ý 1:** Tạo 1 folder trống có tên là **cinema-web-laravel**(giống tên repo) trong folder **www** của Laragon và dùng SourceTree clone về folder đó nhé.
 
 # HƯỚNG DẪN CÀI ĐẶT PROJECT SAU KHI CLONE VỀ LOCAL
-1. Duplicate file **.env.example** và đổi tên file thành **.env**.
-2. Bật Laragon và nhấn nút **Start all**.
+1. Duplicate file **.env.example** và đổi tên file thành **.env**
+2. Bật Laragon và nhấn nút **Start all**
 3. Nhấn nút **Terminal** và trỏ đường dẫn đến thư mục chứa project vừa mới clone về.
    ```sh 
    Nó có cấu trúc tương tự như dòng này: **E:\Laragon\www\cinema-web-laravel (master)** 
