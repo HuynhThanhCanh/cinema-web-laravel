@@ -14,11 +14,17 @@ class CreateRapsTable extends Migration
     public function up()
     {
         Schema::create('raps', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            //
             $table->bigIncrements('MaRap');
-            $table->char('TenRap', 20);
+            $table->string('TenRap', 20);
             $table->integer('SoLuongGhe');
-            $table->bigInteger('ChiNhanh');
+            $table->bigInteger('MaChiNhanh')->unsigned(); //khóa ngoại
             $table->integer('TrangThai')->default(0);
+            $table->timestamp('ThoiGianTao')->useCurrent();
+            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 

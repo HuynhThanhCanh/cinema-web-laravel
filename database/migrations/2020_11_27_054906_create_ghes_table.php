@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChucVusTable extends Migration
+class CreateGhesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,20 @@ class CreateChucVusTable extends Migration
      */
     public function up()
     {
-        Schema::create('chuc_vus', function (Blueprint $table) {
+        Schema::create('ghes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             //
-            $table->bigIncrements('MaCV');
-            $table->string('TenCV', 30);
+            $table->string('MaGhe', 5);
+            $table->string('MaLoaiGhe', 5);
+            $table->integer('ChiSoHang');
+            $table->integer('ChiSoCot');
             $table->integer('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
+            //
+            $table->primary('MaGhe');
         });
     }
 
@@ -33,6 +37,6 @@ class CreateChucVusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chuc_vus');
+        Schema::dropIfExists('ghes');
     }
 }

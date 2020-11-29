@@ -14,13 +14,19 @@ class CreateChiNhanhsTable extends Migration
     public function up()
     {
         Schema::create('chi_nhanhs', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            //
             $table->bigIncrements('MaChiNhanh');
-            $table->char('TenChiNhanh');
+            $table->string('TenChiNhanh', 100);
             $table->integer('SoLuongRap');
-            $table->char('DiaChi', 100);
-            $table->char('SDT', 11);
-            $table->bigInteger('MaNV');
+            $table->string('DiaChi', 100);
+            $table->string('SDT', 11);
+            $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->integer('TrangThai')->default(0);
+            $table->timestamp('ThoiGianTao')->useCurrent();
+            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 

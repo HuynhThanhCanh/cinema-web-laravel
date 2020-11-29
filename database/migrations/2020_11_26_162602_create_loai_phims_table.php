@@ -14,10 +14,16 @@ class CreateLoaiPhimsTable extends Migration
     public function up()
     {
         Schema::create('loai_phims', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            //
             $table->bigIncrements('MaLoaiPhim');
-            $table->char('TenLoaiPhim', 100);
-            $table->integer('MaNV');
+            $table->string('TenLoaiPhim', 100);
+            $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->integer('TrangThai')->default(0);
+            $table->timestamp('ThoiGianTao')->useCurrent();
+            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 

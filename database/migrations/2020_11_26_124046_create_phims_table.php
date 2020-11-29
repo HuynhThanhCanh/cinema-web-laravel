@@ -14,20 +14,26 @@ class CreatePhimsTable extends Migration
     public function up()
     {
         Schema::create('phims', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            //
             $table->bigIncrements('MaPhim');
-            $table->char('TenPhim', 100);
+            $table->string('TenPhim', 100);
             $table->date('NgayDKChieu');
             $table->date('NgayKetThuc');
             $table->time('ThoiLuong');
-            $table->char('DaoDien', 50);
-            $table->char('DienVien', 250);
+            $table->string('DaoDien', 50);
+            $table->string('DienVien', 250);
             $table->integer('Diem')->default(0);
-            $table->char('HinhAnh');
-            $table->char('LinkPhim');
-            $table->bigInteger('MaRapChieu');
-            $table->bigInteger('MaNV');
-            $table->bigInteger('Nhan');
+            $table->string('HinhAnh')->nullable();
+            $table->string('LinkPhim')->nullable();
+            $table->bigInteger('MaLoaiPhim')->unsigned(); //khóa ngoại
+            $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
+            $table->bigInteger('Nhan')->unsigned(); //khóa ngoại
             $table->integer('TrangThai')->default(0);
+            $table->timestamp('ThoiGianTao')->useCurrent();
+            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 
