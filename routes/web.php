@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.trang-chu');
+});
+
+Route::get('/quan-ly-phim', function () {
+    return view('pages.quan-ly-phim');
+});
+
+Route::get('/quan-ly-rap', function () {
+    return view('pages.quan-ly-rap');
+});
+
+Route::get('/dang-nhap', function () {
+    return view('pages.dang-nhap');
 });
