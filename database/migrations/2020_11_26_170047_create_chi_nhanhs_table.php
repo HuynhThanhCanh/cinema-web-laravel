@@ -20,11 +20,11 @@ class CreateChiNhanhsTable extends Migration
             //
             $table->bigIncrements('MaChiNhanh');
             $table->string('TenChiNhanh', 100);
-            $table->integer('SoLuongRap');
+            $table->tinyInteger('SoLuongRap');
             $table->string('DiaChi', 100);
             $table->string('SDT', 11);
             $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

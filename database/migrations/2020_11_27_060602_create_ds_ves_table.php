@@ -19,9 +19,9 @@ class CreateDsVesTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             //
             $table->bigIncrements('MaDsVe');
-            $table->integer('SoLuong');
+            $table->tinyInteger('SoLuong');
             $table->decimal('TongThanhTien');
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

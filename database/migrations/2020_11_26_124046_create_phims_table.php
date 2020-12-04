@@ -25,13 +25,13 @@ class CreatePhimsTable extends Migration
             $table->time('ThoiLuong');
             $table->string('DaoDien', 50);
             $table->string('DienVien', 250);
-            $table->integer('Diem')->default(0);
+            $table->tinyInteger('Diem');
             $table->string('HinhAnh')->nullable();
             $table->string('LinkPhim')->nullable();
             $table->bigInteger('MaLoaiPhim')->unsigned(); //khóa ngoại
             $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->bigInteger('Nhan')->unsigned(); //khóa ngoại
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

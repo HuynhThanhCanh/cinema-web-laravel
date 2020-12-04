@@ -20,7 +20,7 @@ class CreateGioiHanTuoisTable extends Migration
             //
             $table->bigIncrements('MaGioiHan');
             $table->string('TenGioiHan', 50);
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

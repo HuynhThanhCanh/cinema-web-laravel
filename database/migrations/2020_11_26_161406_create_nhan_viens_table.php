@@ -29,7 +29,7 @@ class CreateNhanViensTable extends Migration
             $table->bigInteger('MaNQL')->nullable()->unsigned(); //khóa ngoại
             $table->string('TenTK', 20);
             $table->string('Pass', 20);
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

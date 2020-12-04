@@ -20,7 +20,7 @@ class CreateGiasTable extends Migration
             //
             $table->bigIncrements('MaGia');
             $table->decimal('DonGia');
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

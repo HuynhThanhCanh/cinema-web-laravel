@@ -22,12 +22,10 @@ class CreateVesTable extends Migration
             $table->string('TenVe', 50)->nullable();
             $table->bigInteger('MaDsVe')->unsigned(); //Khóa ngoại
             $table->decimal('ThanhTien')->default(0);
-            $table->dateTime('ThoiGianMua');
+            $table->timestamp('ThoiGianMua')->useCurrent();
             $table->bigInteger('MaLichChieu')->unsigned(); //Khóa ngoại
             $table->string('MaGhe', 5); //Khóa ngoại
-            $table->integer('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
+            $table->tinyInteger('TrangThai')->default(0);
         });
     }
 

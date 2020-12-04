@@ -20,7 +20,7 @@ class CreateChucVusTable extends Migration
             //
             $table->bigIncrements('MaCV');
             $table->string('TenCV', 30);
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

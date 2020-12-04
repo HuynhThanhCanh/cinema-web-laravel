@@ -22,7 +22,7 @@ class CreateLichChieusTable extends Migration
             $table->bigInteger('MaThoiGianChieu')->unsigned();
             $table->bigInteger('MaPhim')->unsigned();
             $table->bigInteger('MaRap')->unsigned();
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //

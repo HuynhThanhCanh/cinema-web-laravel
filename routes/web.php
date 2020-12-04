@@ -17,12 +17,40 @@ Route::get('/', function () {
     return view('pages.trang-chu');
 });
 
-Route::get('/quan-ly-phim', function () {
-    return view('pages.quan-ly-phim');
+Route::group(['prefix' => 'quan-ly-phim'], function () {
+    Route::get('/', function () {
+        return view('pages.quan-ly-phim');
+    });
+    Route::get('/them-phim', function () {
+        return view('pages.them.them-phim');
+    });
+    Route::get('/cap-nhat-phim', function () {
+        return view('pages.cap-nhat.cap-nhat-phim');
+    });
 });
 
-Route::get('/quan-ly-rap', function () {
-    return view('pages.quan-ly-rap');
+Route::group(['prefix' => 'quan-ly-the-loai-phim'], function () {
+    Route::get('/', function () {
+        return view('pages.quan-ly-the-loai-phim');
+    });
+    Route::get('/them-the-loai-phim', function () {
+        return view('pages.them.them-the-loai-phim');
+    });
+    Route::get('/cap-nhat-the-loai-phim', function () {
+        return view('pages.cap-nhat.cap-nhat-the-loai-phim');
+    });
+});
+
+Route::group(['prefix' => 'quan-ly-rap'], function () {
+    Route::get('/', function () {
+        return view('pages.quan-ly-rap');
+    });
+    Route::get('/them-rap', function () {
+        return view('pages.them.them-rap');
+    });
+    Route::get('/cap-nhat-rap', function () {
+        return view('pages.cap-nhat.cap-nhat-rap');
+    });
 });
 
 Route::get('/dang-nhap', function () {

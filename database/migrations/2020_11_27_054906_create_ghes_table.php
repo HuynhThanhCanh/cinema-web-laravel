@@ -20,9 +20,9 @@ class CreateGhesTable extends Migration
             //
             $table->string('MaGhe', 5);
             $table->string('MaLoaiGhe', 5);
-            $table->integer('ChiSoHang');
-            $table->integer('ChiSoCot');
-            $table->integer('TrangThai')->default(0);
+            $table->string('ChiSoHang');
+            $table->tinyInteger('ChiSoCot');
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //
