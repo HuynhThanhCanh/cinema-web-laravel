@@ -20,7 +20,8 @@ class CreateDsVesTable extends Migration
             //
             $table->bigIncrements('MaDsVe');
             $table->tinyInteger('SoLuong');
-            $table->decimal('TongThanhTien');
+            $table->decimal('TongThanhTien', 65);
+            $table->bigInteger('MaTV')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();

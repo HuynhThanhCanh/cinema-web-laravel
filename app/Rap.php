@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Rap extends Model
 {
     //
-    protected $table = 'Rap';
+    protected $table = 'raps';
     public $timestamps =true;
     // 1 rạp chỉ 1 chi nhánh
     public function ChiNhanh()
     {
-        return $this->hasOne('App\ChiNhanh', 'MaChiNhanh', 'MaChiNhanh');
+        return $this->belongsTo('App\ChiNhanh', 'MaChiNhanh', 'MaChiNhanh');
     }
-    //  1 rạp có nhiều lịch chiếu 
+    //  1 rạp có nhiều lịch chiếu
     public function LichChieu()
     {
-        return $this->hasMany('App\LichChieu', 'MaRap', 'MaLichChieu');
+        return $this->hasMany('App\LichChieu', 'MaRap', 'MaRap');
     }
 }

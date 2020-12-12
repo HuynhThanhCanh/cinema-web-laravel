@@ -208,7 +208,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href={{ url('quan-ly-the-loai-phim') }} class="nav-link">
+                            <a href="{{ url('quan-ly-the-loai-phim') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tags"></i>
                                 <p>
                                     Thể loại phim
@@ -216,7 +216,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href={{ url('quan-ly-rap') }} class="nav-link">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon fas fa-warehouse"></i>
                                 <p>
                                     Rạp
@@ -224,7 +224,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href={{ url('quan-ly-rap') }} class="nav-link">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon far fa-clock"></i>
                                 <p>
                                     Suất chiếu
@@ -232,7 +232,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href={{ url('quan-ly-rap') }} class="nav-link">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Lịch chiếu

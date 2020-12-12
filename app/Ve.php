@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ve extends Model
 {
     //
-    protected $table= 'Ve';
+    protected $table= 'ves';
     public $timestamps=true;
 
     // 1 vé thuộc 1 danh sách vé và 1 danh sách vé có nhiều vé
@@ -19,13 +19,13 @@ class Ve extends Model
     // 1 vé thì chỉ được có 1 ghế
     public function Ghe()
     {
-        return $this->hasOne('App\Ghe', 'MaGhe', 'MaGhe');
+        return $this->belongsTo('App\Ghe', 'MaGhe', 'MaGhe');
     }
     // 1 vé có 1 lịch chiếu
     public function LichChieu()
     {
-        return $this->hasOne('App\LichChieu', 'MaLichChieu', 'MaLichChieu');
+        return $this->belongsTo('App\LichChieu', 'MaLichChieu', 'MaLichChieu');
     }
 
-   
+
 }

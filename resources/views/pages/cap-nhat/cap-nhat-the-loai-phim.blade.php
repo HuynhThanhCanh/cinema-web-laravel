@@ -6,8 +6,9 @@
         <div class="container">
             <h2>Cập nhật thể loại phim</h2>
             <hr>
-            <form action={{ url('quan-ly-the-loai-phim') }} class="was-validated d-flex flex-column input-form"
-                id="form-cap-nhat-the-loai-phim">
+            <form method="POST" action="{{ url('quan-ly-the-loai-phim') }}"
+                class="was-validated d-flex flex-column input-form" id="form-cap-nhat-the-loai-phim">
+                @csrf
                 <div class="form-group col-12">
                     <label for="ten-the-loai-phim">Tên thể loại phim:</label>
                     <input type="text" class="form-control" id="ten-the-loai-phim" placeholder="Nhập tên thể loại phim"

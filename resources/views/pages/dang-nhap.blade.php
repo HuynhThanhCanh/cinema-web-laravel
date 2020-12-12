@@ -29,40 +29,44 @@
       -->
 
 <body class="hold-transition sidebar-mini">
-   <div class="login">
-       <!-- Horizontal Form -->
-   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title text-white text-center">Đăng nhập</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form class="form-horizontal">
-      <div class="card-body">
-        <div class="form-group row">
-            <input type="email" class="form-control-transparent" id="inputUserName" placeholder="Tên tài khoản">
-        </div>
-        <div class="form-group row">
-            <input type="password" class="form-control-transparent" id="inputPassword" placeholder="Mật khẩu">
-        </div>
-        <div class="form-group row">
-          <div class="offset-sm-2 col-sm-10">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck2">
-              <label class="form-check-label text-white" for="exampleCheck2">Nhớ tài khoản của tôi</label>
+    <div class="login">
+        <!-- Horizontal Form -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title text-white text-center">Đăng nhập</h3>
             </div>
-          </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form method="POST" class="form-horizontal" action="{{ url('/') }}">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group row">
+                        <input type="email" class="form-control-transparent" id="inputUserName"
+                            placeholder="Tên tài khoản">
+                    </div>
+                    <div class="form-group row">
+                        <input type="password" class="form-control-transparent" id="inputPassword"
+                            placeholder="Mật khẩu">
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                <label class="form-check-label text-white" for="exampleCheck2">Nhớ tài khoản của
+                                    tôi</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-danger w-100">Đăng nhập</button>
+                </div>
+                <!-- /.card-footer -->
+            </form>
         </div>
-      </div>
-      <!-- /.card-body -->
-      <div class="card-footer text-center">
-        <button type="submit" class="btn btn-danger w-100">Đăng nhập</button>
-      </div>
-      <!-- /.card-footer -->
-    </form>
-  </div>
-  <!-- /.card -->
-   </div>
+        <!-- /.card -->
+    </div>
 
     <!-- REQUIRED SCRIPTS -->
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLoaiPhimsTable extends Migration
+class CreateThanhViensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,20 @@ class CreateLoaiPhimsTable extends Migration
      */
     public function up()
     {
-        Schema::create('loai_phims', function (Blueprint $table) {
+        Schema::create('thanh_viens', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             //
-            $table->bigIncrements('MaLoaiPhim');
-            $table->string('TenLoaiPhim', 100)->unique();
-            $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
+            $table->bigIncrements('MaThanhVien');
+            $table->string('HoTV', 50);
+            $table->string('TenTV', 50);
+            $table->date('NgaySinh');
+            $table->string('SDT', 11);
+            $table->string('Email', 50);
+            $table->string('TenDN', 50);
+            $table->string('Password', 45);
+            $table->string('DiaChi', 100);
             $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
@@ -34,6 +40,6 @@ class CreateLoaiPhimsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('loai_phims');
+        Schema::dropIfExists('thanh_viens');
     }
 }

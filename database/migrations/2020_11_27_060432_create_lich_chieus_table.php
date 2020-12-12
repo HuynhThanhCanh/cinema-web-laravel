@@ -20,6 +20,7 @@ class CreateLichChieusTable extends Migration
             //
             $table->bigIncrements('MaLichChieu');
             $table->bigInteger('MaThoiGianChieu')->unsigned();
+            $table->date('NgayChieu');
             $table->bigInteger('MaPhim')->unsigned();
             $table->bigInteger('MaRap')->unsigned();
             $table->tinyInteger('TrangThai')->default(0);

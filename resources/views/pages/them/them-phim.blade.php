@@ -6,7 +6,9 @@
         <div class="container">
             <h2>Thêm phim mới</h2>
             <hr>
-            <form action={{ url('quan-ly-phim') }} class="was-validated d-flex flex-column input-form" id="form-them-phim">
+            <form method="POST" action="{{ url('quan-ly-phim') }}" class="was-validated d-flex flex-column input-form"
+                id="form-them-phim">
+                @csrf
                 <div class="form-group col-12">
                     <label for="ten-phim">Tên phim:</label>
                     <input type="text" class="form-control" id="ten-phim" placeholder="Nhập tên phim" name="ten-phim"
@@ -92,20 +94,14 @@
                     <div class="d-flex" id="check">
                         <div class="form-check">
                             <label class="form-check-label" for="radio-sap-chieu">
-                                <input type="radio" class="form-check-input" id="radio-sap-chieu" name="optradio" value="0"
-                                    checked>Sắp chiếu
+                                <input type="radio" class="form-check-input" id="radio-sap-chieu" name="trang-thai"
+                                    value="0" checked>Sắp chiếu
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label" for="radio-dang-chieu">
-                                <input type="radio" class="form-check-input" id="radio-dang-chieu" name="optradio"
+                                <input type="radio" class="form-check-input" id="radio-dang-chieu" name="trang-thai"
                                     value="1">Đang chiếu
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label" for="radio-xoa">
-                                <input type="radio" class="form-check-input" id="radio-xoa" name="optradio" value="-1">Đã
-                                xóa
                             </label>
                         </div>
                     </div>
