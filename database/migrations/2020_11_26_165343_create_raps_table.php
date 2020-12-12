@@ -20,9 +20,9 @@ class CreateRapsTable extends Migration
             //
             $table->bigIncrements('MaRap');
             $table->string('TenRap', 20);
-            $table->integer('SoLuongGhe');
+            $table->tinyInteger('SoLuongGhe');
             $table->bigInteger('MaChiNhanh')->unsigned(); //khóa ngoại
-            $table->integer('TrangThai')->default(0);
+            $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });

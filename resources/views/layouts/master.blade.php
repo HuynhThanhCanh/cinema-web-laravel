@@ -9,13 +9,17 @@
     <title>Admin</title>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href={{ asset('plugins/fontawesome-free/css/all.css') }}>
     <!-- IonIcons -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.css">
+    <link rel="stylesheet" href={{ asset('dist/css/adminlte.css') }}>
+    <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.css') }}>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <!--
       BODY TAG OPTIONS:
@@ -41,7 +45,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Trang chủ</a>
+                    <a href="#" class="nav-link">Trang chủ</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Liên hệ</a>
@@ -73,7 +77,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="dist/img/user1-128x128.jpg" alt="User Avatar"
+                                <img src={{ asset('dist/img/user1-128x128.jpg') }} alt="User Avatar"
                                     class="img-size-50 mr-3 img-circle">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -90,7 +94,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="dist/img/user8-128x128.jpg" alt="User Avatar"
+                                <img src={{ asset('dist/img/user8-128x128.jpg') }} alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -107,7 +111,7 @@
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
                             <div class="media">
-                                <img src="dist/img/user3-128x128.jpg" alt="User Avatar"
+                                <img src={{ asset('dist/img/user3-128x128.jpg') }} alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
                                 <div class="media-body">
                                     <h3 class="dropdown-item-title">
@@ -163,8 +167,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link text-center navbar-dark" style="height: 80px; display:flex; justify-content: center; align-items: center;">
-                <img src="../../../dist/img/your-logo.png" alt="AdminLTE Logo" class="brand-image elevation-3">
+            <a href="/" class="brand-link text-center navbar-dark"
+                style="height: 80px; display:flex; justify-content: center; align-items: center;">
+                <img src={{ asset('dist/img/your-logo.png') }} alt="AdminLTE Logo" class="brand-image elevation-3">
             </a>
 
             <!-- Sidebar -->
@@ -172,7 +177,8 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src={{ asset('dist/img/user2-160x160.jpg') }} class="img-circle elevation-2"
+                            alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Alexander Pierce</a>
@@ -193,49 +199,49 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="quan-ly-phim" class="nav-link">
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-phim') }}" class="nav-link">
                                 <i class="nav-icon fas fa-film"></i>
                                 <p>
-                                    Quản lý phim
+                                    Phim
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="quan-ly-phim" class="nav-link">
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-the-loai-phim') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tags"></i>
                                 <p>
-                                    Quản lý thể loại phim
+                                    Thể loại phim
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="quan-ly-rap" class="nav-link">
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon fas fa-warehouse"></i>
                                 <p>
-                                    Quản lý Rạp
+                                    Rạp
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="quan-ly-rap" class="nav-link">
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon far fa-clock"></i>
                                 <p>
-                                    Quản lý suất chiếu
+                                    Suất chiếu
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="quan-ly-rap" class="nav-link">
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
-                                    Quản lý lịch chiếu
+                                    Lịch chiếu
                                 </p>
                             </a>
                         </li>
                     </ul>
                 </nav>
-                <button type="button" class="btn btn-dang-xuat btn-warning w-100">Đăng xuất</button>
+                <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng xuất</strong></button>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -255,7 +261,8 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>CBN2T CINEMA TEAM <a href="https://www.facebook.com/groups/327066398507712">CBN2T CINEMA</a>.</strong>
+            <strong>CBN2T CINEMA TEAM <a href="https://www.facebook.com/groups/327066398507712">CBN2T
+                    CINEMA</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 1.0
@@ -263,20 +270,21 @@
         </footer>
     </div>
     <!-- ./wrapper -->
-
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src={{ asset('plugins/jquery/jquery.min.js') }}></script>
     <!-- Bootstrap -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src={{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
+    <script src={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.js') }}></script>
     <!-- AdminLTE -->
-    <script src="dist/js/adminlte.js"></script>
+    <script src={{ asset('dist/js/adminlte.js') }}></script>
 
     <!-- OPTIONAL SCRIPTS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
-    <script src="dist/js/demo.js"></script>
-    <script src="dist/js/pages/dashboard3.js"></script>
+    <script src={{ asset('plugins/chart.js/Chart.min.js') }}></script>
+    <script src={{ asset('dist/js/demo.js') }}></script>
+    <script src={{ asset('dist/js/pages/dashboard3.js') }}></script>
+    <script src={{ asset('js/handler-submit-them.js') }}></script>
 </body>
 
 </html>
