@@ -21,6 +21,7 @@ class CreateNhanViensTable extends Migration
             $table->bigIncrements('MaNV');
             $table->string('HoNV', 10);
             $table->string('TenNV', 20);
+            $table->string('Avatar')->nullable();
             $table->date('NgaySinh');
             $table->string('DiaChi', 100);
             $table->string('SDT', 11);

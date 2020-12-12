@@ -17,8 +17,9 @@ class CreateThanhViensTable extends Migration
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-            //
+            //`
             $table->bigIncrements('MaThanhVien');
+            $table->string('Avatar')->nullable();
             $table->string('HoTV', 50);
             $table->string('TenTV', 50);
             $table->date('NgaySinh');
