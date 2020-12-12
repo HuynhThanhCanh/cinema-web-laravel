@@ -22,7 +22,7 @@ class CreatePhimsTable extends Migration
             $table->string('TenPhim', 100);
             $table->date('NgayDKChieu');
             $table->date('NgayKetThuc');
-            $table->time('ThoiLuong');
+            $table->smallInteger('ThoiLuong');
             $table->string('DaoDien', 50);
             $table->string('DienVien', 250);
             $table->tinyInteger('Diem')->default(0);
