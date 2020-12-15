@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,10 @@ Route::group(['prefix' => 'quan-ly-phim'], function () {
     Route::get('/', 'PhimController@index');
     Route::post('/', 'PhimController@index');
     Route::get('/them-phim', 'PhimController@themPhim');
-    Route::get('/cap-nhat-phim', 'PhimController@capNhatPhim');
+    Route::get('/cap-nhat-phim/{MaPhim}', 'PhimController@capNhatPhim');
+    Route::post('/formAdd', 'PhimController@addPhim');
+    Route::post('/formEdit/{MaPhim}', 'PhimController@editPhim');
+    Route::get('/xoaphim/{MaPhim}', 'PhimController@deletePhim');
 });
 
 /**

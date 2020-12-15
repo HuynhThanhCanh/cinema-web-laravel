@@ -6,7 +6,7 @@
         <div class="container">
             <h2>Thêm phim mới</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-phim') }}" class="was-validated d-flex flex-column input-form"
+            <form method="POST" action="{{ url('quan-ly-phim/formAdd') }}" class="was-validated d-flex flex-column input-form"
                 id="form-them-phim">
                 @csrf
                 <div class="form-group col-12">
@@ -71,20 +71,18 @@
                         <label for="loai-phim">Loại phim:</label>
                         <select class="form-control" id="loai-phim" name="loai-phim" style="background-image: none;"
                             required>
-                            <option>Tình cảm</option>
-                            <option>Hành động</option>
-                            <option>Khoa học viễn tưởng</option>
-                            <option>Hoạt hình</option>
+                            @foreach ($loaiphim as $row)                            
+                            <option value="{{$row->MaLoaiPhim}}">{{$row->TenLoaiPhim}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="col-6">
                         <label for="nhan">Nhãn:</label>
                         <select class="form-control" id="nhan" name="nhan" style="background-image: none;" required>
-                            <option>18+</option>
-                            <option>16+</option>
-                            <option>13+</option>
-                            <option>All</option>
+                            @foreach ($nhan as $n)
+                            <option value="{{$n->MaGioiHan}}">{{$n->TenGioiHan}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
