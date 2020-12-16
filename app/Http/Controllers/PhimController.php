@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Phim;
+use App\LoaiPhim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
@@ -10,7 +11,8 @@ class PhimController extends Controller
 {
     //
     public function index(){
-        $phim=Phim::orderby('MaPhim')->paginate(10);
+        //$phim=Phim::orderby('MaPhim')->paginate(10);
+        $phim=DB::select('select * ,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan from phims, loai_phims,gioi_han_tuois where phims.MaLoaiPhim=loai_phims.MaLoaiPhim and phims.Nhan=gioi_han_tuois.MaGioiHan ');
         return view('pages.quan-ly-phim',compact('phim'));
     }
 
@@ -86,5 +88,24 @@ class PhimController extends Controller
         $phim=DB::select('select * from phims where MaPhim = ?',[$MaPhim]);
         return response()->json($phim);
     }
-    
+    public function insertAPIPhim(Request $request)
+    {
+
+        $phim= new Phim;
+        $phim->TenPhim=$request->TenPhim;
+        $phim->NgayDKChieu=$request->NgayDKChieu;
+        $phim->NgayKetThuc=$request->NgayKetThuc;
+        $phim->ThoiLuong=$request->ThoiLuong;
+        $phim->DaoDien=$request->DaoDien;
+        $phim->DienVien=$request->DienVien;
+        $phim->Diem=$request->Diem;
+        $phim->HinhAnh=$request->HinhAnh;
+        $phim->LinkPhim=$request->LinkPhim;
+        $phim->MaLoaiPhim=$request->MaLoaiPhim;
+        $phim->MaNV=$request->MaNV;
+        $phim->Nhan=$request->Nhan;
+        $phim->TrangThai=$request->TrangThai;
+         $phim->save();
+        return response()->json($phim, 201);
+    }
 }

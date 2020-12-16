@@ -89,8 +89,8 @@
                                             <img src="/image/{{$p->HinhAnh}}" width="60px" height="60px">
                                         </td>
                                         <td>{{$p->LinkPhim}}</td>
-                                        <td>{{$p->MaLoaiPhim}}</td>
-                                        <td>{{$p->Nhan}}</td>
+                                        <td>{{$p->TenLoaiPhim}}</td>
+                                        <td>{{$p->TenGioiHan}}</td>
                                         <td>@if($p->TrangThai=='1')
                                             Đang chiếu
                                             @else
