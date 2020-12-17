@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.trang-chu');
-});
+Route::get('/','TrangChuController@index');
 Route::post('/', function () {
     return view('pages.trang-chu');
 });
@@ -57,6 +55,5 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
 /**
  * ĐĂNG NHẬP
  */
-Route::get('/dang-nhap', function () {
-    return view('pages.dang-nhap');
-});
+Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
+Route::post('/login', 'TrangChuController@dangnhap');

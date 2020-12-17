@@ -90,7 +90,7 @@ class PhimController extends Controller
     }
     public function insertAPIPhim(Request $request)
     {
-
+        
         $phim= new Phim;
         $phim->TenPhim=$request->TenPhim;
         $phim->NgayDKChieu=$request->NgayDKChieu;
