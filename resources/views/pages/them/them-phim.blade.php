@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="form-group d-flex">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="loai-phim">Loại phim:</label>
                         <select class="form-control" id="loai-phim" name="loai-phim" style="background-image: none;"
                             required>
@@ -77,7 +77,18 @@
                         </select>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
+                        <label for="nhan"> Mã nhân viên:</label>
+                        <select class="form-control" id="nhan" name="MaNV" style="background-image: none;" required>
+                            <option  >
+                            @if(Session::has('user'))
+                            {{Session::get('user')->id}}
+                           @endif
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
                         <label for="nhan">Nhãn:</label>
                         <select class="form-control" id="nhan" name="nhan" style="background-image: none;" required>
                             @foreach ($nhan as $n)

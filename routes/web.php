@@ -57,3 +57,4 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
  */
 Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
 Route::post('/login', 'TrangChuController@dangnhap');
+Route::get('/dangxuat', 'TrangChuController@dangxuat');

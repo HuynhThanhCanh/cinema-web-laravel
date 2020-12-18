@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="form-group d-flex">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="loai-phim">Loại phim:</label>
                         <select class="form-control" id="loai-phim" name="loai-phim" style="background-image: none; " 
                             required>
@@ -77,8 +77,17 @@
                             @endforeach        
                         </select>
                     </div>
+                    
+                    <div class="col-4">
+                        <label for="nhan">Nhân Viên:</label>
+                        <select class="form-control" id="nhan" name="MaNV" style="background-image: none;" required>
+                            <option value="{{$p->MaNV}}" >
+                            {{$p->name}} 
+                            </option>
+                        </select>
+                    </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <label for="nhan">Nhãn:</label>
                         <select class="form-control" id="nhan" name="nhan" style="background-image: none;" required>
                             @foreach ($nhan as $n)
@@ -103,12 +112,12 @@
                                     value="1">Đang chiếu
                             </label>
                         </div>
-                        {{-- <div class="form-check">
+                         <div class="form-check">
                             <label class="form-check-label" for="radio-xoa">
                                 <input type="radio" class="form-check-input" id="radio-xoa" name="optradio" value="-1">Đã
                                 xóa
                             </label>
-                        </div> --}}
+                        </div> 
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-submit-input-form btn-cap-nhat" data-toggle="modal">

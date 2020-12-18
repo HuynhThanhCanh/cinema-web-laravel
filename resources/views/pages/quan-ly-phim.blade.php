@@ -86,7 +86,7 @@
                                         <td>{{$p->DaoDien}}</td>
                                         <td>{{$p->DienVien}}</td>
                                         <td>
-                                            <img src="/image/{{$p->HinhAnh}}" width="60px" height="60px">
+                                            <img src="/image/phim/{{$p->HinhAnh}}" width="60px" height="60px">
                                         </td>
                                         <td>{{$p->LinkPhim}}</td>
                                         <td>{{$p->TenLoaiPhim}}</td>

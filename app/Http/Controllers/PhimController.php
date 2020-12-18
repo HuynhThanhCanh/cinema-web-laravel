@@ -12,7 +12,7 @@ class PhimController extends Controller
     //
     public function index(){
         //$phim=Phim::orderby('MaPhim')->paginate(10);
-        $phim=DB::select('select * ,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan from phims, loai_phims,gioi_han_tuois where phims.MaLoaiPhim=loai_phims.MaLoaiPhim and phims.Nhan=gioi_han_tuois.MaGioiHan ');
+        $phim=DB::select('select  * ,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan from phims, loai_phims,gioi_han_tuois where phims.MaLoaiPhim=loai_phims.MaLoaiPhim and phims.Nhan=gioi_han_tuois.MaGioiHan and phims.TrangThai!=-1 ');
         return view('pages.quan-ly-phim',compact('phim'));
     }
 
@@ -24,11 +24,12 @@ class PhimController extends Controller
        $nhan=DB::table('gioi_han_tuois')
        ->select('gioi_han_tuois.TenGioiHan','gioi_han_tuois.MaGioiHan')
        ->get();
+
         return view('pages.them.them-phim',compact('loaiphim','nhan'));
     }
 
     public function capNhatPhim($MaPhim){
-        $phim=DB::select('select * from phims where MaPhim = ?',[$MaPhim]);
+        $phim=DB::select('select * from phims , nhan_viens where MaPhim = ? and phims.MaNV=nhan_viens.id ',[$MaPhim]);
         $loaiphim=DB::select('select * from loai_phims');
         $nhan=DB::select('select * from gioi_han_tuois');
         return view('pages.cap-nhat.cap-nhat-phim',compact('phim','loaiphim','nhan'));
@@ -46,7 +47,7 @@ class PhimController extends Controller
        $HinhAnh=$request->input('hinh-anh');
        $LinkPhim=$request->input('link-trailer');
        $MaLoaiPhim=$request->input('loai-phim');
-       $MaNV=$request->input('MaNV','1');
+       $MaNV=$request->input('MaNV');
        $Nhan=$request->input('nhan');
        $TrangThai=$request->input('trang-thai');
        $data=array('TenPhim'=>$TenPhim,'NgayDKChieu'=>$NgayDKChieu,'NgayKetThuc'=>$NgayKetThuc,'ThoiLuong'=>$ThoiLuong,'DaoDien'=>$DaoDien,'DienVien'=>$DienVien,'Diem'=>$Diem,'HinhAnh'=>$HinhAnh,'LinkPhim'=>$LinkPhim,'MaLoaiPhim'=>$MaLoaiPhim,'MaNV'=>$MaNV,'Nhan'=>$Nhan,'TrangThai'=>$TrangThai);
@@ -75,8 +76,8 @@ class PhimController extends Controller
     }
     public function deletePhim($MaPhim)
 	{
-        //DB::delete('DELETE From phims where MaPhim=?',[$MaPhim]);
-        phim::where('MaPhim',$MaPhim)->delete();
+        DB::update(' UPDATE  phims SET TrangThai=-1 where MaPhim=?',[$MaPhim]);
+        // phim::where('MaPhim',$MaPhim)->delete();
         return redirect('/quan-ly-phim');
     }
     public function getAPIPhim()

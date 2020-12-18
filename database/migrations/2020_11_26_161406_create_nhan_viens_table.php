@@ -18,9 +18,9 @@ class CreateNhanViensTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             //
-            $table->bigIncrements('MaNV');
+            $table->bigIncrements('id');
             $table->string('HoNV', 10);
-            $table->string('TenNV', 20);
+            $table->string('name', 20);
             $table->string('Avatar')->nullable();
             $table->date('NgaySinh');
             $table->string('DiaChi', 100);

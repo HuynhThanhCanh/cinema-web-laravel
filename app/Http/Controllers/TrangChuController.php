@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\NhanVien;
 use Auth;
+use App\User;
 class TrangChuController extends Controller
 {
     //
@@ -19,13 +20,17 @@ class TrangChuController extends Controller
     }
     public function dangnhap(Request $request)
     {
+
         $arr=[
         'email'=>$request->Email,
         'password'=>$request->Pass
         ];
 
-     
-    if(Auth::attempt($arr)){// muốn dùng auth thì phải mã hóa mật khẩu
+
+
+    if(Auth::attempt($arr)){
+        $user=User::find(Auth::user()->id);
+        $request->session()->put('user',$user);// muốn dùng auth thì phải mã hóa mật khẩu
         return redirect('/');
     }
     else
@@ -33,6 +38,12 @@ class TrangChuController extends Controller
         return 'thất bại';
     }
 
+    }
+
+    public function dangxuat()
+    {
+        Auth::logout();
+        return redirect('/dang-nhap');
     }
  
 }
