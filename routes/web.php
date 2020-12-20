@@ -56,3 +56,16 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
 Route::get('/dang-nhap', function () {
     return view('pages.dang-nhap');
 });
+/**
+ * SUAT CHIEU
+ * 
+ */
+Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
+    Route::get('/', 'XuatChieuController@index');
+    Route::post('/Add', 'XuatChieuController@Add');
+    Route::get('/them-suat-chieu', 'XuatChieuController@create');
+    Route::get('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Edit')->name('EditSuatChieu');
+    Route::post('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Update')->name('UpdateSuatChieu');
+    Route::get('/del/{Ma}', 'XuatChieuController@del')->name('DelSuatChieu');
+
+});

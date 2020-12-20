@@ -224,7 +224,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-suat-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-clock"></i>
                                 <p>
                                     Suất chiếu
