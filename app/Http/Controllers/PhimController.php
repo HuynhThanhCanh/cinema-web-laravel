@@ -12,7 +12,7 @@ class PhimController extends Controller
     //
     public function index(){
         //$phim=Phim::orderby('MaPhim')->paginate(10);
-        $phim=DB::select('select  * ,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan from phims, loai_phims,gioi_han_tuois where phims.MaLoaiPhim=loai_phims.MaLoaiPhim and phims.Nhan=gioi_han_tuois.MaGioiHan and phims.TrangThai!=-1 ');
+        $phim=DB::select('select  phims.* ,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan from phims, loai_phims,gioi_han_tuois where phims.MaLoaiPhim=loai_phims.MaLoaiPhim and phims.Nhan=gioi_han_tuois.MaGioiHan and phims.TrangThai!=-1 ');
         return view('pages.quan-ly-phim',compact('phim'));
     }
 

@@ -176,10 +176,13 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    @if(Session::has('user'))
                     <div class="image">
-                        <img src={{ asset('/image/nhanvien/CamNhung.jpg') }} class="img-circle elevation-2"
+                        <img src="/image/nhanvien/{{Session::get('user')->Avatar}}"
+                         class="img-circle elevation-2" 
                             alt="User Image">
                     </div>
+                    @endif
                     <div class="info">
                         <a href="#" class="d-block">
                         @if(Session::has('user'))

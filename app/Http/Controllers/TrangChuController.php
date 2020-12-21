@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\NhanVien;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 class TrangChuController extends Controller
 {
