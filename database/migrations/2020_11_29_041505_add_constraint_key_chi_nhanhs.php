@@ -15,7 +15,7 @@ class AddConstraintKeyChiNhanhs extends Migration
     {
         Schema::table('chi_nhanhs', function (Blueprint $table) {
             //
-            $table->foreign('MaNV')->references('MaNV')->on('nhan_viens');
+            $table->foreign('MaNV')->references('id')->on('nhan_viens');
         });
     }
 

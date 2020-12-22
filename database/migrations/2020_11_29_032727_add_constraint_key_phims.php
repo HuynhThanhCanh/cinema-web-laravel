@@ -15,7 +15,7 @@ class AddConstraintKeyPhims extends Migration
     {
         Schema::table('phims', function (Blueprint $table) {
             $table->foreign('MaLoaiPhim')->references('MaLoaiPhim')->on('loai_phims');
-            $table->foreign('MaNV')->references('MaNV')->on('nhan_viens');
+            $table->foreign('MaNV')->references('id')->on('nhan_viens');
             $table->foreign('Nhan')->references('MaGioiHan')->on('gioi_han_tuois');
         });
     }
