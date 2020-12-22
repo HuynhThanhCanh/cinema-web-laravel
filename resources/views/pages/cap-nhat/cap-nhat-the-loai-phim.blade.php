@@ -19,22 +19,16 @@
                 <div class="check-group col-12">
                     <label for="check">Trạng thái:</label>
                     <div class="d-flex" id="check">
-                        <div class="form-check">
+                    <div class="form-check">
                             <label class="form-check-label" for="radio-sap-chieu">
-                                <input type="radio" class="form-check-input" id="radio-sap-chieu" name="optradio" value="0"
-                                    checked>Sắp chiếu
+                                <input type="radio" class="form-check-input" id="radio-sap-chieu" name="optradio" value="1"
+                                    checked>Đang hoạt động
                             </label>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label" for="radio-dang-chieu">
                                 <input type="radio" class="form-check-input" id="radio-dang-chieu" name="optradio"
-                                    value="1">Đang chiếu
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="form-check-label" for="radio-xoa">
-                                <input type="radio" class="form-check-input" id="radio-xoa" name="optradio" value="-1">Đã
-                                xóa
+                                    value="0">Ngưng hoạt động
                             </label>
                         </div>
                     </div>

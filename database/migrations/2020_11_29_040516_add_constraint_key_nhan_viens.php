@@ -16,7 +16,7 @@ class AddConstraintKeyNhanViens extends Migration
         Schema::table('nhan_viens', function (Blueprint $table) {
             //
             $table->foreign('MaCV')->references('MaCV')->on('chuc_vus');
-            $table->foreign('MaNQL')->references('MaNV')->on('nhan_viens');
+            $table->foreign('MaNQL')->references('id')->on('nhan_viens');
         });
     }
 

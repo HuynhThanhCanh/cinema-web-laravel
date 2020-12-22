@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -46,9 +46,9 @@ class nhan_viens extends Seeder
     public function run()
     {
         DB::table('nhan_viens')->insert([
-            ['HoNV' => 'Phạm', 'TenNV' => 'Nhựt', 'NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'Email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'Pass' => '12345', 'TrangThai' => 1],
-            ['HoNV' => 'Huỳnh', 'TenNV' => 'Cảnh', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'Email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'Pass' => '123456', 'TrangThai' => 1],
-            ['HoNV' => 'Trần', 'TenNV' => 'Thảo', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'Email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'Pass' => '1234', 'TrangThai' => 1],
+            ['HoNV' => 'Phạm', 'name' => 'Nhựt','Avatar'=>null,'NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'password' => bcrypt('12345') , 'TrangThai' => 1],
+            ['HoNV' => 'Huỳnh', 'name' => 'Cảnh','Avatar'=>null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'password' => bcrypt('12345'), 'TrangThai' => 1],
+            ['HoNV' => 'Trần', 'name' => 'Thảo','Avatar'=>null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'password' => bcrypt('12345'), 'TrangThai' => 1],
 
         ]);
     }
@@ -91,8 +91,8 @@ class phims extends Seeder
     {
         DB::table('phims')->insert([
 
-            ['TenPhim' => 'Ròm', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 180, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 4, 'HinhAnh' => null, 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Tiệc trăng máu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 5, 'HinhAnh' => null, 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
+            ['TenPhim' => 'Ròm', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 180, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 4, 'HinhAnh' => 'rom.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
+            ['TenPhim' => 'Tiệc trăng máu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
 
         ]);
     }

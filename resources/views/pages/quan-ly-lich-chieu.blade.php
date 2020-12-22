@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý thể loại phim</h1>
+                    <h1>Quản lý lịch chiếu</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Quản lý phim</li>
+                        <li class="breadcrumb-item active">Quản lý lịch chiếu</li>
                     </ol>
                 </div>
             </div>
@@ -26,10 +26,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <a class="btn btn-primary" role="button"
-                                href="{{ url('quan-ly-the-loai-phim/them-the-loai-phim') }}">
+                            <a class="btn btn-primary" role="button" href={{ url('quan-ly-lich-chieu/xep-lich') }}>
                                 <i class="fas fa-plus-circle"></i>
-                                Thêm mới
+                                Xếp lịch mới
                             </a>
                             <div class="card-tools">
                                 <div class="input-group">
@@ -48,49 +47,35 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên loại phim</th>
-                                        <th>Nhân viên thêm</th>
-                                        <th>Trạng thái</th>
+                                        <th>Mã lịch chiếu</th>
+                                        <th>Tên phim</th>
+                                        <th>Tên rạo</th>
+                                        <th>Thời Gian chiếu</th>
+                                        <th>Ngày chiếu</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @php
-                                    $stt=0;
-                                    if (isset($_GET['page'])) {
-										$a=$_GET['page'];
-
-									}
-									else{
-										$a=1;
-									}
-									$stt=($a-1)*10;
-                                   @endphp
-                                   @foreach ($loaiphim as $v)
-                                   @php
-                                   @endphp 
+                                    @php
+                                    $stt = 0;
+                                    @endphp
+                                    @foreach ($lichChieus as $lichChieu)
                                         <tr>
-                                        <td>{{++$stt}}</td>                                    
-                                        <td>{{$v->TenLoaiPhim}}</td>
-                                        @foreach($nhanvien as $nv)
-                                        <td>{{$nv->TenNV}}</td>
-                                        @endforeach
-                                        <td>@if($v->TrangThai=='1')
-                                        Đang hoạt động
-                                            @else
-                                            Ngưng hoạt động
-                                            @endif
-                                        </td>
-                                           
+                                            <td>{{ ++$stt }}</td>
+                                            <td>{{ 'LC' . $lichChieu->MaLichChieu }}</td>
+                                            <td>{{ $lichChieu->TenPhim }}</td>
+                                            <td>{{ $lichChieu->TenRap }}</td>
+                                            <td>{{ $lichChieu->ThoiGianChieu }}</td>
+                                            <td>{{ $lichChieu->NgayChieu }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
+                                                    <a href="{{ url('quan-ly-suat-chieu/cap-nhat-suat-chieu') }}">
                                                         <button type="button" class="btn btn-warning" data-toggle="tooltip"
                                                             data-placement="top" title="Chỉnh sửa">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
                                                     </a>
-                                                    <a href="quan-ly-the-loai-phim/xoatheloaiphim/{{$v->MaLoaiPhim}}">
+                                                    <a href="#">
                                                         <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                                             title="Xóa">
                                                             <i class="far fa-trash-alt"></i>
@@ -98,11 +83,8 @@
                                                     </a>
                                                 </div>
                                             </td>
-                                                    
-                                         </tr>
+                                        </tr>
                                     @endforeach
-                                        
-                             
                                 </tbody>
                             </table>
                         </div>

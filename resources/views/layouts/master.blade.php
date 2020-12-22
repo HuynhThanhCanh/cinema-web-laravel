@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Admin</title>
 
@@ -15,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href={{ asset('dist/css/adminlte.css') }}>
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('css/bootstrap-duallistbox.css') }}>
     <link rel="stylesheet" href={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.css') }}>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -176,12 +178,19 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    @if(Session::has('user'))
                     <div class="image">
-                        <img src={{ asset('dist/img/user2-160x160.jpg') }} class="img-circle elevation-2"
+                        <img src="/image/nhanvien/{{Session::get('user')->Avatar}}"
+                         class="img-circle elevation-2" 
                             alt="User Image">
                     </div>
+                    @endif
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">
+                        @if(Session::has('user'))
+                         {{Session::get('user')->name}}
+                           @endif
+                        </a>
                     </div>
                 </div>
 
@@ -232,7 +241,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-lich-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Lịch chiếu
@@ -241,7 +250,9 @@
                         </li>
                     </ul>
                 </nav>
-                <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng xuất</strong></button>
+                <a  href="{{url('dangxuat')}}">          
+                      <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng xuất</strong></button>
+                </a>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -251,6 +262,7 @@
         <div class="content-wrapper">
             @yield('content')
         </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -274,6 +286,7 @@
 
     <!-- jQuery -->
     <script src={{ asset('plugins/jquery/jquery.min.js') }}></script>
+
     <!-- Bootstrap -->
     <script src={{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <script src={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.js') }}></script>
@@ -285,6 +298,15 @@
     <script src={{ asset('dist/js/demo.js') }}></script>
     <script src={{ asset('dist/js/pages/dashboard3.js') }}></script>
     <script src={{ asset('js/handler-submit-them.js') }}></script>
+    <script src={{ asset('ajax/xep-lich-ajax.js') }}></script>
+    <script src={{ asset('js/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}></script>
+    <script>
+        $(function() {
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+        })
+
+    </script>
 </body>
 
 </html>

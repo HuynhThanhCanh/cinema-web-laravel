@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Request;
 
 class LoaiPhim extends Model
 {
@@ -14,4 +15,5 @@ class LoaiPhim extends Model
     {
         return $this->belongsTo('App\NhanVien', 'MaNV', 'MaNV');
     }
+   
 }

@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\PhimController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Phim;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,5 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    
     return $request->user();
 });
+Route::get('getGhe', 'RapController@LayMaghe');
+Route::get('/phim','PhimController@getAPIPhim');
+Route::get('/phim/{MaPhim}','PhimController@getAPIPhimbyID');
+Route::post('/savephim','PhimController@insertAPIPhim');

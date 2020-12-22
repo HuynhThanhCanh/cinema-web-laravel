@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.trang-chu');
-});
+Route::get('/','TrangChuController@index');
 Route::post('/', function () {
     return view('pages.trang-chu');
 });
@@ -27,7 +26,10 @@ Route::group(['prefix' => 'quan-ly-phim'], function () {
     Route::get('/', 'PhimController@index');
     Route::post('/', 'PhimController@index');
     Route::get('/them-phim', 'PhimController@themPhim');
-    Route::get('/cap-nhat-phim', 'PhimController@capNhatPhim');
+    Route::get('/cap-nhat-phim/{MaPhim}', 'PhimController@capNhatPhim');
+    Route::post('/formAdd', 'PhimController@addPhim');
+    Route::post('/formEdit/{MaPhim}', 'PhimController@editPhim');
+    Route::get('/xoaphim/{MaPhim}', 'PhimController@deletePhim');
 });
 
 /**
@@ -38,6 +40,10 @@ Route::group(['prefix' => 'quan-ly-the-loai-phim'], function () {
     Route::post('/', 'TheLoaiPhimController@index');
     Route::get('/them-the-loai-phim', 'TheLoaiPhimController@themLoaiPhim');
     Route::get('/cap-nhat-the-loai-phim', 'TheLoaiPhimController@capNhatLoaiPhim');
+    Route::post('/formSua','TheLoaiPhimController@suaLoaiPhim' );
+    Route::post('/formAdd', 'TheLoaiPhimController@addLoaiPhim');
+    Route::get('/xoatheloaiphim/{MaLoaiPhim}', 'TheLoaiPhimController@XoaLoaiPhim');
+
 });
 
 /**
@@ -48,6 +54,37 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
     Route::post('/', 'RapController@index');
     Route::get('/them-rap', 'RapController@themRap');
     Route::get('/cap-nhat-rap', 'RapController@capNhatRap');
+});
+
+/**
+ * XUẤT CHIẾU
+ */
+Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
+    Route::get('/', function () {
+        return view('pages.quan-ly-suat-chieu');
+    });
+    Route::post('/', function () {
+        return view('pages.quan-ly-suat-chieu');
+    });
+    Route::get('/them-suat-chieu', function () {
+        return view('pages.them.them-suat-chieu');
+    });
+    Route::get('/cap-nhat-suat-chieu', function () {
+        return view('pages.cap-nhat.cap-nhat-suat-chieu');
+    });
+});
+
+/**
+ * LỊCH CHIẾU
+ */
+Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
+    Route::get('/', 'LichChieuController@index');
+    Route::post('/', 'LichChieuController@index');
+    Route::get('/xep-lich',  'LichChieuController@xepLichAJAX');
+    Route::post('/xep-lich', 'LichChieuController@xepLichAJAX');
+    Route::get('/cap-nhat-lich-chieu', function () {
+        return view('pages.cap-nhat.cap-nhat-lich-chieu');
+    });
 });
 
 /**

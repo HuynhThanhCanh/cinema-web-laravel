@@ -47,29 +47,20 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>User</th>
-                                        <th>Status</th>
+                                        <th>Suất chiếu</th>
+                                        <th>Trạng thái</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-
-                                    
+                                <tbody>                                 
                                     @foreach ($phim as $p)
                                     <tr>
-                                   
-                                 
-                               
-                                  
                                         <td>{{$p->MaThoiGianChieu}}</td>
                                         <td>{{$p->ThoiGianChieu}}</td>
-                                       
-                                     
                                         <td>@if($p->TrangThai=='1')
                                             Tồn Tại
                                             @else
                                             Tạm Ngưng
-
                                         @endif
                                         </td>
                                         <td>
@@ -80,6 +71,7 @@
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </a>
+                                                
                                                 <a href="{{ route('DelSuatChieu',$p->MaThoiGianChieu) }}">
                                                     <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                                         title="Xóa">
