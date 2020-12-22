@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <a class="btn btn-primary" role="button"
-                                href={{ url('quan-ly-the-loai-phim/them-the-loai-phim') }}>
+                                href="{{ url('quan-ly-the-loai-phim/them-the-loai-phim') }}">
                                 <i class="fas fa-plus-circle"></i>
                                 Thêm mới
                             </a>
@@ -47,38 +47,62 @@
                             <table class="table table-head-fixed table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>STT</th>
+                                        <th>Tên loại phim</th>
+                                        <th>Nhân viên thêm</th>
+                                        <th>Trạng thái</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
-                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip"
-                                                        data-placement="top" title="Chỉnh sửa">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                </a>
-                                                <a href="#">
-                                                    <button type="button" class="btn btn-danger" data-toggle="tooltip"
-                                                        title="Xóa">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
-                                                </a>
-                                            </div>
+                                @php
+                                    $stt=0;
+                                    if (isset($_GET['page'])) {
+										$a=$_GET['page'];
+
+									}
+									else{
+										$a=1;
+									}
+									$stt=($a-1)*10;
+                                   @endphp
+                                   @foreach ($loaiphim as $v)
+                                   @php
+                                   @endphp 
+                                        <tr>
+                                        <td>{{++$stt}}</td>                                    
+                                        <td>{{$v->TenLoaiPhim}}</td>
+                                        @foreach($nhanvien as $nv)
+                                        <td>{{$nv->TenNV}}</td>
+                                        @endforeach
+                                        <td>@if($v->TrangThai=='1')
+                                        Đang hoạt động
+                                            @else
+                                            Ngưng hoạt động
+                                            @endif
                                         </td>
-                                    </tr>
+                                           
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
+                                                        <button type="button" class="btn btn-warning" data-toggle="tooltip"
+                                                            data-placement="top" title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    </a>
+                                                    <a href="quan-ly-the-loai-phim/xoatheloaiphim/{{$v->MaLoaiPhim}}">
+                                                        <button type="button" class="btn btn-danger" data-toggle="tooltip"
+                                                            title="Xóa">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                                    
+                                         </tr>
+                                    @endforeach
+                                        
+                             
                                 </tbody>
                             </table>
                         </div>

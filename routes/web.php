@@ -40,6 +40,10 @@ Route::group(['prefix' => 'quan-ly-the-loai-phim'], function () {
     Route::post('/', 'TheLoaiPhimController@index');
     Route::get('/them-the-loai-phim', 'TheLoaiPhimController@themLoaiPhim');
     Route::get('/cap-nhat-the-loai-phim', 'TheLoaiPhimController@capNhatLoaiPhim');
+    Route::post('/formSua','TheLoaiPhimController@suaLoaiPhim' );
+    Route::post('/formAdd', 'TheLoaiPhimController@addLoaiPhim');
+    Route::get('/xoatheloaiphim/{MaLoaiPhim}', 'TheLoaiPhimController@XoaLoaiPhim');
+
 });
 
 /**
