@@ -47,29 +47,32 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>Suất chiếu</th>
+                                        <th>Trạng thái</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>                                 
+                                    @foreach ($phim as $p)
                                     <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>{{$p->MaThoiGianChieu}}</td>
+                                        <td>{{$p->ThoiGianChieu}}</td>
+                                        <td>@if($p->TrangThai=='1')
+                                            Tồn Tại
+                                            @else
+                                            Tạm Ngưng
+                                        @endif
+                                        </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ url('quan-ly-suat-chieu/cap-nhat-suat-chieu') }}">
+                                                <a href="{{ route('EditSuatChieu',$p->MaThoiGianChieu) }}">
                                                     <button type="button" class="btn btn-warning" data-toggle="tooltip"
                                                         data-placement="top" title="Chỉnh sửa">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="#">
+                                                
+                                                <a href="{{ route('DelSuatChieu',$p->MaThoiGianChieu) }}">
                                                     <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                                         title="Xóa">
                                                         <i class="far fa-trash-alt"></i>
@@ -78,6 +81,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

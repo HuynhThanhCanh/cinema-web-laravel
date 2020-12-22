@@ -90,7 +90,19 @@ Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
 /**
  * ĐĂNG NHẬP
  */
-Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
-Route::post('/login', 'TrangChuController@dangnhap');
-Route::get('/dangxuat', 'TrangChuController@dangxuat');
+Route::get('/dang-nhap', function () {
+    return view('pages.dang-nhap');
+});
+/**
+ * SUAT CHIEU
+ * 
+ */
+Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
+    Route::get('/', 'XuatChieuController@index');
+    Route::post('/Add', 'XuatChieuController@Add');
+    Route::get('/them-suat-chieu', 'XuatChieuController@create');
+    Route::get('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Edit')->name('EditSuatChieu');
+    Route::post('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Update')->name('UpdateSuatChieu');
+    Route::get('/del/{Ma}', 'XuatChieuController@del')->name('DelSuatChieu');
 
+});

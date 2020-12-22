@@ -6,31 +6,29 @@
         <div class="container">
             <h2>Cập nhật suất chiếu</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-suat-chieu') }}" class="was-validated d-flex flex-column input-form"
+            @foreach($SuatChieu as $s)
+
+            <form method="POST" action="{{ route('UpdateSuatChieu',$s->MaThoiGianChieu) }}" class="was-validated d-flex flex-column input-form"
                 id="form-cap-nhat-suat-chieu">
                 @csrf
                 <div class="form-group col-12">
-                    <label for="suat-chieu">Suất chiếu:</label>
-                    <input type="time" class="form-control" id="suat-chieu" name="suat-chieu" required>
+                    <label for="suat-chieu">Suất chiếu: {{$s->MaThoiGianChieu}}</label>
+                    <input type="time" class="form-control" id="suat-chieu" name="suat-chieu" required value="{{$s->ThoiGianChieu}}">
                     <div class="invalid-feedback">Không được bỏ trống trường này</div>
                 </div>
 
                 <div class="check-group col-12">
                     <label for="check">Trạng thái:</label>
+                    
                     <div class="d-flex" id="check">
                         <div class="form-check">
                             <label class="form-check-label" for="radio-mo">
-                                <input type="radio" class="form-check-input" id="radio-mo" name="trang-thai" value="1"
+                                <input type="radio" class="form-check-input" id="radio-mo" name="trang-thai" value="0"
                                     checked>Mở
                             </label>
-                            <div class="form-check">
-                                <label class="form-check-label" for="radio-dong">
-                                    <input type="radio" class="form-check-input" id="radio-dong" name="trang-thai"
-                                        value="0">Đóng
-                                </label>
-                            </div>
                         </div>
                     </div>
+
                 </div>
                 <button type="submit" class="btn btn-primary btn-submit-input-form btn-cap-nhat-suat-chieu"
                     data-toggle="modal">
@@ -57,6 +55,7 @@
                     </div>
                 </div>
             </form>
+            @endforeach
         </div>
     </section>
 
