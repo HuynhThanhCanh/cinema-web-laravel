@@ -6,7 +6,7 @@
         <div class="container">
             <h2>Thêm phim mới</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-phim') }}" class="was-validated d-flex flex-column input-form"
+            <form method="GET" action="{{ url('quan-ly-phim') }}" class="was-validated d-flex flex-column input-form"
                 id="form-them-phim">
                 @csrf
                 <div class="form-group col-12">

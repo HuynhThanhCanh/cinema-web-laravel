@@ -51,8 +51,45 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
 });
 
 /**
+ * XUẤT CHIẾU
+ */
+Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
+    Route::get('/', function () {
+        return view('pages.quan-ly-suat-chieu');
+    });
+    Route::post('/', function () {
+        return view('pages.quan-ly-suat-chieu');
+    });
+    Route::get('/them-suat-chieu', function () {
+        return view('pages.them.them-suat-chieu');
+    });
+    Route::get('/cap-nhat-suat-chieu', function () {
+        return view('pages.cap-nhat.cap-nhat-suat-chieu');
+    });
+});
+
+/**
+ * LỊCH CHIẾU
+ */
+Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
+    Route::get('/', 'LichChieuController@index');
+    Route::post('/', 'LichChieuController@index');
+    Route::get('/xep-lich',  'LichChieuController@xepLichAJAX');
+    Route::post('/xep-lich', 'LichChieuController@xepLichAJAX');
+    Route::get('/cap-nhat-lich-chieu', function () {
+        return view('pages.cap-nhat.cap-nhat-lich-chieu');
+    });
+});
+
+/**
  * ĐĂNG NHẬP
  */
 Route::get('/dang-nhap', function () {
     return view('pages.dang-nhap');
 });
+
+/**
+ * TEST
+ */
+// Route::get('/test', 'LichChieuController@xepLichAJAX');
+// Route::post('/test', 'LichChieuController@xepLichAJAX');

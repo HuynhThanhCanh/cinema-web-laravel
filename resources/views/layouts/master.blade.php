@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Admin</title>
 
@@ -15,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href={{ asset('dist/css/adminlte.css') }}>
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('css/bootstrap-duallistbox.css') }}>
     <link rel="stylesheet" href={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.css') }}>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -224,7 +226,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-suat-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-clock"></i>
                                 <p>
                                     Suất chiếu
@@ -232,7 +234,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-lich-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Lịch chiếu
@@ -251,6 +253,7 @@
         <div class="content-wrapper">
             @yield('content')
         </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -274,6 +277,7 @@
 
     <!-- jQuery -->
     <script src={{ asset('plugins/jquery/jquery.min.js') }}></script>
+
     <!-- Bootstrap -->
     <script src={{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <script src={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.js') }}></script>
@@ -285,6 +289,15 @@
     <script src={{ asset('dist/js/demo.js') }}></script>
     <script src={{ asset('dist/js/pages/dashboard3.js') }}></script>
     <script src={{ asset('js/handler-submit-them.js') }}></script>
+    <script src={{ asset('ajax/xep-lich-ajax.js') }}></script>
+    <script src={{ asset('js/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}></script>
+    <script>
+        $(function() {
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+        })
+
+    </script>
 </body>
 
 </html>
