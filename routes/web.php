@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.trang-chu');
-});
+Route::get('/','TrangChuController@index');
 Route::post('/', function () {
     return view('pages.trang-chu');
 });
@@ -27,7 +26,10 @@ Route::group(['prefix' => 'quan-ly-phim'], function () {
     Route::get('/', 'PhimController@index');
     Route::post('/', 'PhimController@index');
     Route::get('/them-phim', 'PhimController@themPhim');
-    Route::get('/cap-nhat-phim', 'PhimController@capNhatPhim');
+    Route::get('/cap-nhat-phim/{MaPhim}', 'PhimController@capNhatPhim');
+    Route::post('/formAdd', 'PhimController@addPhim');
+    Route::post('/formEdit/{MaPhim}', 'PhimController@editPhim');
+    Route::get('/xoaphim/{MaPhim}', 'PhimController@deletePhim');
 });
 
 /**
@@ -53,6 +55,6 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
 /**
  * ĐĂNG NHẬP
  */
-Route::get('/dang-nhap', function () {
-    return view('pages.dang-nhap');
-});
+Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
+Route::post('/login', 'TrangChuController@dangnhap');
+Route::get('/dangxuat', 'TrangChuController@dangxuat');
