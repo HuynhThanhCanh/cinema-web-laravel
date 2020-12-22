@@ -46,38 +46,75 @@
                             <table class="table table-head-fixed table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
-                                        <th>Tác vụ</th>
+                                        <th>STT</th>
+                                        <th>Tên Phim</th>
+                                        <th>Ngày Chiếu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Thời lượng</th>
+                                        <th>Đạo diễn</th>
+                                        <th>Diễn viên</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Tralier</th>
+                                        <th>Loại phim</th>
+                                        <th>Nhãn</th>
+                                        <th>Trạng thái</th>
+                                        <th>Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                    $stt=0;
+                                    if (isset($_GET['page'])) {
+										$a=$_GET['page'];
+
+									}
+									else{
+										$a=1;
+									}
+									$stt=($a-1)*10;
+                                   @endphp
+                                   @foreach ($phim as $p)
+                                   @php
+                                   $stt++;
+                                   @endphp
                                     <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>{{$stt}}</td>
+                                        <td>{{$p->TenPhim}}</td>
+                                        <td>{{$p->NgayDKChieu}}</td>
+                                        <td>{{$p->NgayKetThuc}}</td>
+                                        <td>{{$p->ThoiLuong}}</td>
+                                        <td>{{$p->DaoDien}}</td>
+                                        <td>{{$p->DienVien}}</td>
+                                        <td>
+                                            <img src="/image/phim/{{$p->HinhAnh}}" width="60px" height="60px">
+                                        </td>
+                                        <td>{{$p->LinkPhim}}</td>
+                                        <td>{{$p->TenLoaiPhim}}</td>
+                                        <td>{{$p->TenGioiHan}}</td>
+                                        <td>@if($p->TrangThai=='1')
+                                            Đang chiếu
+                                            @else
+                                            Sắp Chiếu
+
+                                        @endif </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ url('quan-ly-phim/cap-nhat-phim') }}">
+                                                <a href="quan-ly-phim/cap-nhat-phim/{{$p->MaPhim}}">
                                                     <button type="submit" class="btn btn-warning" data-toggle="tooltip"
                                                         data-placement="top" title="Chỉnh sửa">
                                                         <i class="fas fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="#">
-                                                    <button type="button" class="btn btn-danger" data-toggle="tooltip"
-                                                        title="Xóa">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
+                                                <a href="quan-ly-phim/xoaphim/{{$p->MaPhim}}">
+                                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" type="submit" 
+                                                    title="Xóa">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
