@@ -25,11 +25,11 @@ class CreateNhanViensTable extends Migration
             $table->date('NgaySinh');
             $table->string('DiaChi', 100);
             $table->string('SDT', 11);
-            $table->string('email', 30);// sửa Email thành email cho giống trong user
+            $table->string('email', 30); // sửa Email thành email cho giống trong user
             $table->bigInteger('MaCV')->unsigned(); //khóa ngoại
             $table->bigInteger('MaNQL')->nullable()->unsigned(); //khóa ngoại
             $table->string('TenTK', 20);
-            $table->string('password', 255);// sửa lại lengh cao hơn để tạo md5
+            $table->string('password', 255); // sửa lại lengh cao hơn để tạo md5
             $table->tinyInteger('TrangThai')->default(0);
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();

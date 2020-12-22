@@ -46,41 +46,42 @@
                             <table class="table table-head-fixed table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>STT</th>
                                         <th>Suất chiếu</th>
                                         <th>Trạng thái</th>
                                         <th>Tác vụ</th>
                                     </tr>
                                 </thead>
-                                <tbody>                                 
+                                <tbody>
                                     @foreach ($phim as $p)
-                                    <tr>
-                                        <td>{{$p->MaThoiGianChieu}}</td>
-                                        <td>{{$p->ThoiGianChieu}}</td>
-                                        <td>@if($p->TrangThai=='1')
-                                            Tồn Tại
-                                            @else
-                                            Tạm Ngưng
-                                        @endif
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a href="{{ route('EditSuatChieu',$p->MaThoiGianChieu) }}">
-                                                    <button type="button" class="btn btn-warning" data-toggle="tooltip"
-                                                        data-placement="top" title="Chỉnh sửa">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                </a>
-                                                
-                                                <a href="{{ route('DelSuatChieu',$p->MaThoiGianChieu) }}">
-                                                    <button type="button" class="btn btn-danger" data-toggle="tooltip"
-                                                        title="Xóa">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $p->MaThoiGianChieu }}</td>
+                                            <td>{{ $p->ThoiGianChieu }}</td>
+                                            <td>
+                                                @if ($p->TrangThai == '1')
+                                                    Tồn Tại
+                                                @else
+                                                    Tạm Ngưng
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{ route('EditSuatChieu', $p->MaThoiGianChieu) }}">
+                                                        <button type="button" class="btn btn-warning" data-toggle="tooltip"
+                                                            data-placement="top" title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                    </a>
+
+                                                    <a href="{{ route('DelSuatChieu', $p->MaThoiGianChieu) }}">
+                                                        <button type="button" class="btn btn-danger" data-toggle="tooltip"
+                                                            title="Xóa">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','TrangChuController@index');
+Route::get('/', 'TrangChuController@index');
 Route::post('/', function () {
     return view('pages.trang-chu');
 });
@@ -40,10 +40,9 @@ Route::group(['prefix' => 'quan-ly-the-loai-phim'], function () {
     Route::post('/', 'TheLoaiPhimController@index');
     Route::get('/them-the-loai-phim', 'TheLoaiPhimController@themLoaiPhim');
     Route::get('/cap-nhat-the-loai-phim', 'TheLoaiPhimController@capNhatLoaiPhim');
-    Route::post('/formSua','TheLoaiPhimController@suaLoaiPhim' );
+    Route::post('/formSua', 'TheLoaiPhimController@suaLoaiPhim');
     Route::post('/formAdd', 'TheLoaiPhimController@addLoaiPhim');
     Route::get('/xoatheloaiphim/{MaLoaiPhim}', 'TheLoaiPhimController@XoaLoaiPhim');
-
 });
 
 /**
@@ -54,24 +53,6 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
     Route::post('/', 'RapController@index');
     Route::get('/them-rap', 'RapController@themRap');
     Route::get('/cap-nhat-rap', 'RapController@capNhatRap');
-});
-
-/**
- * XUẤT CHIẾU
- */
-Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
-    Route::get('/', function () {
-        return view('pages.quan-ly-suat-chieu');
-    });
-    Route::post('/', function () {
-        return view('pages.quan-ly-suat-chieu');
-    });
-    Route::get('/them-suat-chieu', function () {
-        return view('pages.them.them-suat-chieu');
-    });
-    Route::get('/cap-nhat-suat-chieu', function () {
-        return view('pages.cap-nhat.cap-nhat-suat-chieu');
-    });
 });
 
 /**
@@ -88,14 +69,8 @@ Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
 });
 
 /**
- * ĐĂNG NHẬP
- */
-Route::get('/dang-nhap', function () {
-    return view('pages.dang-nhap');
-});
-/**
  * SUAT CHIEU
- * 
+ *
  */
 Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
     Route::get('/', 'XuatChieuController@index');
@@ -104,5 +79,11 @@ Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
     Route::get('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Edit')->name('EditSuatChieu');
     Route::post('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Update')->name('UpdateSuatChieu');
     Route::get('/del/{Ma}', 'XuatChieuController@del')->name('DelSuatChieu');
-
 });
+
+/**
+ * ĐĂNG NHẬP
+ */
+Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
+Route::post('/login', 'TrangChuController@dangnhap');
+Route::get('/dangxuat', 'TrangChuController@dangxuat');

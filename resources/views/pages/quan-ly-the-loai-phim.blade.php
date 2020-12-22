@@ -68,12 +68,12 @@
                                    @endphp
                                    @foreach ($loaiphim as $v)
                                    @php
-                                   @endphp 
+                                   @endphp
                                         <tr>
-                                        <td>{{++$stt}}</td>                                    
+                                        <td>{{++$stt}}</td>
                                         <td>{{$v->TenLoaiPhim}}</td>
                                         @foreach($nhanvien as $nv)
-                                        <td>{{$nv->TenNV}}</td>
+                                        <td>{{$nv->name}}</td>
                                         @endforeach
                                         <td>@if($v->TrangThai=='1')
                                         Đang hoạt động
@@ -81,7 +81,7 @@
                                             Ngưng hoạt động
                                             @endif
                                         </td>
-                                           
+
                                             <td>
                                                 <div class="btn-group">
                                                     <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
@@ -98,11 +98,11 @@
                                                     </a>
                                                 </div>
                                             </td>
-                                                    
+
                                          </tr>
                                     @endforeach
-                                        
-                             
+
+
                                 </tbody>
                             </table>
                         </div>
