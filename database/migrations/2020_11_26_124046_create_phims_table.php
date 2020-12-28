@@ -32,8 +32,6 @@ class CreatePhimsTable extends Migration
             $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->bigInteger('Nhan')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 

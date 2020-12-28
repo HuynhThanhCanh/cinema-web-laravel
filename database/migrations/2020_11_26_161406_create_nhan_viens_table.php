@@ -31,8 +31,7 @@ class CreateNhanViensTable extends Migration
             $table->string('TenTK', 20);
             $table->string('password', 255); // sửa lại lengh cao hơn để tạo md5
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
+
         });
     }
 

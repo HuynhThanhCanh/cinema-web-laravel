@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Phim;
 use App\LoaiPhim;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
@@ -37,36 +38,43 @@ class PhimController extends Controller
 
     public function addPhim(Request $request)
     {
-       $TenPhim=$request->input('ten-phim');
-       $NgayDKChieu=$request->input('ngay-dk-chieu');
-       $NgayKetThuc=$request->input('ngay-ket-thuc');
-       $ThoiLuong=$request->input('thoi-luong-chieu');
-       $DaoDien=$request->input('dao-dien');
-       $DienVien=$request->input('dien-vien');
-       $Diem=$request->input('Diem','0');
-       $HinhAnh=$request->input('hinh-anh');
-       $LinkPhim=$request->input('link-trailer');
-       $MaLoaiPhim=$request->input('loai-phim');
-       $MaNV=$request->input('MaNV');
-       $Nhan=$request->input('nhan');
-       $TrangThai=$request->input('trang-thai');
-       $data=array('TenPhim'=>$TenPhim,'NgayDKChieu'=>$NgayDKChieu,'NgayKetThuc'=>$NgayKetThuc,'ThoiLuong'=>$ThoiLuong,'DaoDien'=>$DaoDien,'DienVien'=>$DienVien,'Diem'=>$Diem,'HinhAnh'=>$HinhAnh,'LinkPhim'=>$LinkPhim,'MaLoaiPhim'=>$MaLoaiPhim,'MaNV'=>$MaNV,'Nhan'=>$Nhan,'TrangThai'=>$TrangThai);
-        DB::table('phims')->insert($data);
+    //     $path ='/image/phim/';
+    //     $fileName = null;
+    // if (request()->hasFile('hinh_anh')) {
+    //     $file = $request->file('hinh_anh');
+    //     $fileName = ($file->getClientOriginalName());
+    //     $file->move($path, $fileName);    
+    // }
+        $phim= new Phim;
+        $phim->TenPhim=$request->ten_phim;
+        $phim->NgayDKChieu=$request->ngay_dk_chieu;
+        $phim->NgayKetThuc=$request->ngay_ket_thuc;
+        $phim->ThoiLuong=$request->thoi_luong_chieu;
+        $phim->DaoDien=$request->dao_dien;
+        $phim->DienVien=$request->dien_vien;
+        $phim->Diem=$request->Diem=0;
+        $phim->HinhAnh= $request->hinh_anh;
+        $phim->LinkPhim=$request->link_trailer;
+        $phim->MaLoaiPhim=$request->loai_phim;
+        $phim->MaNV=$request->MaNV;
+        $phim->Nhan=$request->nhan;
+        $phim->TrangThai=$request->trang_thai;
+        $phim->save();
       return redirect('/quan-ly-phim');
     }   
-    
+
     public function editPhim(Request $request,$MaPhim)
     {
-        $TenPhim=$request->input('ten-phim');
-        $NgayDKChieu=$request->input('ngay-dk-chieu');
-        $NgayKetThuc=$request->input('ngay-ket-thuc');
-        $ThoiLuong=$request->input('thoi-luong-chieu');
-        $DaoDien=$request->input('dao-dien');
-        $DienVien=$request->input('dien-vien');
+        $TenPhim=$request->input('ten_phim');
+        $NgayDKChieu=$request->input('ngay_dk_chieu');
+        $NgayKetThuc=$request->input('ngay_ket_thuc');
+        $ThoiLuong=$request->input('thoi_luong_chieu');
+        $DaoDien=$request->input('dao_dien');
+        $DienVien=$request->input('dien_vien');
         $Diem=$request->input('Diem','0');
-        $HinhAnh=$request->input('hinh-anh');
-        $LinkPhim=$request->input('link-trailer');
-        $MaLoaiPhim=$request->input('loai-phim');
+        $HinhAnh=$request->input('hinh_anh');
+        $LinkPhim=$request->input('link_trailer');
+        $MaLoaiPhim=$request->input('loai_phim');
         $MaNV=$request->input('MaNV','1');
         $Nhan=$request->input('nhan');
         $TrangThai=$request->input('optradio');
@@ -86,7 +94,7 @@ class PhimController extends Controller
     }
     public function getAPIPhimbyID($MaPhim)
     {
-        $phim=DB::select('select * from phims where MaPhim = ?',[$MaPhim]);
+        $phim=DB::select('select * from phims where MaPhim = ?'  ,[$MaPhim]);
         return response()->json($phim);
     }
     public function insertAPIPhim(Request $request)
@@ -108,5 +116,16 @@ class PhimController extends Controller
         $phim->TrangThai=$request->TrangThai;
          $phim->save();
         return response()->json($phim, 201);
+    }
+    public function getPhimDangChieu()
+    {
+        $phim=Phim::where('TrangThai','1')->get();
+        return response()->json($phim);
+    }
+    
+    public function getPhimSapChieu()
+    {
+        $phim=Phim::where('TrangThai','0')->get();
+        return response()->json($phim);
     }
 }

@@ -22,8 +22,7 @@ class CreateLoaiPhimsTable extends Migration
             $table->string('TenLoaiPhim', 100)->unique();
             $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
+
         });
     }
 
