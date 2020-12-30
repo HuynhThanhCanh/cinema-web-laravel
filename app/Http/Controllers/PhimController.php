@@ -119,13 +119,22 @@ class PhimController extends Controller
     }
     public function getPhimDangChieu()
     {
-        $phim=Phim::where('TrangThai','1')->get();
-        return response()->json($phim);
+        // $phim=Phim::where('TrangThai','1')->get();
+        // return response()->json($phim);
+       $phim=DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
+       FROM phims , loai_phims , gioi_han_tuois
+       WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=1');
+       return response()->json($phim);
     }
     
     public function getPhimSapChieu()
     {
-        $phim=Phim::where('TrangThai','0')->get();
+        // $phim=Phim::where('TrangThai','0')->get();
+        // return response()->json($phim);
+
+        $phim=DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
+        FROM phims , loai_phims , gioi_han_tuois
+        WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=0');
         return response()->json($phim);
     }
 }
