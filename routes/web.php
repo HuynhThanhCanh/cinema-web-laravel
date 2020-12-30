@@ -79,6 +79,13 @@ Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
     Route::get('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Edit')->name('EditSuatChieu');
     Route::post('/cap-nhat-suat-chieu/{Ma}', 'XuatChieuController@Update')->name('UpdateSuatChieu');
     Route::get('/del/{Ma}', 'XuatChieuController@del')->name('DelSuatChieu');
+
+    /**AJAX */
+    Route::get('/edit-suat-chieu-ajax', 'XuatChieuController@EditSuatChieuAjax');
+
+    Route::post('/UpdateAjax', 'XuatChieuController@UpdateAjax');
+    Route::post('/AddAjax', 'XuatChieuController@AddAjax')->name('AddSuatChieuAjax');
+
 });
 
 /**

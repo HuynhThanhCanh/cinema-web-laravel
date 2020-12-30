@@ -23,3 +23,8 @@ Route::get('getGhe', 'RapController@LayMaghe');
 Route::get('/phim','PhimController@getAPIPhim');
 Route::get('/phim/{MaPhim}','PhimController@getAPIPhimbyID');
 Route::post('/savephim','PhimController@insertAPIPhim');
+
+
+/** SuatChieu */
+Route::get('/SuatChieu', 'XuatChieuController@getAPIAllSuatChieu');
+Route::get('/SuatChieu/{MaSuatChieu}','XuatChieuController@getAPISuatChieubyID');
