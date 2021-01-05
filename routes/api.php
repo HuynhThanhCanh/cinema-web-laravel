@@ -20,9 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('getGhe', 'RapController@LayMaghe');
-Route::get('/phim','PhimController@getAPIPhim');
-Route::get('/phim/{MaPhim}','PhimController@getAPIPhimbyID');
-Route::post('/savephim','PhimController@insertAPIPhim');
-Route::get('/phimDangChieu','PhimController@getPhimDangChieu');
-Route::get('/phimSapChieu','PhimController@getPhimSapChieu');
+Route::get('/phim','PhimController@getAPIPhim');// lấy danh sách tất cả phim
+Route::get('/phim/{MaPhim}','PhimController@getAPIPhimbyID');// lấy phim theo ten  phim
+Route::get('/phim/{TenPhim}','PhimController@TimKiemPhimTheoTen');// Tìm kiếm phim theo tên
+Route::post('/savephim','PhimController@insertAPIPhim');// thêm phim
+Route::get('/phimDangChieu','PhimController@getPhimDangChieu');// lấy tất cả phim đang chiếu
+Route::get('/phimSapChieu','PhimController@getPhimSapChieu');// lấy tất cả phim sắp chiếu
+Route::post('/savethanhvien','ThanhVienController@insertThanhVien');// thêm thành viên
+Route::post('/thanhvien','ThanhVienController@getThanhVien');// Lấy danh sách tất cả thành viên
+
 

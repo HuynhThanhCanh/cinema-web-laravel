@@ -7,7 +7,7 @@
             <h2>Thêm phim mới</h2>
             <hr>
             <form method="POST" action="{{ url('quan-ly-phim/formAdd') }}" class="was-validated d-flex flex-column input-form"
-                id="form-them-phim">
+                id="form-them-phim" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-12">
                     <label for="ten-phim">Tên phim:</label>
@@ -15,7 +15,6 @@
                         required>
                     <div class="invalid-feedback">Không được bỏ trống trường này</div>
                 </div>
-
                 <div class="form-group d-flex">
                     <div class="col-4">
                         <label for="ngay-dk-chieu">Ngày đăng ký chiếu:</label>
@@ -53,10 +52,16 @@
                     </div>
                 </div>
 
+                <div class="form-group col-12">
+                    <label for="ten-phim">Nội dung phim:</label>
+                    <input type="text" class="form-control" id="ten-phim" placeholder="Nhập nội dung phim" name="nd_phim">
+                    <div class="invalid-feedback">Viết ngắn gọn thôi !</div>
+                </div>
+
                 <div class="form-group d-flex">
                     <div class="col-6">
                         <label for="ngay-dk-chieu">Hình ảnh (Có thể bỏ qua trường này):</label>
-                        <input type="file" class="form-control-file input-border" id="hinh-anh" name="hinh_anh">
+                        <input type="file" class="form-control-file input-border" id="hinh-anh" name="hinh_anh" >
                     </div>
 
                     <div class="col-6">

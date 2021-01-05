@@ -8,7 +8,7 @@
             <hr>
             @foreach ($phim as $p)
             <form method="POST" action="/quan-ly-phim/formEdit/{{$p->MaPhim}}" class="was-validated d-flex flex-column input-form"
-                id="form-cap-nhat-phim">
+                id="form-cap-nhat-phim" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-12">
                     <label for="ten-phim">Tên phim:</label>

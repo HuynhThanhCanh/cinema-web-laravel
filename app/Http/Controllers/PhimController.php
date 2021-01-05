@@ -52,13 +52,25 @@ class PhimController extends Controller
         $phim->ThoiLuong=$request->thoi_luong_chieu;
         $phim->DaoDien=$request->dao_dien;
         $phim->DienVien=$request->dien_vien;
+        $phim->NoiDung=$request->nd_phim;
         $phim->Diem=$request->Diem=0;
-        $phim->HinhAnh= $request->hinh_anh;
+        //$phim->HinhAnh= $request->hinh_anh;
         $phim->LinkPhim=$request->link_trailer;
         $phim->MaLoaiPhim=$request->loai_phim;
         $phim->MaNV=$request->MaNV;
         $phim->Nhan=$request->nhan;
         $phim->TrangThai=$request->trang_thai;
+        if ($request->hasFile('hinh_anh')) {
+            $image = $request->file('hinh_anh');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/image/phim');
+            $image->move($destinationPath, $name);
+            $HinhAnh= $name;
+           
+            }else{
+                $HinhAnh= "tiectrangmau.jpg";// nếu k thì có thì chọn tên ảnh mặc định ảnh mặc định
+            }
+        $phim->HinhAnh= $HinhAnh;
         $phim->save();
       return redirect('/quan-ly-phim');
     }   
@@ -72,7 +84,17 @@ class PhimController extends Controller
         $DaoDien=$request->input('dao_dien');
         $DienVien=$request->input('dien_vien');
         $Diem=$request->input('Diem','0');
-        $HinhAnh=$request->input('hinh_anh');
+        //$HinhAnh=$request->input('hinh_anh');
+        if ($request->hasFile('hinh_anh')) {
+            $image = $request->file('hinh_anh');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/image/phim');
+            $image->move($destinationPath, $name);
+            $HinhAnh= $name;
+           
+            }else{
+                $HinhAnh= "tiectrangmau.jpg";// nếu k thì có thì chọn tên ảnh mặc định ảnh mặc định
+            }
         $LinkPhim=$request->input('link_trailer');
         $MaLoaiPhim=$request->input('loai_phim');
         $MaNV=$request->input('MaNV','1');
@@ -94,7 +116,7 @@ class PhimController extends Controller
     }
     public function getAPIPhimbyID($MaPhim)
     {
-        $phim=DB::select('select * from phims where MaPhim = ?'  ,[$MaPhim]);
+        $phim=DB::select('select * from phims where MaPhim =?'  ,[$MaPhim]);
         return response()->json($phim);
     }
     public function insertAPIPhim(Request $request)
@@ -107,6 +129,7 @@ class PhimController extends Controller
         $phim->ThoiLuong=$request->ThoiLuong;
         $phim->DaoDien=$request->DaoDien;
         $phim->DienVien=$request->DienVien;
+        $phim->NoiDung=$request->NoiDung;
         $phim->Diem=$request->Diem;
         $phim->HinhAnh=$request->HinhAnh;
         $phim->LinkPhim=$request->LinkPhim;
@@ -137,4 +160,12 @@ class PhimController extends Controller
         WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=0');
         return response()->json($phim);
     }
+    public function TimKiemPhimTheoTen($TenPhim)
+    {
+        $phim=DB::select('select * from phims where TenPhim like "?%" ',[$TenPhim]);
+        return response()->json($phim);
+    }
+ 
+
+    
 }

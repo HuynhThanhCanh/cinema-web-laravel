@@ -8,7 +8,7 @@ class GioiHanTuoi extends Model
 {
     //
     protected $table = 'gioi_han_tuois';
-    public $timestamps=true;
+    public $timestamps=false;
     // 1 giới hạn tuổi thuộc về nhiều phim
 
     public function Phim()
