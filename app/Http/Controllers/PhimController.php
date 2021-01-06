@@ -162,7 +162,8 @@ class PhimController extends Controller
     }
     public function TimKiemPhimTheoTen($TenPhim)
     {
-        $phim=DB::select('select * from phims where TenPhim like "?%" ',[$TenPhim]);
+        // $phim=Phim::where('TenPhim','LIKE','%'.'?'.'%',[$TenPhim])->get();
+        $phim=DB::select('select * from phims where TenPhim  like concat(?,"%") ', [$TenPhim]);
         return response()->json($phim);
     }
  
