@@ -26,7 +26,9 @@ Route::get('/timkiemphim/{TenPhim}','PhimController@TimKiemPhimTheoTen');// Tìm
 Route::post('/savephim','PhimController@insertAPIPhim');// thêm phim
 Route::get('/phimDangChieu','PhimController@getPhimDangChieu');// lấy tất cả phim đang chiếu
 Route::get('/phimSapChieu','PhimController@getPhimSapChieu');// lấy tất cả phim sắp chiếu
-Route::post('/savethanhvien','ThanhVienController@insertThanhVien');// thêm thành viên
-Route::post('/thanhvien','ThanhVienController@getThanhVien');// Lấy danh sách tất cả thành viên
-
+Route::get('/savethanhvien','ThanhVienController@insertThanhVien');// thêm thành viên
+Route::get('/thanhvien','ThanhVienController@getThanhVien');// Lấy danh sách tất cả thành viên
+Route::get('/loginApp', 'ThanhVienController@LoginApp');// Check đăng nhập dưới App
+Route::get('/themdanhsachve', 'VeController@DanhSachVe');// Thêm danh sách vé
+Route::get('/themve', 'VeController@DatVe');// thêm vé
 

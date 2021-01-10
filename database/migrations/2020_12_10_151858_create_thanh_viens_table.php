@@ -24,7 +24,7 @@ class CreateThanhViensTable extends Migration
             $table->date('NgaySinh');
             $table->string('SDT', 11);
             $table->string('Email', 50);
-            $table->string('Password', 45);
+            $table->string('Password', 255);
             $table->string('DiaChi', 100);
             $table->tinyInteger('TrangThai')->default(0);
         });

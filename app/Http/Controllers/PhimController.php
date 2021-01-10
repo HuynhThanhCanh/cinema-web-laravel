@@ -38,13 +38,10 @@ class PhimController extends Controller
 
     public function addPhim(Request $request)
     {
-    //     $path ='/image/phim/';
-    //     $fileName = null;
-    // if (request()->hasFile('hinh_anh')) {
-    //     $file = $request->file('hinh_anh');
-    //     $fileName = ($file->getClientOriginalName());
-    //     $file->move($path, $fileName);    
-    // }
+        $this->validate($request,[
+            'ten_phim'=>'required',
+            'ten_phim'=>'unique:phims,TenPhim'
+        ]);
         $phim= new Phim;
         $phim->TenPhim=$request->ten_phim;
         $phim->NgayDKChieu=$request->ngay_dk_chieu;
