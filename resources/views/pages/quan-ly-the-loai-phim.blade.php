@@ -73,7 +73,7 @@
                                         <td>{{++$stt}}</td>                                    
                                         <td>{{$v->TenLoaiPhim}}</td>
                                         @foreach($nhanvien as $nv)
-                                        <td>{{$nv->TenNV}}</td>
+                                        <td>{{$nv->name}}</td>
                                         @endforeach
                                         <td>@if($v->TrangThai=='1')
                                         Đang hoạt động
@@ -84,7 +84,7 @@
                                            
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
+                                                    <a href="quan-ly-the-loai-phim/cap-nhat-the-loai-phim/{{$v->MaLoaiPhim}}">
                                                         <button type="button" class="btn btn-warning" data-toggle="tooltip"
                                                             data-placement="top" title="Chỉnh sửa">
                                                             <i class="fas fa-edit"></i>
