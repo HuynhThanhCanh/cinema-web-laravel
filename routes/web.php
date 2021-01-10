@@ -82,7 +82,7 @@ Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
 
     /**AJAX */
     Route::get('/edit-suat-chieu-ajax', 'XuatChieuController@EditSuatChieuAjax');
-
+    Route::get('/xoa-suat-chieu-ajax', 'XuatChieuController@DeleteAjax');
     Route::post('/UpdateAjax', 'XuatChieuController@UpdateAjax');
     Route::post('/AddAjax', 'XuatChieuController@AddAjax')->name('AddSuatChieuAjax');
 

@@ -49,7 +49,7 @@ class XuatChieuController extends Controller
         if(count($phim)>0):
             foreach ($phim as $p){
                 $active = $p->TrangThai == '1' ? 'Tồn Tại' : 'Tạm Ngưng';
-                $html .='<tr>
+                $html .='<tr class="clickable-row" data-href="'.$p->MaThoiGianChieu.'">
                 <td>'.$p->MaThoiGianChieu.'</td>
                 <td>'.$p->ThoiGianChieu.'</td>
                 <td>'.$active.'
@@ -58,7 +58,7 @@ class XuatChieuController extends Controller
                     <div class="btn-group">
                     
 
-                        <a href="'.route('DelSuatChieu', $p->MaThoiGianChieu).'">
+                    <a class="btn-delete" data-href="'.$p->MaThoiGianChieu.'">
                             <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                 title="Xóa">
                                 <i class="far fa-trash-alt"></i>
@@ -71,6 +71,7 @@ class XuatChieuController extends Controller
         endif;
         return response()->json(['message'=>'success','html'=>$html]);
     }
+
     public function UpdateAjax(Request $request)
     {
 
@@ -84,7 +85,9 @@ class XuatChieuController extends Controller
         if(count($phim)>0):
             foreach ($phim as $p){
                 $active = $p->TrangThai == '1' ? 'Tồn Tại' : 'Tạm Ngưng';
-                $html .='<tr>
+
+                
+                $html .='<tr class="clickable-row" data-href="'.$p->MaThoiGianChieu.'">
                 <td>'.$p->MaThoiGianChieu.'</td>
                 <td>'.$p->ThoiGianChieu.'</td>
                 <td>'.$active.'
@@ -93,7 +96,7 @@ class XuatChieuController extends Controller
                     <div class="btn-group">
                         
 
-                        <a href="'.route('DelSuatChieu', $p->MaThoiGianChieu).'">
+                    <a class="btn-delete" data-href="'.$p->MaThoiGianChieu.'">
                             <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                 title="Xóa">
                                 <i class="far fa-trash-alt"></i>
@@ -106,6 +109,42 @@ class XuatChieuController extends Controller
         endif;
         return response()->json(['message'=>'success','html'=>$html]);
     }
+    public function DeleteAjax(Request $request)
+    {
+
+
+        $idSC=$request->_ID;
+       
+        DB::update('UPDATE  thoi_gian_chieus SET TrangThai=? WHERE MaThoiGianChieu=?',[0,$idSC]);
+
+        $phim=DB::select('select * from thoi_gian_chieus WHERE TrangThai=1');
+        $html = '';
+        if(count($phim)>0):
+            foreach ($phim as $p){
+                $active = $p->TrangThai == '1' ? 'Tồn Tại' : 'Tạm Ngưng';
+                $html .='<tr class="clickable-row" data-href="'.$p->MaThoiGianChieu.'">
+                <td>'.$p->MaThoiGianChieu.'</td>
+                <td>'.$p->ThoiGianChieu.'</td>
+                <td>'.$active.'
+                </td>
+                <td>
+                    <div class="btn-group">
+                        
+
+                    <a class="btn-delete" data-href="'.$p->MaThoiGianChieu.'">
+                            <button type="button" class="btn btn-danger" data-toggle="tooltip"
+                                title="Xóa">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </a>
+                    </div>
+                </td>
+            </tr>';
+            }
+        endif;
+        return response()->json(['message'=>'success','html'=>$html]);
+    }
+
 
 
     public function Edit($Ma)

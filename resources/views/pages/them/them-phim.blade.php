@@ -7,7 +7,7 @@
             <h2>Thêm phim mới</h2>
             <hr>
             <form method="POST" action="{{ url('quan-ly-phim/formAdd') }}" class="was-validated d-flex flex-column input-form"
-                id="form-them-phim">
+                id="form-them-phim"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-12">
                     <label for="ten-phim">Tên phim:</label>

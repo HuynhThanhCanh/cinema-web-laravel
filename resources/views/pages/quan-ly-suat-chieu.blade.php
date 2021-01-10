@@ -42,19 +42,28 @@
 
                                     <div class="card-body">
                                         <button type="submit" class="btn btn-primary btn-submit-input-form btn-them-suat-chieu"
-                                            data-toggle="modal">
+                                            data-toggle="modal" data-target="#popup-them-question">
                                             <strong>Thêm mới</strong>
                                         </button>
                                         <button type="submit" class="btn btn-success btn-submit-input-form btn-cap-nhat-suat-chieu"
-                                            data-toggle="modal">
+                                            data-toggle="modal" data-target="#popup-cap-nhat">
                                             <strong>Cập nhật</strong>
                                         </button>
+                                    
+                                     
+                                        
                                 
                                     </div>
+                                    
+                                    
                     
                     
                     
                                 </form>
+
+
+                            
+                                
                                 
                             </div>
                             <div class="card-tools">
@@ -82,7 +91,7 @@
                                 </thead>
                                 <tbody id="body-list">
                                     @foreach ($phim as $p)
-                                   <a href="{{ route('EditSuatChieu', $p->MaThoiGianChieu) }}">
+                               
                                         <tr class="clickable-row" data-href="{{$p->MaThoiGianChieu}}">
                                         
                                             <td>{{ $p->MaThoiGianChieu }}</td>
@@ -98,7 +107,7 @@
                                                 <div class="btn-group">
                                                 
 
-                                                    <a href="{{ route('DelSuatChieu', $p->MaThoiGianChieu) }}">
+                                                    <a class="btn-delete" data-href="{{ $p->MaThoiGianChieu }}">
                                                         <button type="button" class="btn btn-danger" data-toggle="tooltip"
                                                             title="Xóa">
                                                             <i class="far fa-trash-alt"></i>
@@ -108,10 +117,31 @@
                                             </td>
                                            
                                         </tr>
-                                    </a>
+                                  
                                     @endforeach
                                 </tbody>
+                                
                             </table>
+                            <div class="modal fade modal-them-suat-chieu-question" id="popup-them-question">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <!-- Modal body -->
+                                        <div class="modal-body text-center">
+                                            <i class="fas fa-info-circle" style="color: #dc3545;"></i>
+                                            Xác nhận thêm suất chiếu vào hệ thống
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-warning btn-xac-nhan-them-suat-chieu">
+                                                <strong>Xác nhận</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
                         </div>
                         <!-- /.card-body -->
                     </div>

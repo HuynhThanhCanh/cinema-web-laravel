@@ -44,14 +44,20 @@ class PhimController extends Controller
        $DaoDien=$request->input('dao-dien');
        $DienVien=$request->input('dien-vien');
        $Diem=$request->input('Diem','0');
-       $HinhAnh=$request->input('hinh-anh');
+       
+       
+
+
        $LinkPhim=$request->input('link-trailer');
        $MaLoaiPhim=$request->input('loai-phim');
        $MaNV=$request->input('MaNV');
        $Nhan=$request->input('nhan');
        $TrangThai=$request->input('trang-thai');
+      
+        $HinhAnh= $request->input('hinh-anh');
        $data=array('TenPhim'=>$TenPhim,'NgayDKChieu'=>$NgayDKChieu,'NgayKetThuc'=>$NgayKetThuc,'ThoiLuong'=>$ThoiLuong,'DaoDien'=>$DaoDien,'DienVien'=>$DienVien,'Diem'=>$Diem,'HinhAnh'=>$HinhAnh,'LinkPhim'=>$LinkPhim,'MaLoaiPhim'=>$MaLoaiPhim,'MaNV'=>$MaNV,'Nhan'=>$Nhan,'TrangThai'=>$TrangThai);
         DB::table('phims')->insert($data);
+  
       return redirect('/quan-ly-phim');
     }   
     
