@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\ThanhVien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class ThanhVienController extends Controller
 {
-    //
+    /**
+    * API
+    */
     public function insertThanhVien(Request $request)
     {
         $thanhvien= new ThanhVien;
@@ -20,7 +23,6 @@ class ThanhVienController extends Controller
         $thanhvien->TrangThai=$request->TrangThai=1;
         $thanhvien->save();
         return response()->json(['mess'=>'true']);
-
     }
 
     public function getThanhVien()
@@ -51,4 +53,10 @@ class ThanhVienController extends Controller
          return response()->json(['message'=>'false']);
     }
    
+    public function capNhatThanhVien(Request $request)
+    {
+        $maThanhVien = $request->maThanhVien;
+        $diaChi = $request->diaChi;
+        ThanhVien::where("MaThanhVien", $maThanhVien)->update(['DiaChi' => $diaChi]);
+    }
 }

@@ -23,7 +23,6 @@ class CreateRapsTable extends Migration
             $table->tinyInteger('SoLuongGhe');
             $table->bigInteger('MaChiNhanh')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
-
         });
     }
 

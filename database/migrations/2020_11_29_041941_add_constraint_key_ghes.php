@@ -16,6 +16,7 @@ class AddConstraintKeyGhes extends Migration
         Schema::table('ghes', function (Blueprint $table) {
             //Tạo khóa ngoại
             $table->foreign('MaLoaiGhe')->references('MaLoaiGhe')->on('loai_ghes');
+            $table->foreign('MaRap')->references('MaRap')->on('raps');
         });
     }
 
@@ -29,6 +30,7 @@ class AddConstraintKeyGhes extends Migration
         Schema::table('ghes', function (Blueprint $table) {
             //
             $table->dropForeign('ghes_maloaighe_foreign');
+            $table->dropForeign('ghes_marap_foreign');
         });
     }
 }

@@ -1,7 +1,5 @@
 $(document).ready(function () {
-    // Fetch records
-    //fetchRecords();
-    // Add record
+    //XẾP LỊCH
     $(".btn-xep-lich").click(function (e) {
         e.preventDefault();
         var danhSachPhimDaChon = $(".duallistbox").val();
@@ -19,37 +17,35 @@ $(document).ready(function () {
                 url: "xep-lich",
                 type: "POST",
                 datatype: "json",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                crossDomain: true,
                 data: {
                     _danhSachPhim: danhSachPhimDaChon,
                     _ngayChieu: ngayChieu,
                 },
                 success: function (response) {
                     $(".card-body .table-striped tbody").remove();
-                    console.log(response);
                     var setDataInHTML = "<tbody>";
                     if (response != null) {
                         var dataLich = response.dataResponse;
-                        console.log("Lich: ", dataLich);
                         var stt = 0;
-
-                        Object.entries(dataLich).forEach(([, lich]) => {
+                        var arrayLichChieu = Object.values(dataLich);
+                        arrayLichChieu.forEach((lich) => {
                             stt++;
-                            console.log(lich);
                             setDataInHTML += `<tr>
                                                 <td>${stt}</td>
                                                 <td>${lich.TenPhim}</td>
                                                 <td>${lich.TenRap}</td>
                                                 <td>${lich.ThoiGianChieu}</td>
                                                 <td>${lich.NgayChieu}</td>
-                                            </tr>
-                                            </tbody>`;
+                                            </tr>`;
                         });
-
+                        setDataInHTML += "</tbody>";
                         $(".card-body .table-striped").append(setDataInHTML);
-                    } else if (response == 0) {
-                        alert("Username already in use.");
-                    } else {
-                        alert(response);
+                        document.cookie =
+                            "dsLichChieu=" + JSON.stringify(arrayLichChieu);
                     }
                 },
                 error: function (data, textStatus, errorThrown) {
@@ -58,102 +54,139 @@ $(document).ready(function () {
             });
         }
     });
+    //TÌM KIẾM LỊCH
+    $("#input-ngay-chieu").change(function () {
+        var ngayChieu = $(this).val();
+
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+        $.ajax({
+            url: "quan-ly-lich-chieu/tim-kiem-lich-theo-ngay-chieu",
+            type: "POST",
+            datatype: "json",
+            data: {
+                _ngayChieu: ngayChieu,
+            },
+            success: function (response) {
+                if (response.dataResponse == "") {
+                    $(".alert-dismissible").remove();
+                    $(".table-tim-kiem-lich tbody").remove();
+                    var htmlResult = `<div class="alert alert-info alert-dismissible" style="margin-bottom: 0;">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Thông báo!</strong> Không tìm thấy lịch chiếu của ngày ${ngayChieu}.
+                                    </div>`;
+                    $(htmlResult).insertAfter(
+                        ".card .card-header .btn-xoa-lich-chieu"
+                    );
+                } else {
+                    $(".alert-dismissible").remove();
+                    $(".table-tim-kiem-lich tbody").remove();
+                    var setDataInHTML = "<tbody>";
+                    if (response != null) {
+                        var dataLich = response.dataResponse;
+                        var stt = 0;
+                        dataLich.forEach((lich) => {
+                            stt++;
+                            setDataInHTML += `<tr>
+                                                <td>${stt}</td>
+                                                <td>LC${lich.MaLichChieu}</td>
+                                                <td>${lich.TenPhim}</td>
+                                                <td>${lich.TenRap}</td>
+                                                <td>${lich.ThoiGianChieu}</td>
+                                                <td>${lich.NgayChieu}</td>
+                                            </tr>`;
+                        });
+                        setDataInHTML += "</tbody>";
+                        $(".table-tim-kiem-lich").append(setDataInHTML);
+                    }
+                }
+            },
+            error: function (data, textStatus, errorThrown) {
+                console.log(data);
+            },
+        });
+    });
+
+    //XÓA LỊCH
+    $(".btn-xac-nhan-xoa-lich-chieu").click(function () {
+        var ngayChieu = $("#input-ngay-chieu").val();
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+
+        if (ngayChieu == "") {
+            $(".alert-dismissible").remove();
+            //insert warning notification
+            var htmlResult = `<div class="alert alert-warning alert-dismissible" style="margin-bottom: 0;">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <strong>Cảnh báo!</strong> Vui lòng chọn ngày của lịch chiếu.
+                            </div>`;
+            $(htmlResult).insertAfter(".card .card-header .btn-xoa-lich-chieu");
+        } else {
+            $.ajax({
+                url: "quan-ly-lich-chieu/xoa-lich-theo-ngay-chieu",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    _ngayChieu: ngayChieu,
+                },
+                success: function (response) {
+                    var check = response.success;
+                    var htmlResult;
+                    $(".alert-dismissible").remove();
+                    if (check == true) {
+                        //insert success notification
+                        htmlResult = `<div class="alert alert-success alert-dismissible" style="margin-bottom: 0;">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Thành công!</strong> Đã xóa thành công lịch chiếu của ngày ${ngayChieu}.
+                                    </div>`;
+                        $(".card-body .table-tim-kiem-lich tbody").remove();
+
+                        //Reload list lich chieu
+                        $(
+                            ".card-body #table-danh-sach-lich-chieu tbody"
+                        ).remove();
+                        var setDataInHTML = "<tbody>";
+                        if (response != null) {
+                            var dataLich = response.dataResponse;
+                            console.log(dataLich);
+                            var stt = 0;
+                            dataLich.forEach((lich) => {
+                                stt++;
+                                setDataInHTML += `<tr>
+                                                    <td>${stt}</td>
+                                                    <td>LC${lich.MaLichChieu}</td>
+                                                    <td>${lich.TenPhim}</td>
+                                                    <td>${lich.TenRap}</td>
+                                                    <td>${lich.ThoiGianChieu}</td>
+                                                    <td>${lich.NgayChieu}</td>
+                                                </tr>`;
+                            });
+                            setDataInHTML += "</tbody>";
+                            $(".card-body #table-danh-sach-lich-chieu").append(
+                                setDataInHTML
+                            );
+                        }
+                    } else {
+                        //insert error notification
+                        htmlResult = `<div class="alert alert-danger alert-dismissible" style="margin-bottom: 0;">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Thất bại!</strong> Không thể thực hiện yêu cầu này, vui lòng kiểm tra và thử lại.
+                                    </div>`;
+                    }
+                    $(htmlResult).insertAfter(
+                        ".card .card-header .btn-xoa-lich-chieu"
+                    );
+                },
+                error: function (data, textStatus, errorThrown) {
+                    console.log(data);
+                },
+            });
+        }
+    });
 });
-
-// Update record
-// $(document).on("click", ".update", function () {
-//     var edit_id = $(this).data("id");
-
-//     var name = $("#name_" + edit_id).val();
-//     var email = $("#email_" + edit_id).val();
-
-//     if (name != "" && email != "") {
-//         $.ajax({
-//             url: "updateUser",
-//             type: "post",
-//             data: {
-//                 _token: CSRF_TOKEN,
-//                 editid: edit_id,
-//                 name: name,
-//                 email: email,
-//             },
-//             success: function (response) {
-//                 alert(response);
-//             },
-//         });
-//     } else {
-//         alert("Fill all fields");
-//     }
-// });
-
-// Delete record
-// $(document).on("click", ".delete", function () {
-//     var delete_id = $(this).data("id");
-//     var el = this;
-//     $.ajax({
-//         url: "deleteUser/" + delete_id,
-//         type: "get",
-//         success: function (response) {
-//             $(el).closest("tr").remove();
-//             alert(response);
-//         },
-//     });
-// });
-
-// Fetch records
-// function fetchRecords() {
-//     $.ajax({
-//         url: "getUsers",
-//         type: "get",
-//         dataType: "json",
-//         success: function (response) {
-//             var len = 0;
-//             $("#userTable tbody tr:not(:first)").empty(); // Empty <tbody>
-//             if (response["data"] != null) {
-//                 len = response["data"].length;
-//             }
-
-//             if (len > 0) {
-//                 for (var i = 0; i < len; i++) {
-//                     var id = response["data"][i].id;
-//                     var username = response["data"][i].username;
-//                     var name = response["data"][i].name;
-//                     var email = response["data"][i].email;
-
-//                     var tr_str =
-//                         "<tr>" +
-//                         "<td align='center'><input type='text' value='" +
-//                         username +
-//                         "' id='username_" +
-//                         id +
-//                         "' disabled></td>" +
-//                         "<td align='center'><input type='text' value='" +
-//                         name +
-//                         "' id='name_" +
-//                         id +
-//                         "'></td>" +
-//                         "<td align='center'><input type='email' value='" +
-//                         email +
-//                         "' id='email_" +
-//                         id +
-//                         "'></td>" +
-//                         "<td align='center'><input type='button' value='Update' class='update' data-id='" +
-//                         id +
-//                         "' ><input type='button' value='Delete' class='delete' data-id='" +
-//                         id +
-//                         "' ></td>" +
-//                         "</tr>";
-
-//                     $("#userTable tbody").append(tr_str);
-//                 }
-//             } else {
-//                 var tr_str =
-//                     "<tr class='norecord'>" +
-//                     "<td align='center' colspan='4'>No record found.</td>" +
-//                     "</tr>";
-
-//                 $("#userTable tbody").append(tr_str);
-//             }
-//         },
-//     });
-// }

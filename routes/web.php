@@ -64,6 +64,9 @@ Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
     Route::post('/', 'LichChieuController@index');
     Route::get('/xep-lich',  'LichChieuController@xepLichAJAX')->middleware('checklogin::class');
     Route::post('/xep-lich', 'LichChieuController@xepLichAJAX');
+    Route::post('/them-lich', 'LichChieuController@themLich');
+    Route::post('/tim-kiem-lich-theo-ngay-chieu', 'LichChieuController@timKiemLichTheoNgayChieu');
+    Route::post('/xoa-lich-theo-ngay-chieu', 'LichChieuController@xoaLichTheoNgayChieu');
     Route::get('/cap-nhat-lich-chieu', function () {
         return view('pages.cap-nhat.cap-nhat-lich-chieu')->middleware('checklogin::class');
     });
@@ -82,6 +85,10 @@ Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
     Route::get('/del/{Ma}', 'XuatChieuController@del')->name('DelSuatChieu');
 });
 
+/**
+ * VÉ
+ */
+Route::get('/quan-ly-ve', 'VeController@index');
 /**
  * ĐĂNG NHẬP
  */

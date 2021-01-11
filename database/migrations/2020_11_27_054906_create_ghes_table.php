@@ -18,7 +18,8 @@ class CreateGhesTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             //
-            $table->string('MaGhe', 5);
+            $table->string('MaGhe', 10);
+            $table->bigInteger('MaRap')->unsigned(); //khóa ngoại
             $table->string('MaLoaiGhe', 5);
             $table->string('ChiSoHang');
             $table->tinyInteger('ChiSoCot');

@@ -25,7 +25,6 @@ class CreateChiNhanhsTable extends Migration
             $table->string('SDT', 11);
             $table->bigInteger('MaNV')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
-
         });
     }
 
