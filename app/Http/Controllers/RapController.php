@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Ghe;
@@ -17,7 +18,8 @@ class RapController extends Controller
         return view('pages.quan-ly-rap', compact('raps'));
     }
 
-    public function themRap(){
+    public function themRap()
+    {
         return view('pages.them.them-rap');
     }
 
@@ -52,8 +54,32 @@ class RapController extends Controller
 
     public function LayMaghe(){
         $result= DB::select('select MaGhe,MaLoaiGhe from Ghes ');
-       
         return response()->json($result);
     }
-    
+
+    /**
+     * API
+     * Author: Huỳnh Thanh Cảnh
+     */
+    function laySoDoRap(Request $request)
+    {
+        // $maPhim = $request->maPhim;
+        // $ngayChieu = $request->ngayChieu;
+        $maLichChieu = $request->maLichChieu;
+        $lichChieu = DB::select("SELECT *
+                                FROM lich_chieus lc
+                                WHERE lc.MaLichChieu = $maLichChieu");
+        $argsGhe = Ghe::where('MaRap', $lichChieu[0]->MaRap)->get();
+        $argsVe = DB::select("SELECT *
+                                FROM ves v
+                                WHERE v.MaLichChieu = $maLichChieu");
+        foreach ($argsVe as $ve) {
+            for ($iGhe = 0; $iGhe < count($argsGhe); $iGhe++) {
+                if ($argsGhe[$iGhe]->MaGhe === $ve->MaGhe) {
+                    $argsGhe[$iGhe]->TrangThai = 0;
+                }
+            }
+        }
+        return response()->json(["dsGhe" => $argsGhe, "lichChieu" => $lichChieu]);
+    }
 }

@@ -84,7 +84,7 @@
 
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ url('quan-ly-the-loai-phim/cap-nhat-the-loai-phim') }}">
+                                                    <a href="quan-ly-the-loai-phim/cap-nhat-the-loai-phim/{{$v->MaLoaiPhim}}">
                                                         <button type="button" class="btn btn-warning" data-toggle="tooltip"
                                                             data-placement="top" title="Chỉnh sửa">
                                                             <i class="fas fa-edit"></i>

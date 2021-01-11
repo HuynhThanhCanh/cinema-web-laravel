@@ -19,4 +19,10 @@ class Rap extends Model
     {
         return $this->hasMany('App\LichChieu', 'MaRap', 'MaRap');
     }
+
+    //1 rạp có nhiều ghế
+    public function Ghe()
+    {
+        return $this->hasMany('App\Ghe', 'MaGhe', 'MaGhe');
+    }
 }

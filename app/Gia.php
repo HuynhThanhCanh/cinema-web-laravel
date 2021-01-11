@@ -8,7 +8,7 @@ class Gia extends Model
 {
     //
     protected $table = 'gias';
-    public $timestamps = true;
+    public $timestamps = false;
     // 1 giá thuộc nhiều  loại ghế
     public function LoaiGhe()
     {

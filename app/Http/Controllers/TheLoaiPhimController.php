@@ -13,18 +13,18 @@ class TheLoaiPhimController extends Controller
     //
     public function index()
     {
+        $nhanvien=DB::select('SELECT  DISTINCT  nhan_viens.name FROM loai_phims, nhan_viens WHERE loai_phims.MaNV=nhan_viens.id');
+        $loaiphim=DB::select('select * from loai_phims where TrangThai =? ', [1]);
+        return view('pages.quan-ly-the-loai-phim',compact('loaiphim','nhanvien'));
+    }
+    public function themLoaiPhim(){
         $nhanvien = DB::select('SELECT DISTINCT  nhan_viens.name FROM loai_phims, nhan_viens WHERE loai_phims.MaNV=nhan_viens.id');
         $loaiphim = DB::select('select * from loai_phims where TrangThai =? ', [1]);
         return view('pages.quan-ly-the-loai-phim', compact('loaiphim', 'nhanvien'));
     }
-    public function themLoaiPhim()
-    {
-        return view('pages.them.them-the-loai-phim', compact('loaiphim', 'nhanvien'));
-    }
 
     public function addLoaiPhim(Request $request)
     {
-
         $TenLoaiPhim = $request->input('ten-loai-phim');
         $MaNV = $request->input('MaNV', '1');
         $TrangThai = $request->input('optradio');
@@ -34,21 +34,18 @@ class TheLoaiPhimController extends Controller
         return redirect('/quan-ly-the-loai-phim');
     }
 
-    public function suaLoaiPhim(Request $request)
+    public function suaLoaiPhim( Request $request,$MaLoaiPhim)
     {
-        $TenLoaiPhim = $request->input('ten-loai-phim');
-        $MaNV = $request->input('MaNV', '1');
-        $TrangThai = $request->input('optradio');
-
-        DB::update('update loai_phims set TenLoaiPhim = ? TrangThai=? where MaLoaiPhim = ?', [$TenLoaiPhim, $TrangThai, $MaLoaiPhim]);
+        $TenLoaiPhim = $request -> input('ten-loai-phim');
+        $TrangThai=$request->input('optradio');
+        DB::update('update loai_phims set TenLoaiPhim = ? , TrangThai=? where MaLoaiPhim = ?', [$TenLoaiPhim,$TrangThai ,$MaLoaiPhim]);
         return redirect('/quan-ly-the-loai-phim');
     }
 
-    public function capNhatLoaiPhim()
+    public function capNhatLoaiPhim($MaLoaiPhim)
     {
-
-        $loaiphim = DB::select('select * from loai_phims where TrangThai =? ', [1]);
-        return view('pages.cap-nhat.cap-nhat-the-loai-phim', compact('loaiphim'));
+        $loaiphim=DB::select("select * from loai_phims where MaLoaiPhim = $MaLoaiPhim AND TrangThai =? ", [1]);
+        return view('pages.cap-nhat.cap-nhat-the-loai-phim',compact('loaiphim'));
     }
 
     public function XoaLoaiPhim($MaLoaiPhim)

@@ -6,13 +6,14 @@
         <div class="container">
             <h2>Cập nhật thể loại phim</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-the-loai-phim') }}"
+            @foreach($loaiphim as $l)
+            <form method="POST" action= "/quan-ly-the-loai-phim/formSua/{{$l->MaLoaiPhim}} "
                 class="was-validated d-flex flex-column input-form" id="form-cap-nhat-the-loai-phim">
                 @csrf
                 <div class="form-group col-12">
                     <label for="ten-the-loai-phim">Tên thể loại phim:</label>
                     <input type="text" class="form-control" id="ten-the-loai-phim" placeholder="Nhập tên thể loại phim"
-                        name="ten-loai-phim" required>
+                        name="ten-loai-phim" value = "{{$l->TenLoaiPhim}}" required>
                     <div class="invalid-feedback">Không được bỏ trống trường này</div>
                 </div>
 
@@ -58,6 +59,7 @@
                     </div>
                 </div>
             </form>
+           @endforeach
         </div>
     </section>
 
