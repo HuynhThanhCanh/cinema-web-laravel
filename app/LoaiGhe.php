@@ -8,7 +8,7 @@ class LoaiGhe extends Model
 {
     //
     protected $table ='loai_ghes';
-    public $timestamps=true;
+    public $timestamps=false;
     // 1 loại ghế có 1 giá và 1 giá cho nhiều loại ghế
     public function Gia()
     {

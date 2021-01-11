@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Phim;
 use App\LoaiPhim;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
@@ -37,42 +38,62 @@ class PhimController extends Controller
 
     public function addPhim(Request $request)
     {
-       $TenPhim=$request->input('ten-phim');
-       $NgayDKChieu=$request->input('ngay-dk-chieu');
-       $NgayKetThuc=$request->input('ngay-ket-thuc');
-       $ThoiLuong=$request->input('thoi-luong-chieu');
-       $DaoDien=$request->input('dao-dien');
-       $DienVien=$request->input('dien-vien');
-       $Diem=$request->input('Diem','0');
-       
-       
-
-
-       $LinkPhim=$request->input('link-trailer');
-       $MaLoaiPhim=$request->input('loai-phim');
-       $MaNV=$request->input('MaNV');
-       $Nhan=$request->input('nhan');
-       $TrangThai=$request->input('trang-thai');
-      
-        $HinhAnh= $request->input('hinh-anh');
-       $data=array('TenPhim'=>$TenPhim,'NgayDKChieu'=>$NgayDKChieu,'NgayKetThuc'=>$NgayKetThuc,'ThoiLuong'=>$ThoiLuong,'DaoDien'=>$DaoDien,'DienVien'=>$DienVien,'Diem'=>$Diem,'HinhAnh'=>$HinhAnh,'LinkPhim'=>$LinkPhim,'MaLoaiPhim'=>$MaLoaiPhim,'MaNV'=>$MaNV,'Nhan'=>$Nhan,'TrangThai'=>$TrangThai);
-        DB::table('phims')->insert($data);
-  
+        $this->validate($request,[
+            'ten_phim'=>'required',
+            'ten_phim'=>'unique:phims,TenPhim'
+        ]);
+        $phim= new Phim;
+        $phim->TenPhim=$request->ten_phim;
+        $phim->NgayDKChieu=$request->ngay_dk_chieu;
+        $phim->NgayKetThuc=$request->ngay_ket_thuc;
+        $phim->ThoiLuong=$request->thoi_luong_chieu;
+        $phim->DaoDien=$request->dao_dien;
+        $phim->DienVien=$request->dien_vien;
+        $phim->NoiDung=$request->nd_phim;
+        $phim->Diem=$request->Diem=0;
+        //$phim->HinhAnh= $request->hinh_anh;
+        $phim->LinkPhim=$request->link_trailer;
+        $phim->MaLoaiPhim=$request->loai_phim;
+        $phim->MaNV=$request->MaNV;
+        $phim->Nhan=$request->nhan;
+        $phim->TrangThai=$request->trang_thai;
+        if ($request->hasFile('hinh_anh')) {
+            $image = $request->file('hinh_anh');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/image/phim');
+            $image->move($destinationPath, $name);
+            $HinhAnh= $name;
+           
+            }else{
+                $HinhAnh= "tiectrangmau.jpg";// nếu k thì có thì chọn tên ảnh mặc định ảnh mặc định
+            }
+        $phim->HinhAnh= $HinhAnh;
+        $phim->save();
       return redirect('/quan-ly-phim');
     }   
-    
+
     public function editPhim(Request $request,$MaPhim)
     {
-        $TenPhim=$request->input('ten-phim');
-        $NgayDKChieu=$request->input('ngay-dk-chieu');
-        $NgayKetThuc=$request->input('ngay-ket-thuc');
-        $ThoiLuong=$request->input('thoi-luong-chieu');
-        $DaoDien=$request->input('dao-dien');
-        $DienVien=$request->input('dien-vien');
+        $TenPhim=$request->input('ten_phim');
+        $NgayDKChieu=$request->input('ngay_dk_chieu');
+        $NgayKetThuc=$request->input('ngay_ket_thuc');
+        $ThoiLuong=$request->input('thoi_luong_chieu');
+        $DaoDien=$request->input('dao_dien');
+        $DienVien=$request->input('dien_vien');
         $Diem=$request->input('Diem','0');
-        $HinhAnh=$request->input('hinh-anh');
-        $LinkPhim=$request->input('link-trailer');
-        $MaLoaiPhim=$request->input('loai-phim');
+        //$HinhAnh=$request->input('hinh_anh');
+        if ($request->hasFile('hinh_anh')) {
+            $image = $request->file('hinh_anh');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/image/phim');
+            $image->move($destinationPath, $name);
+            $HinhAnh= $name;
+           
+            }else{
+                $HinhAnh= "tiectrangmau.jpg";// nếu k thì có thì chọn tên ảnh mặc định ảnh mặc định
+            }
+        $LinkPhim=$request->input('link_trailer');
+        $MaLoaiPhim=$request->input('loai_phim');
         $MaNV=$request->input('MaNV','1');
         $Nhan=$request->input('nhan');
         $TrangThai=$request->input('optradio');
@@ -92,7 +113,7 @@ class PhimController extends Controller
     }
     public function getAPIPhimbyID($MaPhim)
     {
-        $phim=DB::select('select * from phims where MaPhim = ?',[$MaPhim]);
+        $phim=DB::select('select * from phims where MaPhim =?'  ,[$MaPhim]);
         return response()->json($phim);
     }
     public function insertAPIPhim(Request $request)
@@ -105,6 +126,7 @@ class PhimController extends Controller
         $phim->ThoiLuong=$request->ThoiLuong;
         $phim->DaoDien=$request->DaoDien;
         $phim->DienVien=$request->DienVien;
+        $phim->NoiDung=$request->NoiDung;
         $phim->Diem=$request->Diem;
         $phim->HinhAnh=$request->HinhAnh;
         $phim->LinkPhim=$request->LinkPhim;
@@ -114,5 +136,31 @@ class PhimController extends Controller
         $phim->TrangThai=$request->TrangThai;
          $phim->save();
         return response()->json($phim, 201);
+    }
+    public function getPhimDangChieu()
+    {
+        // $phim=Phim::where('TrangThai','1')->get();
+        // return response()->json($phim);
+       $phim=DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
+       FROM phims , loai_phims , gioi_han_tuois
+       WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=1');
+       return response()->json($phim);
+    }
+    
+    public function getPhimSapChieu()
+    {
+        // $phim=Phim::where('TrangThai','0')->get();
+        // return response()->json($phim);
+
+        $phim=DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
+        FROM phims , loai_phims , gioi_han_tuois
+        WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=0');
+        return response()->json($phim);
+    }
+    public function TimKiemPhimTheoTen($TenPhim)
+    {
+        // $phim=Phim::where('TenPhim','LIKE','%'.'?'.'%',[$TenPhim])->get();
+        $phim=DB::select('select * from phims where TenPhim  like concat(?,"%") ', [$TenPhim]);
+        return response()->json($phim);
     }
 }
