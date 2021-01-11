@@ -1,18 +1,12 @@
 $(document).ready(function () {
     //XẾP LỊCH
     $(".btn-xep-lich").click(function (e) {
+        
         e.preventDefault();
         var danhSachPhimDaChon = $(".duallistbox").val();
         var ngayChieu = $("#ngay-xep-lich").val();
 
         if (ngayChieu != "") {
-            $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-            });
             $.ajax({
                 url: "xep-lich",
                 type: "POST",

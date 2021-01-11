@@ -308,6 +308,7 @@
     <script src={{ asset('dist/js/pages/dashboard3.js') }}></script>
     <script src={{ asset('js/handler-submit-them.js') }}></script>
     <script src={{ asset('ajax/xep-lich-ajax.js') }}></script>
+    <script src={{ asset('ajax/suat-chieu-ajax.js') }}></script>
     <script src={{ asset('js/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}></script>
     <script>
         $(function() {

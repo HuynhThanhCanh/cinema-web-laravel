@@ -163,7 +163,4 @@ class PhimController extends Controller
         $phim=DB::select('select * from phims where TenPhim  like concat(?,"%") ', [$TenPhim]);
         return response()->json($phim);
     }
- 
-
-    
 }

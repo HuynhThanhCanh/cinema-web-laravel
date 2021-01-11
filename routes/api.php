@@ -22,6 +22,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('getGhe', 'RapController@LayMaghe');
 
 /**
+* SUẤT CHIẾU
+*/
+Route::get('/SuatChieu', 'XuatChieuController@getAPIAllSuatChieu');
+Route::get('/SuatChieu/{MaSuatChieu}','XuatChieuController@getAPISuatChieubyID');
+
+/**
  * LỊCH CHIẾU
  */
 //Lấy danh sách lịch chiếu (tất cả và theo trạng thái)
