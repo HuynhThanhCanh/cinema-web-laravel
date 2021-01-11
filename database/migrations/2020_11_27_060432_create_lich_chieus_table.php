@@ -27,7 +27,7 @@ class CreateLichChieusTable extends Migration
             $table->timestamp('ThoiGianTao')->useCurrent();
             $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //
-            $table->unique(['MaThoiGianChieu', 'MaRap']);
+            $table->unique(['MaThoiGianChieu', 'MaRap', 'NgayChieu']);
         });
     }
 

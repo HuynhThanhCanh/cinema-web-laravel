@@ -22,8 +22,6 @@ class CreateLoaiGhesTable extends Migration
             $table->string('TenLoaiGhe', 20);
             $table->bigInteger('MaGia')->unsigned(); //khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //Tạo khóa chính
             $table->primary('MaLoaiGhe');
         });

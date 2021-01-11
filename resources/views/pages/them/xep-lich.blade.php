@@ -6,7 +6,7 @@
         <div class="container">
             <h2>Xếp lịch</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-lich-chieu/xep-lich') }}"
+            <form method="POST" action="{{ url('quan-ly-lich-chieu/them-lich') }}"
                 class="was-validated d-flex flex-column input-form" id="form-xep-lich">
                 @csrf
                 <div class="card card-default">
@@ -25,7 +25,6 @@
                                         @foreach ($argsGetPhim as $phim)
                                             <option value={{ $phim->MaPhim }}>{{ $phim->TenPhim }}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                                 <!-- /.form-group -->
@@ -55,8 +54,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-submit-input-form mb-3 btn-them-lich-chieu"
-                        data-toggle="modal">
+                    <button type="submit" class="btn btn-primary btn-submit-input-form mb-3 btn-them-lich-chieu">
                         <strong>Thêm lịch chiếu</strong>
                     </button>
                 </div>

@@ -178,18 +178,17 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    @if(Session::has('user'))
-                    <div class="image">
-                        <img src="/image/nhanvien/{{Session::get('user')->Avatar}}"
-                         class="img-circle elevation-2" 
-                            alt="User Image">
-                    </div>
+                    @if (Session::has('user'))
+                        <div class="image">
+                            <img src="/image/nhanvien/{{ Session::get('user')->Avatar }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        </div>
                     @endif
                     <div class="info">
                         <a href="#" class="d-block">
-                        @if(Session::has('user'))
-                         {{Session::get('user')->name}}
-                           @endif
+                            @if (Session::has('user'))
+                                {{ Session::get('user')->name }}
+                            @endif
                         </a>
                     </div>
                 </div>
@@ -248,10 +247,19 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-ve') }}" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Vé
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                <a  href="{{url('dangxuat')}}">          
-                      <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng xuất</strong></button>
+                <a href="{{ url('dangxuat') }}">
+                    <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng
+                            xuất</strong></button>
                 </a>
                 <!-- /.sidebar-menu -->
             </div>

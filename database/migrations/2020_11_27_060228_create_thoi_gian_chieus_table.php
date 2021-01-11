@@ -21,8 +21,6 @@ class CreateThoiGianChieusTable extends Migration
             $table->bigIncrements('MaThoiGianChieu');
             $table->time('ThoiGianChieu');
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 
