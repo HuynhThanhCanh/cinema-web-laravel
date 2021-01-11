@@ -19,13 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     return $request->user();
 });
+
+/**
+ * GHẾ
+ */
 Route::get('getGhe', 'RapController@LayMaghe');
 
 /**
-* SUẤT CHIẾU
-*/
+ * SUẤT CHIẾU
+ */
 Route::get('/SuatChieu', 'XuatChieuController@getAPIAllSuatChieu');
-Route::get('/SuatChieu/{MaSuatChieu}','XuatChieuController@getAPISuatChieubyID');
+Route::get('/SuatChieu/{MaSuatChieu}', 'XuatChieuController@getAPISuatChieubyID');
 
 /**
  * LỊCH CHIẾU
@@ -38,35 +42,40 @@ Route::get('/lich-chieu/phim/{maPhim}', 'LichChieuController@lichChieuTheoPhim')
 Route::get('/lich-chieu/ngay-chieu/{ngayChieu}', 'LichChieuController@lichChieuTheoNgay');
 //Lấy danh sách lich chiếu theo rạp (truyền vào mã rạp)
 Route::get('/lich-chieu/rap/{maRap}', 'LichChieuController@lichChieuTheoRap');
-//Lấy danh sách lịch chiếu theo  và theo ngày (truyền vào mã phim và ngày)
+//Lấy danh sách lịch chiếu theo  và theo ngày (truyền vào mã phim và ngày: ?ngay=&maPhim=)
 Route::get('/lich-chieu-phim-ngay', 'LichChieuController@lichChieuTheoPhimVaNgay');
 
 /**
  * RẠP
  */
-//Lấy sơ đồ rạp
+//Lấy sơ đồ rạp (?maLichChieu=)
 Route::get('/so-do-rap', 'RapController@laySoDoRap');
 
 /**
  * THÀNH VIÊN
  */
+// cập nhật thành viên (?maThanhVien=&diaChi=)
 Route::get('/cap-nhat-thanh-vien', 'ThanhVienController@capNhatThanhVien');
-Route::get('/savethanhvien','ThanhVienController@insertThanhVien');// thêm thành viên
-Route::get('/thanhvien','ThanhVienController@getThanhVien');// Lấy danh sách tất cả thành viên
-Route::get('/loginApp', 'ThanhVienController@LoginApp');// Check đăng nhập dưới App
+// thêm thành viên (?Avatar=&HoTenTV=&NgaySinh=&SDT=&Email=&Password=&DiaChi=&TrangThai=)
+Route::get('/savethanhvien', 'ThanhVienController@insertThanhVien');
+Route::get('/thanhvien', 'ThanhVienController@getThanhVien'); // Lấy danh sách tất cả thành viên
+// Check đăng nhập dưới App (?User=&Pass=)
+Route::get('/loginApp', 'ThanhVienController@LoginApp');
 
 /**
-* PHIM
-*/
-Route::get('/phim','PhimController@getAPIPhim');// lấy danh sách tất cả phim
-Route::get('/phim/{MaPhim}','PhimController@getAPIPhimbyID');// lấy phim theo ten  phim
-Route::get('/timkiemphim/{TenPhim}','PhimController@TimKiemPhimTheoTen');// Tìm kiếm phim theo tên
-Route::post('/savephim','PhimController@insertAPIPhim');// thêm phim
-Route::get('/phimDangChieu','PhimController@getPhimDangChieu');// lấy tất cả phim đang chiếu
-Route::get('/phimSapChieu','PhimController@getPhimSapChieu');// lấy tất cả phim sắp chiếu
+ * PHIM
+ */
+Route::get('/phim', 'PhimController@getAPIPhim'); // lấy danh sách tất cả phim
+Route::get('/phim/{MaPhim}', 'PhimController@getAPIPhimbyID'); // lấy phim theo ten  phim
+Route::get('/timkiemphim/{TenPhim}', 'PhimController@TimKiemPhimTheoTen'); // Tìm kiếm phim theo tên
+Route::post('/savephim', 'PhimController@insertAPIPhim'); // thêm phim
+Route::get('/phimDangChieu', 'PhimController@getPhimDangChieu'); // lấy tất cả phim đang chiếu
+Route::get('/phimSapChieu', 'PhimController@getPhimSapChieu'); // lấy tất cả phim sắp chiếu
 
 /**
-* VÉ
-*/
-Route::get('/themdanhsachve', 'VeController@DanhSachVe');// Thêm danh sách vé
+ * VÉ
+ */
+// Thêm danh sách vé ?SoLuong=&TongThanhTien=&MaTV=&TrangThai=
+Route::get('/themdanhsachve', 'VeController@DanhSachVe');
+// Thêm danh sách vé: ?maDsVe=&ThanhTien=&ThoiGianMua=&MaLichChieu=&MaGhe=
 Route::get('/themve', 'VeController@DatVe');// thêm vé

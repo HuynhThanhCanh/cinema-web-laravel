@@ -13,8 +13,9 @@ use App\ChiNhanh;
 class RapController extends Controller
 {
     //
-    public function index(){
-        $raps = DB::table('raps')->join('chi_nhanhs','raps.MaChiNhanh','=','chi_nhanhs.MaChiNhanh')->where('raps.TrangThai','<>','-1')->get();
+    public function index()
+    {
+        $raps = DB::table('raps')->join('chi_nhanhs', 'raps.MaChiNhanh', '=', 'chi_nhanhs.MaChiNhanh')->where('raps.TrangThai', '<>', '-1')->get();
         return view('pages.quan-ly-rap', compact('raps'));
     }
 
@@ -23,7 +24,8 @@ class RapController extends Controller
         return view('pages.them.them-rap');
     }
 
-    public function addRap(Request $req){
+    public function addRap(Request $req)
+    {
         $tenRap = $req->input('ten-rap');
         $soLuongGhe = 50;
         $rap = new Rap;
@@ -35,25 +37,29 @@ class RapController extends Controller
         return redirect('/quan-ly-rap');
     }
 
-    public function edit($MaRap){
-        $raps = DB::table('raps')->join('chi_nhanhs','raps.MaChiNhanh','=','chi_nhanhs.MaChiNhanh')->where('raps.MaRap','=',$MaRap)->get();
+    public function edit($MaRap)
+    {
+        $raps = DB::table('raps')->join('chi_nhanhs', 'raps.MaChiNhanh', '=', 'chi_nhanhs.MaChiNhanh')->where('raps.MaRap', '=', $MaRap)->get();
         return view('pages.cap-nhat.cap-nhat-rap', compact('raps'));
     }
 
-    public function update(Request $req, $MaRap){
-       $tenRap = $req->input('ten-rap');
-       $rap = Rap::where("MaRap",'=',$MaRap)->update(['TenRap'=> $tenRap]);
+    public function update(Request $req, $MaRap)
+    {
+        $tenRap = $req->input('ten-rap');
+        $rap = Rap::where("MaRap", '=', $MaRap)->update(['TenRap' => $tenRap]);
         return redirect('/quan-ly-rap');
     }
 
-    public function delete($MaRap){
-        $result= DB::select('select MaGhe,MaLoaiGhe from Ghes ');
-        $rap = Rap::where("MaRap",'=',$MaRap)->update(['TrangThai'=> -1]);
+    public function delete($MaRap)
+    {
+        $result = DB::select('select MaGhe,MaLoaiGhe from Ghes ');
+        $rap = Rap::where("MaRap", '=', $MaRap)->update(['TrangThai' => -1]);
         return redirect('/quan-ly-rap');
     }
 
-    public function LayMaghe(){
-        $result= DB::select('select MaGhe,MaLoaiGhe from Ghes ');
+    public function LayMaghe()
+    {
+        $result = DB::select('select MaGhe,MaLoaiGhe from Ghes ');
         return response()->json($result);
     }
 
@@ -63,8 +69,6 @@ class RapController extends Controller
      */
     function laySoDoRap(Request $request)
     {
-        // $maPhim = $request->maPhim;
-        // $ngayChieu = $request->ngayChieu;
         $maLichChieu = $request->maLichChieu;
         $lichChieu = DB::select("SELECT *
                                 FROM lich_chieus lc

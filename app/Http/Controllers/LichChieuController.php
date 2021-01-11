@@ -201,7 +201,13 @@ class LichChieuController extends Controller
         $ngay = $req->ngay;
         $maPhim = $req->maPhim;
 
-        $lichChieu = LichChieu::where('NgayChieu', '=', $ngay)->where('MaPhim', '=', $maPhim)->get();
+        //$lichChieus = LichChieu::where('NgayChieu', '=', $ngay)->where('MaPhim', '=', $maPhim)->get();
+        $lichChieu = DB::table('lich_chieus')
+            ->join('thoi_gian_chieus', 'thoi_gian_chieus.MaThoiGianChieu', '=', 'lich_chieus.MaThoiGianChieu')
+            ->join('phims', 'phims.MaPhim', '=', 'lich_chieus.MaPhim')
+            ->where('phims.MaPhim', '=', $maPhim)
+            ->where('lich_chieus.NgayChieu', '=', $ngay)
+            ->get();
         return response()->json(["lichChieu" => $lichChieu]);
     }
 }
