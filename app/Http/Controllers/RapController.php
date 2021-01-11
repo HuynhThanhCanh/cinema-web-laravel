@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Ghe;
+use App\Rap;
+use App\ChiNhanh;
 
 
 
 class RapController extends Controller
 {
     //
-    public function index()
-    {
-        return view('pages.quan-ly-rap');
-        //return $this->api_success(Rap::all());
-
+    public function index(){
+        $raps = DB::table('raps')->join('chi_nhanhs','raps.MaChiNhanh','=','chi_nhanhs.MaChiNhanh')->where('raps.TrangThai','<>','-1')->get();
+        return view('pages.quan-ly-rap', compact('raps'));
     }
 
     public function themRap()
@@ -23,14 +23,37 @@ class RapController extends Controller
         return view('pages.them.them-rap');
     }
 
-    public function capNhatRap()
-    {
-        return view('pages.cap-nhat.cap-nhat-rap');
+    public function addRap(Request $req){
+        $tenRap = $req->input('ten-rap');
+        $soLuongGhe = 50;
+        $rap = new Rap;
+        $rap->TenRap = $tenRap;
+        $rap->SoLuongGhe = $soLuongGhe;
+        $rap->MaChiNhanh = 1;
+        $rap->TrangThai = 1;
+        $rap->save();
+        return redirect('/quan-ly-rap');
     }
-    public function LayMaghe()
-    {
-        $result = DB::select('select MaGhe,MaLoaiGhe from Ghes ');
 
+    public function edit($MaRap){
+        $raps = DB::table('raps')->join('chi_nhanhs','raps.MaChiNhanh','=','chi_nhanhs.MaChiNhanh')->where('raps.MaRap','=',$MaRap)->get();
+        return view('pages.cap-nhat.cap-nhat-rap', compact('raps'));
+    }
+
+    public function update(Request $req, $MaRap){
+       $tenRap = $req->input('ten-rap');
+       $rap = Rap::where("MaRap",'=',$MaRap)->update(['TenRap'=> $tenRap]);
+        return redirect('/quan-ly-rap');
+    }
+
+    public function delete($MaRap){
+        $result= DB::select('select MaGhe,MaLoaiGhe from Ghes ');
+        $rap = Rap::where("MaRap",'=',$MaRap)->update(['TrangThai'=> -1]);
+        return redirect('/quan-ly-rap');
+    }
+
+    public function LayMaghe(){
+        $result= DB::select('select MaGhe,MaLoaiGhe from Ghes ');
         return response()->json($result);
     }
 

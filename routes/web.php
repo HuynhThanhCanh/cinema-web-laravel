@@ -53,7 +53,10 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
     Route::get('/', 'RapController@index')->middleware('checklogin::class');
     Route::post('/', 'RapController@index');
     Route::get('/them-rap', 'RapController@themRap')->middleware('checklogin::class');
-    Route::get('/cap-nhat-rap', 'RapController@capNhatRap')->middleware('checklogin::class');
+    Route::post('/create', 'RapController@addRap')->name('addRap');
+    Route::get('/edit/{MaRap}', 'RapController@edit')->middleware('checklogin::class');
+    Route::post('/update/{MaRap}', 'RapController@update')->name('updateRap');
+    Route::get('/delete/{MaRap}', 'RapController@delete')->name('deleteRap')->middleware('checklogin::class');
 });
 
 /**
@@ -67,9 +70,6 @@ Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
     Route::post('/them-lich', 'LichChieuController@themLich');
     Route::post('/tim-kiem-lich-theo-ngay-chieu', 'LichChieuController@timKiemLichTheoNgayChieu');
     Route::post('/xoa-lich-theo-ngay-chieu', 'LichChieuController@xoaLichTheoNgayChieu');
-    Route::get('/cap-nhat-lich-chieu', function () {
-        return view('pages.cap-nhat.cap-nhat-lich-chieu')->middleware('checklogin::class');
-    });
 });
 
 /**

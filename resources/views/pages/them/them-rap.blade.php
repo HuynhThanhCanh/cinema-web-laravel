@@ -6,14 +6,13 @@
         <div class="container">
             <h2>Thêm rạp mới</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-rap') }}" class="was-validated d-flex flex-column input-form"
+            <form method="POST" action="{{ route('addRap') }}" class="was-validated d-flex flex-column input-form"
                 id="form-them-rap">
                 @csrf
                 <div class="form-group d-flex">
                     <div class="col-6">
                         <label for="ten-rap">Tên rạp:</label>
-                        <input type="text" class="form-control" id="ten-rap" placeholder="Nhập tên rạp" name="ten-rap"
-                            disabled required>
+                        <input type="text" class="form-control" id="ten-rap" placeholder="Nhập tên rạp" name="ten-rap" required>
                         <div class="invalid-feedback">Không được bỏ trống trường này</div>
                     </div>
 
