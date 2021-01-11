@@ -29,7 +29,7 @@ class CreateNhanViensTable extends Migration
             $table->bigInteger('MaCV')->unsigned(); //khóa ngoại
             $table->bigInteger('MaNQL')->nullable()->unsigned(); //khóa ngoại
             $table->string('TenTK', 20);
-            $table->string('password', 255); // sửa lại lengh cao hơn để tạo md5
+            $table->string('password', 255); // sửa lại lenght cao hơn để tạo md5
             $table->tinyInteger('TrangThai')->default(0);
         });
     }

@@ -8,7 +8,7 @@ class Ghe extends Model
 {
     //
     protected $table = 'ghes';
-    public $timestamps = true;
+    public $timestamps=false;
     //1 ghế chỉ thuộc về 1 loại ghế và 1 loại ghế có nhiều ghế
     public function LoaiGhe()
     {

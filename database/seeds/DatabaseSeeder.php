@@ -47,10 +47,9 @@ class nhan_viens extends Seeder
     public function run()
     {
         DB::table('nhan_viens')->insert([
-            ['HoNV' => 'Phạm', 'name' => 'Nhựt', 'Avatar' => null, 'NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'password' => bcrypt('12345'), 'TrangThai' => 1],
-            ['HoNV' => 'Huỳnh', 'name' => 'Cảnh', 'Avatar' => null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'password' => bcrypt('12345'), 'TrangThai' => 1],
-            ['HoNV' => 'Trần', 'name' => 'Thảo', 'Avatar' => null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'password' => bcrypt('12345'), 'TrangThai' => 1],
-
+            ['HoNV' => 'Phạm', 'name' => 'Nhựt','Avatar'=>'CamNhung.jpg','NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'password' => bcrypt('12345') , 'TrangThai' => 1],
+            ['HoNV' => 'Huỳnh', 'name' => 'Cảnh','Avatar'=>'canh.jpg', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'password' => bcrypt('12345'), 'TrangThai' => 1],
+            ['HoNV' => 'Trần', 'name' => 'Thảo','Avatar'=>'thao.jpg', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'password' => bcrypt('12345'), 'TrangThai' => 1],
         ]);
     }
 }
@@ -91,7 +90,6 @@ class phims extends Seeder
     public function run()
     {
         DB::table('phims')->insert([
-
             ['TenPhim' => 'Ròm', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 180, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'NoiDung' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", 'Diem' => 4, 'HinhAnh' => 'rom.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
             ['TenPhim' => 'Tiệc trăng máu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'NoiDung' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
             ['TenPhim' => 'Siêu nhân đỏ', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Đỏ', 'DienVien' => 'Đỏ', 'NoiDung' => "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
@@ -300,8 +298,8 @@ class thanh_viens extends Seeder
     public function run()
     {
         DB::table('thanh_viens')->insert([
-            ['HoTenTV' => 'Huỳnh Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => '12345', 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
-            ['HoTebTV' => 'Phạm Minh Nhựt',  'NgaySinh' => '2000-10-02', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => '12345', 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV'=>'Huỳnh Thanh Cảnh','NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => '12345', 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
+            ['HoTenTV'=>'Phạm Minh Nhựt','NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => '12345', 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
         ]);
     }
 }

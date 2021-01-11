@@ -8,7 +8,7 @@ class DsVe extends Model
 {
     //
     protected $table ='ds_ves';
-    public $timestamps=true;
+    public $timestamps=false;
     // 1 danh sách vé có nhiều vé
     public function Ve()
     {
