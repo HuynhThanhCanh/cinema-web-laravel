@@ -9,7 +9,7 @@ class LoaiPhim extends Model
 {
     //
     protected $table='loai_phims';
-	public $timestamp=true;
+	public $timestamp=false;
     // 1 loại phim đc nhiều nhân viên thêm( chút sửa lại)
     public function NhanVien()
     {

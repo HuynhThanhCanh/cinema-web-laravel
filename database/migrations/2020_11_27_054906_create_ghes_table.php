@@ -23,8 +23,6 @@ class CreateGhesTable extends Migration
             $table->string('ChiSoHang');
             $table->tinyInteger('ChiSoCot');
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //
             $table->primary('MaGhe');
         });

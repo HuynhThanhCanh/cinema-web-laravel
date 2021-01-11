@@ -8,7 +8,7 @@ class Rap extends Model
 {
     //
     protected $table = 'raps';
-    public $timestamps =true;
+    public $timestamps =false;
     // 1 rạp chỉ 1 chi nhánh
     public function ChiNhanh()
     {

@@ -24,8 +24,6 @@ class CreateLichChieusTable extends Migration
             $table->bigInteger('MaPhim')->unsigned();
             $table->bigInteger('MaRap')->unsigned();
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
             //
             $table->unique(['MaThoiGianChieu', 'MaRap']);
         });

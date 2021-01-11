@@ -46,9 +46,9 @@ class nhan_viens extends Seeder
     public function run()
     {
         DB::table('nhan_viens')->insert([
-            ['HoNV' => 'Phạm', 'name' => 'Nhựt','Avatar'=>null,'NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'password' => bcrypt('12345') , 'TrangThai' => 1],
-            ['HoNV' => 'Huỳnh', 'name' => 'Cảnh','Avatar'=>null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'password' => bcrypt('12345'), 'TrangThai' => 1],
-            ['HoNV' => 'Trần', 'name' => 'Thảo','Avatar'=>null, 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'password' => bcrypt('12345'), 'TrangThai' => 1],
+            ['HoNV' => 'Phạm', 'name' => 'Nhựt','Avatar'=>'CamNhung.jpg','NgaySinh' => '2000-10-10', 'DiaChi' => 'Bến Tre', 'SDT' => '0911079197', 'email' => 'nhatminh785@gmail.com', 'MaCV' => 1, 'MaNQL' => null, 'TenTK' => 'nhutdzvl', 'password' => bcrypt('12345') , 'TrangThai' => 1],
+            ['HoNV' => 'Huỳnh', 'name' => 'Cảnh','Avatar'=>'canh.jpg', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'Bình Thuận', 'SDT' => '12345678', 'email' => 'canhcdth18pmc@gmail.com', 'MaCV' => 3, 'MaNQL' => 1, 'TenTK' => 'canhngu123', 'password' => bcrypt('12345'), 'TrangThai' => 1],
+            ['HoNV' => 'Trần', 'name' => 'Thảo','Avatar'=>'thao.jpg', 'NgaySinh' => '2000-10-2', 'DiaChi' => 'HCM', 'SDT' => '123456789', 'email' => 'thaocdth18pmc@gmail.com', 'MaCV' => 2, 'MaNQL' => 1, 'TenTK' => 'thao1234', 'password' => bcrypt('12345'), 'TrangThai' => 1],
 
         ]);
     }
@@ -91,16 +91,9 @@ class phims extends Seeder
     {
         DB::table('phims')->insert([
 
-            ['TenPhim' => 'Ròm', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 180, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 4, 'HinhAnh' => 'rom.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Tiệc trăng máu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân đỏ', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Đỏ', 'DienVien' => 'Đỏ', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân cam', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Cam', 'DienVien' => 'Cam', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân vàng', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Vàng', 'DienVien' => 'Vàng', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân xanh', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Xanh', 'DienVien' => 'Xanh', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân hồng', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Hồng', 'DienVien' => 'Hồng', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân trắng', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trắng', 'DienVien' => 'Trắng', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân nâu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Nâu', 'DienVien' => 'Nâu', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
-            ['TenPhim' => 'Siêu nhân đen', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Đen', 'DienVien' => 'Đen', 'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 1, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
+            ['TenPhim' => 'Ròm', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 180, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa','NoiDung'=>'Lấy bối cảnh từ một khu chung cư cũ đang chờ giải tỏa tại Sài Gòn, Ròm kể câu chuyện về cuộc sống của những người dân lao động nơi đây. Họ đều chơi số đề với hy vọng kiếm được một khoản tiền lớn để đổi đời. Ròm là cậu bé làm “cò đề” để kiếm sống qua ngày, chuyên tư vấn cho người dân những con số may mắn để họ có cơ may trúng đề. Một hôm cậu giúp bà già kia trúng đề lớn nên được mọi người tin tưởng nhưng sau nhiều lần thua cậu bị người dân mất tin tưởng', 'Diem' => 4, 'HinhAnh' => 'rom.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
+            ['TenPhim' => 'Tiệc trăng máu', 'NgayDKChieu' => '2020-10-10', 'NgayKetThuc' => '2020-11-10', 'ThoiLuong' => 210, 'DaoDien' => 'Trần Thanh Huy', 'DienVien' => 'Trần Anh Khoa','NoiDung'=>'Trong buổi họp mặt của nhóm bạn thân, một thành viên bất ngờ đề xuất trò chơi chia sẻ điện thoại nhằm tăng tinh thần đoàn kết. Từ đó, những góc khuất của từng người dần hé lộ và khiến cho mối quan hệ vốn khắng khít của họ bắt đầu lay chuyển.' ,'Diem' => 5, 'HinhAnh' => 'tiectrangmau.jpg', 'LinkPhim' => 'XRm1P7oGpMQ', 'MaLoaiPhim' => 2, 'MaNV' => 1, 'Nhan' => 1, 'TrangThai' => 1],
+
         ]);
     }
 }
@@ -237,8 +230,8 @@ class thanh_viens extends Seeder
     public function run()
     {
         DB::table('thanh_viens')->insert([
-            ['HoTV' => 'Huỳnh', 'TenTV' => 'Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'TenDN' => 'canh123', 'Password' => '12345', 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
-            ['HoTV' => 'Phạm', 'TenTV' => 'Minh Nhựt',  'NgaySinh' => '2000-10-02', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'TenDN' => 'nhut123', 'Password' => '12345', 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV'=>'Huỳnh Thanh Cảnh','NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => '12345', 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
+            ['HoTenTV'=>'Phạm Minh Nhựt','NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => '12345', 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
         ]);
     }
 }
