@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 use App\LoaiPhim;
 use App\NhanVien;
+
 class TheLoaiPhimController extends Controller
 {
     //
@@ -16,36 +18,32 @@ class TheLoaiPhimController extends Controller
         return view('pages.quan-ly-the-loai-phim',compact('loaiphim','nhanvien'));
     }
     public function themLoaiPhim(){
-     $loai=LoaiPhim::get();
-       return view('pages.them.them-the-loai-phim');
-
+        $nhanvien = DB::select('SELECT DISTINCT  nhan_viens.name FROM loai_phims, nhan_viens WHERE loai_phims.MaNV=nhan_viens.id');
+        $loaiphim = DB::select('select * from loai_phims where TrangThai =? ', [1]);
+        return view('pages.quan-ly-the-loai-phim', compact('loaiphim', 'nhanvien'));
     }
 
-    public function addLoaiPhim( Request $request)
+    public function addLoaiPhim(Request $request)
     {
-       
-        $TenLoaiPhim = $request -> input('ten-loai-phim');
-        $MaNV =$request->input('MaNV','1');
-        $TrangThai=$request->input('optradio');
+        $TenLoaiPhim = $request->input('ten-loai-phim');
+        $MaNV = $request->input('MaNV', '1');
+        $TrangThai = $request->input('optradio');
 
-       $data=array('TenLoaiPhim'=>$TenLoaiPhim,'MaNV'=>$MaNV,'TrangThai'=>$TrangThai);
-       DB::table('loai_phims')->insert($data);
-      return redirect('/quan-ly-the-loai-phim');       
-
+        $data = array('TenLoaiPhim' => $TenLoaiPhim, 'MaNV' => $MaNV, 'TrangThai' => $TrangThai);
+        DB::table('loai_phims')->insert($data);
+        return redirect('/quan-ly-the-loai-phim');
     }
 
     public function suaLoaiPhim( Request $request,$MaLoaiPhim)
     {
         $TenLoaiPhim = $request -> input('ten-loai-phim');
         $TrangThai=$request->input('optradio');
-
-       DB::update('update loai_phims set TenLoaiPhim = ? , TrangThai=? where MaLoaiPhim = ?', [$TenLoaiPhim,$TrangThai ,$MaLoaiPhim]);
+        DB::update('update loai_phims set TenLoaiPhim = ? , TrangThai=? where MaLoaiPhim = ?', [$TenLoaiPhim,$TrangThai ,$MaLoaiPhim]);
         return redirect('/quan-ly-the-loai-phim');
     }
 
     public function capNhatLoaiPhim($MaLoaiPhim)
     {
-        
         $loaiphim=DB::select("select * from loai_phims where MaLoaiPhim = $MaLoaiPhim AND TrangThai =? ", [1]);
         return view('pages.cap-nhat.cap-nhat-the-loai-phim',compact('loaiphim'));
     }
@@ -53,7 +51,6 @@ class TheLoaiPhimController extends Controller
     public function XoaLoaiPhim($MaLoaiPhim)
     {
         DB::update('update loai_phims set TrangThai=-1 where MaLoaiPhim=?', [$MaLoaiPhim]);
-        return redirect('/quan-ly-the-loai-phim');  
+        return redirect('/quan-ly-the-loai-phim');
     }
-    
 }

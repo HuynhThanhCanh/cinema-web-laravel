@@ -37,15 +37,15 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form method="POST" class="form-horizontal" action="{{ url('/') }}">
+            <form method="POST" class="form-horizontal" action="{{ url('/login') }}">
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
-                        <input type="email" class="form-control-transparent" id="inputUserName"
+                        <input type="email" class="form-control-transparent" id="inputUserName" name="Email"
                             placeholder="Tên tài khoản">
                     </div>
                     <div class="form-group row">
-                        <input type="password" class="form-control-transparent" id="inputPassword"
+                        <input type="password" class="form-control-transparent" id="inputPassword" name="Pass"
                             placeholder="Mật khẩu">
                     </div>
                     <div class="form-group row">

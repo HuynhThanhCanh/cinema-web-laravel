@@ -8,7 +8,7 @@ class ThanhVien extends Model
 {
     //
     protected $table = 'thanh_viens';
-    public $timestamps = true;
+    public $timestamps = false;
     // 1 thành viên có nhiều danh sách vé
     public function DanhSachVe()
     {

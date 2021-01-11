@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Admin</title>
 
@@ -15,6 +16,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href={{ asset('dist/css/adminlte.css') }}>
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
+    <link rel="stylesheet" href={{ asset('css/bootstrap-duallistbox.css') }}>
     <link rel="stylesheet" href={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.css') }}>
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
@@ -176,12 +178,18 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src={{ asset('dist/img/user2-160x160.jpg') }} class="img-circle elevation-2"
-                            alt="User Image">
-                    </div>
+                    @if (Session::has('user'))
+                        <div class="image">
+                            <img src="/image/nhanvien/{{ Session::get('user')->Avatar }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        </div>
+                    @endif
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">
+                            @if (Session::has('user'))
+                                {{ Session::get('user')->name }}
+                            @endif
+                        </a>
                     </div>
                 </div>
 
@@ -224,7 +232,7 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-suat-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-clock"></i>
                                 <p>
                                     Suất chiếu
@@ -232,16 +240,27 @@
                             </a>
                         </li>
                         <li class="nav-item menu-item has-treeview">
-                            <a href="{{ url('quan-ly-rap') }}" class="nav-link">
+                            <a href="{{ url('quan-ly-lich-chieu') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
                                     Lịch chiếu
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item menu-item has-treeview">
+                            <a href="{{ url('quan-ly-ve') }}" class="nav-link">
+                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <p>
+                                    Vé
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
-                <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng xuất</strong></button>
+                <a href="{{ url('dangxuat') }}">
+                    <button type="button" class="btn btn-dang-xuat btn-warning w-100"><strong>Đăng
+                            xuất</strong></button>
+                </a>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
@@ -251,6 +270,7 @@
         <div class="content-wrapper">
             @yield('content')
         </div>
+
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
@@ -269,11 +289,13 @@
             </div>
         </footer>
     </div>
+    
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
     <script src={{ asset('plugins/jquery/jquery.min.js') }}></script>
+
     <!-- Bootstrap -->
     <script src={{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}></script>
     <script src={{ asset('plugins/bootstrap-tagsinput-latest/src/bootstrap-tagsinput.js') }}></script>
@@ -285,6 +307,83 @@
     <script src={{ asset('dist/js/demo.js') }}></script>
     <script src={{ asset('dist/js/pages/dashboard3.js') }}></script>
     <script src={{ asset('js/handler-submit-them.js') }}></script>
+    <script src={{ asset('ajax/xep-lich-ajax.js') }}></script>
+    <script src={{ asset('ajax/suat-chieu-ajax.js') }}></script>
+    <script src={{ asset('js/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}></script>
+    <script>
+        $(function() {
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+        })
+
+    </script>
+    <script>
+        var pictureSrc = "https://1.bp.blogspot.com/-CXx9jt2JMRk/Vq-Lh5fm88I/AAAAAAAASwo/XivooDn_oSY/s1600/hoamai.png";
+       // var pictureSrc ="https://anonyviet.com/resource/hoaroi/hoadao.png"; //the location of the snowflakes
+var pictureWidth = 20; //the width of the snowflakes
+var pictureHeight = 20; //the height of the snowflakes
+var numFlakes = 20; //the number of snowflakes
+var downSpeed = 0.01; //the falling speed of snowflakes (portion of screen per 100 ms)
+var lrFlakes = 10; //the speed that the snowflakes should swing from side to side
+
+
+if( typeof( numFlakes ) != 'number' || Math.round( numFlakes ) != numFlakes || numFlakes < 1 ) { numFlakes = 10; }
+
+//draw the snowflakes
+for( var x = 0; x < numFlakes; x++ ) {
+if( document.layers ) { //releave NS4 bug
+document.write('<layer id="snFlkDiv'+x+'"><imgsrc="'+pictureSrc+'" height="'+pictureHeight+'"width="'+pictureWidth+'" alt="*" border="0"></layer>');
+} else {
+document.write('<div style="position:absolute;"id="snFlkDiv'+x+'"><img src="'+pictureSrc+'"height="'+pictureHeight+'" width="'+pictureWidth+'" alt="*"border="0"></div>');
+}
+}
+
+//calculate initial positions (in portions of browser window size)
+var xcoords = new Array(), ycoords = new Array(), snFlkTemp;
+for( var x = 0; x < numFlakes; x++ ) {
+xcoords[x] = ( x + 1 ) / ( numFlakes + 1 );
+do { snFlkTemp = Math.round( ( numFlakes - 1 ) * Math.random() );
+} while( typeof( ycoords[snFlkTemp] ) == 'number' );
+ycoords[snFlkTemp] = x / numFlakes;
+}
+
+//now animate
+function flakeFall() {
+if( !getRefToDivNest('snFlkDiv0') ) { return; }
+var scrWidth = 0, scrHeight = 0, scrollHeight = 0, scrollWidth = 0;
+//find screen settings for all variations. doing this every time allows for resizing and scrolling
+if( typeof( window.innerWidth ) == 'number' ) { scrWidth = window.innerWidth; scrHeight = window.innerHeight; } else {
+if( document.documentElement && (document.documentElement.clientWidth ||document.documentElement.clientHeight ) ) {
+scrWidth = document.documentElement.clientWidth; scrHeight = document.documentElement.clientHeight; } else {
+if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+scrWidth = document.body.clientWidth; scrHeight = document.body.clientHeight; } } }
+if( typeof( window.pageYOffset ) == 'number' ) { scrollHeight = pageYOffset; scrollWidth = pageXOffset; } else {
+if( document.body && ( document.body.scrollLeft ||document.body.scrollTop ) ) { scrollHeight = document.body.scrollTop;scrollWidth = document.body.scrollLeft; } else {
+if(document.documentElement && (document.documentElement.scrollLeft ||document.documentElement.scrollTop ) ) { scrollHeight =document.documentElement.scrollTop; scrollWidth =document.documentElement.scrollLeft; } }
+}
+//move the snowflakes to their new position
+for( var x = 0; x < numFlakes; x++ ) {
+if( ycoords[x] * scrHeight > scrHeight - pictureHeight ) { ycoords[x] = 0; }
+var divRef = getRefToDivNest('snFlkDiv'+x); if( !divRef ) { return; }
+if( divRef.style ) { divRef = divRef.style; } var oPix = document.childNodes ? 'px' : 0;
+divRef.top = ( Math.round( ycoords[x] * scrHeight ) + scrollHeight ) + oPix;
+divRef.left = ( Math.round( ( ( xcoords[x] * scrWidth ) - (pictureWidth / 2 ) ) + ( ( scrWidth / ( ( numFlakes + 1 ) * 4 ) ) * (Math.sin( lrFlakes * ycoords[x] ) - Math.sin( 3 * lrFlakes * ycoords[x]) ) ) ) + scrollWidth ) + oPix;
+ycoords[x] += downSpeed;
+}
+}
+
+//DHTML handlers
+function getRefToDivNest(divName) {
+if( document.layers ) { return document.layers[divName]; } //NS4
+if( document[divName] ) { return document[divName]; } //NS4 also
+if( document.getElementById ) { return document.getElementById(divName); } //DOM (IE5+, NS6+, Mozilla0.9+, Opera)
+if( document.all ) { return document.all[divName]; } //Proprietary DOM - IE4
+return false;
+}
+
+window.setInterval('flakeFall();',100);
+    </script>
+   
 </body>
 
 </html>

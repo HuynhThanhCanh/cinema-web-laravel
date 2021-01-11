@@ -8,7 +8,7 @@ class ChiNhanh extends Model
 {
     //
     protected $table = 'chi_nhanhs';
-    public $timetamps = true;
+    public $timetamps = false;
     // 1 chi nhánh có 1 viên quản lý
     public function NhanVien()
     {

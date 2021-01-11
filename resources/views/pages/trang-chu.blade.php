@@ -1,7 +1,7 @@
 @extends('../layouts.master')
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

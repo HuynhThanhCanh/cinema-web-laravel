@@ -37,6 +37,18 @@ $(document).ready(function(){
         $('body').css("overflow", "hidden");
     });
 
+    //Xử lý cho trang Thêm suất chiếu
+    $('#form-them-suat-chieu').submit(function(e){
+        e.preventDefault();
+        $('.modal-them-suat-chieu-question').addClass('show').css({
+            "display": "block",
+            "padding": "17px",
+            "background": "#00000055",
+        });
+
+        $('body').css("overflow", "hidden");
+    });
+
 
     /**
      * CẬP NHẬT
@@ -64,39 +76,51 @@ $(document).ready(function(){
         $('body').css("overflow", "hidden");
     });
 
-     $('#form-cap-nhat-the-loai-phim').submit(function(e){
+    //Xử lý cho trang Cập nhật thể loại phim
+    $('#form-cap-nhat-the-loai-phim').submit(function(e){
+       e.preventDefault();
+       $('.modal-cap-nhat-the-loai-phim-question').addClass('show').css({
+           "display": "block",
+           "padding": "17px",
+           "background": "#00000055",
+       });
+       $('body').css("overflow", "hidden");
+    });
+
+    //Xử lý cho trang Cập nhật suất chiếu
+    $('#form-cap-nhat-suat-chieu').submit(function(e){
         e.preventDefault();
-        $('.modal-cap-nhat-the-loai-phim-question').addClass('show').css({
+        $('.modal-cap-nhat-suat-chieu-question').addClass('show').css({
             "display": "block",
             "padding": "17px",
             "background": "#00000055",
         });
         $('body').css("overflow", "hidden");
-    });
-
+     });
     /**
      * SET SUBMIT EVENT
      */
+    //PHIM
     $('.btn-xac-nhan-them-phim').on('click', function(){
         $('#form-them-phim').unbind('submit');
         $('#form-them-phim').trigger('submit');
     })
 
-    $('.btn-xac-nhan-them-the-loai-phim').on('click', function(){
-        $('#form-them-the-loai-phim').unbind('submit');
-        $('#form-them-the-loai-phim').trigger('submit');
-    });
-
     $('.btn-xac-nhan-cap-nhat-phim').on('click', function(){
         $('#form-cap-nhat-phim').unbind('submit');
         $('#form-cap-nhat-phim').trigger('submit');
+    });
+    //THỂ LOẠI PHIM
+    $('.btn-xac-nhan-them-the-loai-phim').on('click', function(){
+        $('#form-them-the-loai-phim').unbind('submit');
+        $('#form-them-the-loai-phim').trigger('submit');
     });
 
     $('.btn-xac-nhan-cap-nhat-the-loai-phim').on('click', function(){
         $('#form-cap-nhat-the-loai-phim').unbind('submit');
         $('#form-cap-nhat-the-loai-phim').trigger('submit');
     });
-
+    //RẠP
     $('.btn-xac-nhan-them-rap').on('click', function(){
         $('#form-them-rap').unbind('submit');
         $('#form-them-rap').trigger('submit');
@@ -105,6 +129,15 @@ $(document).ready(function(){
     $('.btn-xac-nhan-cap-nhat-rap').on('click', function(){
         $('#form-cap-nhat-rap').unbind('submit');
         $('#form-cap-nhat-rap').trigger('submit');
+    });
+    //SUẤT CHIẾU
+    $('.btn-xac-nhan-them-suat-chieu').on('click', function(){
+        $('#form-them-suat-chieu').unbind('submit');
+        $('#form-them-suat-chieu').trigger('submit');
+    });
+    $('.btn-xac-nhan-cap-nhat-suat-chieu').on('click', function(){
+        $('#form-cap-nhat-suat-chieu').unbind('submit');
+        $('#form-cap-nhat-suat-chieu').trigger('submit');
     });
 
     /**
@@ -117,6 +150,8 @@ $(document).ready(function(){
         $('.modal-cap-nhat-the-loai-phim-question').hide();
         $('.modal-them-rap-question').hide();
         $('.modal-cap-nhat-rap-question').hide();
+        $('.modal-them-suat-chieu-question').hide();
+        $('.modal-cap-nhat-suat-chieu-question').hide();
 
         $('body').css("overflow", "auto");
     });

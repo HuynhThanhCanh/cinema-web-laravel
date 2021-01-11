@@ -24,7 +24,7 @@ class CreateVesTable extends Migration
             $table->decimal('ThanhTien')->default(0);
             $table->timestamp('ThoiGianMua')->useCurrent();
             $table->bigInteger('MaLichChieu')->unsigned(); //Khóa ngoại
-            $table->string('MaGhe', 5); //Khóa ngoại
+            $table->string('MaGhe', 10); //Khóa ngoại
             $table->tinyInteger('TrangThai')->default(0);
         });
     }

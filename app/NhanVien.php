@@ -8,7 +8,7 @@ class NhanVien extends Model
 {
     //
     protected $table = 'nhan_viens';
-    public $timestamps = true;
+    public $timestamps = false;
     // nhân viên là người quản lý
     public function NhanVien()
     {

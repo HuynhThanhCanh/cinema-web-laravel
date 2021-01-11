@@ -18,21 +18,19 @@ class CreateNhanViensTable extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             //
-            $table->bigIncrements('MaNV');
+            $table->bigIncrements('id');
             $table->string('HoNV', 10);
-            $table->string('TenNV', 20);
+            $table->string('name', 20);
             $table->string('Avatar')->nullable();
             $table->date('NgaySinh');
             $table->string('DiaChi', 100);
             $table->string('SDT', 11);
-            $table->string('Email', 30);
+            $table->string('email', 30); // sửa Email thành email cho giống trong user
             $table->bigInteger('MaCV')->unsigned(); //khóa ngoại
             $table->bigInteger('MaNQL')->nullable()->unsigned(); //khóa ngoại
             $table->string('TenTK', 20);
-            $table->string('Pass', 20);
+            $table->string('password', 255); // sửa lại lenght cao hơn để tạo md5
             $table->tinyInteger('TrangThai')->default(0);
-            $table->timestamp('ThoiGianTao')->useCurrent();
-            $table->timestamp('ThoiGianCapNhatCuoi')->useCurrent();
         });
     }
 

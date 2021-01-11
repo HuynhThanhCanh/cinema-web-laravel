@@ -8,7 +8,7 @@ class Phim extends Model
 {
     //
     protected $table = 'phims';
-    public $timestamps = true;
+    public $timestamps = false;
 
     // 1 phim có 1 loại phim
     public  function LoaiPhim()

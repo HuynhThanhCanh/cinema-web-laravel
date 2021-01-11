@@ -8,7 +8,7 @@ class ChucVu extends Model
 {
     //
     protected $table='chuc_vus';
-    public $timestamp=true;
+    public $timestamp=false;
      // 1 chức vụ cho nhiều nhân viên
     public function NhanVien()
     {
