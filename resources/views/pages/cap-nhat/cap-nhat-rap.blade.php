@@ -6,22 +6,33 @@
         <div class="container">
             <h2>Cập nhật rạp</h2>
             <hr>
-            <form method="POST" action="{{ url('quan-ly-rap') }}" class="was-validated d-flex flex-column input-form"
+            @foreach($raps as $r)
+            <form method="POST" action="{{route('updateRap', $r->MaRap)}}" class="was-validated d-flex flex-column input-form"
                 id="form-cap-nhat-rap">
                 @csrf
                 <div class="form-group d-flex">
                     <div class="col-6">
                         <label for="ten-rap">Tên rạp:</label>
                         <input type="text" class="form-control" id="ten-rap" placeholder="Nhập tên rạp" name="ten-rap"
-                            disabled required>
+                             value="{{$r->TenRap}}" required>
                         <div class="invalid-feedback">Không được bỏ trống trường này</div>
                     </div>
 
                     <div class="col-6">
                         <label for="so-luong-ghe">Số lượng ghế:</label>
                         <input type="number" class="form-control" id="so-luong-ghe" name="so-luong-ghe"
-                            placeholder="Nhập số lượng ghế" value="50" disabled required>
+                            placeholder="Nhập số lượng ghế" value="{{$r->SoLuongGhe}}" disabled required>
                         <div class="invalid-feedback">Không được bỏ trống trường này</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group d-flex">
+                        <div class="col-6">
+                                <label for="chi-nhanh">Chi nhánh:</label>
+                                <input type="text" class="form-control" id="chi-nhanh" name="chi-nhanh" value="{{$r->TenChiNhanh}}" disabled required>
+                                <div class="invalid-feedback">Không được bỏ trống trường này</div>
+                        </div>
                     </div>
                 </div>
 
@@ -57,13 +68,13 @@
                             <!-- Modal body -->
                             <div class="modal-body text-center">
                                 <i class="fas fa-info-circle" style="color: #dc3545;"></i>
-                                Xác nhận thêm rạp vào hệ thống
+                                Xác nhận cập nhật rạp vào hệ thống
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer d-flex justify-content-center">
-                                <button type="button" class="btn btn-warning btn-xac-nhan-cap-nhat-rap">
+                                <button type="submit" class="btn btn-warning btn-xac-nhan-cap-nhat-rap">
                                     <strong>Xác nhận</strong>
                                 </button>
                             </div>
@@ -71,6 +82,7 @@
                     </div>
                 </div>
             </form>
+            @endforeach
         </div>
     </section>
 

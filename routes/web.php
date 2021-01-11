@@ -52,7 +52,10 @@ Route::group(['prefix' => 'quan-ly-rap'], function () {
     Route::get('/', 'RapController@index');
     Route::post('/', 'RapController@index');
     Route::get('/them-rap', 'RapController@themRap');
-    Route::get('/cap-nhat-rap', 'RapController@capNhatRap');
+    Route::post('/create', 'RapController@addRap')->name('addRap');
+    Route::get('/edit/{MaRap}', 'RapController@edit');
+    Route::post('/update/{MaRap}', 'RapController@update')->name('updateRap');
+    Route::get('/delete/{MaRap}', 'RapController@delete')->name('deleteRap');
 });
 
 /**
