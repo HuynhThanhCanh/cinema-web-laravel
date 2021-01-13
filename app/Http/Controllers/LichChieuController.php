@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Constraint\Count;
 
 class LichChieuController extends Controller
 {
     private $queryLichChieu = 'SELECT lc.MaLichChieu,  p.TenPhim, r.TenRap, tgc.ThoiGianChieu, lc.NgayChieu, lc.TrangThai
                                 FROM lich_chieus lc, thoi_gian_chieus tgc, phims p, raps r
-                                WHERE lc.MaThoiGianChieu = tgc.MaThoiGianChieu && lc.MaPhim = p.MaPhim && lc.MaRap = r.MaRap && lc.TrangThai = 1';
+                                WHERE lc.MaThoiGianChieu = tgc.MaThoiGianChieu && lc.MaPhim = p.MaPhim && lc.MaRap = r.MaRap && lc.TrangThai = 1
+                                ORDER BY lc.NgayChieu DESC';
     //
     private $lichChieus;
     private $argsLichChieu;
@@ -41,64 +43,82 @@ class LichChieuController extends Controller
         } else {
             //Lấy data từ giao diện và model
             $argsMaPhim = $req->input('_danhSachPhim');
-            $argsSuat = ThoiGianChieu::select('MaThoiGianChieu', 'ThoiGianChieu')->get();
-            $argsRap = Rap::select('MaRap', 'TenRap')->get();
+            $argsSuat = ThoiGianChieu::select('MaThoiGianChieu', 'ThoiGianChieu')->where("TrangThai", 1)->get();
+            $argsRap = Rap::select('MaRap', 'TenRap')->where("TrangThai", 1)->get();
             $ngayChieu = $req->input('_ngayChieu');
             $argsRand = [];
 
-            //Sếp lịch chiếu, tạo sẵn sườn để gán phim vào
-            foreach ($argsRap as $rap) {
-                foreach ($argsSuat as $suat) {
-                    $lichChieu = array(
-                        "MaRap" => $rap['MaRap'],
-                        "TenRap" => $rap['TenRap'],
-                        "MaThoiGianChieu" => $suat['MaThoiGianChieu'],
-                        "ThoiGianChieu" => $suat['ThoiGianChieu'],
-                        "MaPhim" => null,
-                        "TenPhim" => null,
-                        "NgayChieu" => $ngayChieu
-                    );
-                    array_push($this->argsLichChieu, $lichChieu);
-                }
-            }
-
             //Xử lý tính số lần xếp cho từng phim - chia đều
-            $soSuatChieu = DB::select('SELECT COUNT(MaThoiGianChieu) "soSuatChieu"
-                                        FROM thoi_gian_chieus
-                                        WHERE TrangThai = 1');
+            $soLuongSuat = Count($argsSuat);
+            $soLuongRap = Count($argsRap);
             $soLuongPhim = count($argsMaPhim);
-            $soSuatChieu = $soSuatChieu[0]->soSuatChieu;
-            $soLanChieuCuaPhim = $soSuatChieu / $soLuongPhim;
+            $soLanChieuCuaPhim = floor(($soLuongSuat * $soLuongRap) / $soLuongPhim);
 
-            //Gán phim random vào lich chiếu
-            foreach ($argsMaPhim as $maPhim) {
-                $count = count($this->argsLichChieu);
-                for ($i = 0; $i < $soLanChieuCuaPhim; $i++) {
-                    $flag = true;
-                    $rand = rand(0, $count - 1);
-                    if (in_array($rand, $argsRand)) {
-                        if ($flag) {
-                            --$i;
-                            $flag = false;
-                        }
-                    } else {
-                        $flag = true;
-                        array_push($argsRand, $rand);
-                        $this->argsLichChieu[$rand]["MaPhim"] = $maPhim;
-                        $tenPhim = Phim::select("TenPhim")->where("MaPhim", "=", $maPhim)->get();
-
-                        $this->argsLichChieu[$rand]["TenPhim"] = $tenPhim[0]['TenPhim'];
+            if ($soLanChieuCuaPhim != 0) {
+                //Sếp lịch chiếu, tạo sẵn sườn để gán phim vào
+                foreach ($argsRap as $rap) {
+                    foreach ($argsSuat as $suat) {
+                        $lichChieu = array(
+                            "MaRap" => $rap['MaRap'],
+                            "TenRap" => $rap['TenRap'],
+                            "MaThoiGianChieu" => $suat['MaThoiGianChieu'],
+                            "ThoiGianChieu" => $suat['ThoiGianChieu'],
+                            "MaPhim" => null,
+                            "TenPhim" => null,
+                            "NgayChieu" => $ngayChieu
+                        );
+                        array_push($this->argsLichChieu, $lichChieu);
                     }
                 }
-            }
 
-            //Loại bỏ các phim có mã là null
-            $this->argsLichChieu = array_filter($this->argsLichChieu, function ($lichChieu) {
-                if ($lichChieu['MaPhim'] != null) {
-                    return $lichChieu;
+                //Gán phim random vào lich
+                $coutLichChieu = count($this->argsLichChieu);
+                foreach ($argsMaPhim as $maPhim) {
+                    for ($i = 0; $i < $soLanChieuCuaPhim; $i++) {
+                        $flag = true;
+                        $rand = rand(0, $coutLichChieu - 1);
+                        if (in_array($rand, $argsRand)) {
+                            if ($flag) {
+                                --$i;
+                                $flag = false;
+                            }
+                        } else {
+                            $flag = true;
+                            array_push($argsRand, $rand);
+                            $this->argsLichChieu[$rand]["MaPhim"] = $maPhim;
+                            $tenPhim = Phim::select("TenPhim")->where("MaPhim", "=", $maPhim)->get();
+
+                            $this->argsLichChieu[$rand]["TenPhim"] = $tenPhim[0]['TenPhim'];
+                        }
+                    }
                 }
-            });
-            return response()->json(['success' => 'Gọi data thành công.', 'dataResponse' => $this->argsLichChieu]);
+
+                //Xử lý các lịch chiếu null
+                $argsRand = [];
+                $coutMaPhim = count($argsMaPhim);
+                for ($iLich = 0; $iLich < $coutLichChieu; $iLich++) {
+                    if ($this->argsLichChieu[$iLich]["MaPhim"] == null) {
+                        $flag = true;
+                        $rand = rand(0, $coutMaPhim - 1);
+
+                        if (in_array($rand, $argsRand)) {
+                            if ($flag) {
+                                --$iLich;
+                                $flag = false;
+                            }
+                        } else {
+                            $flag = true;
+                            array_push($argsRand, $rand);
+                            $this->argsLichChieu[$iLich]["MaPhim"] = $argsMaPhim[$rand];
+                            $tenPhim = Phim::select("TenPhim")->where("MaPhim", "=", $maPhim)->get();
+
+                            $this->argsLichChieu[$iLich]["TenPhim"] = $tenPhim[0]['TenPhim'];
+                        }
+                    }
+                }
+                return response()->json(['success' => true, 'dataResponse' => $this->argsLichChieu]);
+            }
+            return response()->json(['success' => false, 'dataResponse' => $this->argsLichChieu]);
         }
     }
 
@@ -106,21 +126,22 @@ class LichChieuController extends Controller
     {
         $dsLichChieu = json_decode($_COOKIE['dsLichChieu']);
 
-        foreach ((array)$dsLichChieu as $lich) {
+        foreach ($dsLichChieu as $lich) {
             $lichChieu = new LichChieu;
             $lichChieu->MaThoiGianChieu = $lich->MaThoiGianChieu;
             $lichChieu->NgayChieu = $lich->NgayChieu;
             $lichChieu->MaPhim = $lich->MaPhim;
             $lichChieu->MaRap = $lich->MaRap;
             $lichChieu->TrangThai = 1;
-            //echo var_dump($lichChieu->save());
+
             try {
                 $lichChieu->save();
-                return redirect('/quan-ly-lich-chieu');
             } catch (QueryException $err) {
                 return "Lịch chiếu này đã tồn tại";
+                //return $err;
             }
         }
+        return redirect('/quan-ly-lich-chieu');
     }
 
     function timKiemLichTheoNgayChieu(Request $req)

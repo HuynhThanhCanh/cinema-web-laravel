@@ -11,8 +11,8 @@
                 @csrf
                 <div class="card card-default">
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row">
+                    <div class="card-body form-select">
+                        <div class="row row-select">
                             <div class="col-12">
                                 <label for="ngay-xep-lich">Chọn ngày xếp lịch:</label>
                                 <input type="date" class="form-control" id="ngay-xep-lich" name="ngay-xep-lich" required>

@@ -1,7 +1,6 @@
 $(document).ready(function () {
     //XẾP LỊCH
     $(".btn-xep-lich").click(function (e) {
-        
         e.preventDefault();
         var danhSachPhimDaChon = $(".duallistbox").val();
         var ngayChieu = $("#ngay-xep-lich").val();
@@ -20,32 +19,57 @@ $(document).ready(function () {
                     _ngayChieu: ngayChieu,
                 },
                 success: function (response) {
+                    $(".alert-dismissible").remove();
                     $(".card-body .table-striped tbody").remove();
                     var setDataInHTML = "<tbody>";
                     if (response != null) {
                         var dataLich = response.dataResponse;
-                        var stt = 0;
-                        var arrayLichChieu = Object.values(dataLich);
-                        arrayLichChieu.forEach((lich) => {
-                            stt++;
-                            setDataInHTML += `<tr>
+                        console.log(dataLich);
+
+                        if (dataLich.length > 0) {
+                            var stt = 0;
+                            var arrayLichChieu = Object.values(dataLich);
+                            arrayLichChieu.forEach((lich) => {
+                                stt++;
+                                setDataInHTML += `<tr>
                                                 <td>${stt}</td>
                                                 <td>${lich.TenPhim}</td>
                                                 <td>${lich.TenRap}</td>
                                                 <td>${lich.ThoiGianChieu}</td>
                                                 <td>${lich.NgayChieu}</td>
                                             </tr>`;
-                        });
-                        setDataInHTML += "</tbody>";
-                        $(".card-body .table-striped").append(setDataInHTML);
-                        document.cookie =
-                            "dsLichChieu=" + JSON.stringify(arrayLichChieu);
+                            });
+                            setDataInHTML += "</tbody>";
+                            $(".card-body .table-striped").append(
+                                setDataInHTML
+                            );
+                            document.cookie =
+                                "dsLichChieu=" + JSON.stringify(arrayLichChieu);
+                        } else {
+                            $(".alert-dismissible").remove();
+                            $(".card-body .table-striped tbody").remove();
+                            var htmlResult = `<div class="alert alert-danger alert-dismissible mt-3" style="margin-bottom: 0;">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>Quan trọng!</strong> Số lượng suất chiếu của hệ thống hiện tại không thể đáp ứng, vui lòng lượt bớt phim hoặc thêm suất chiếu.
+                                        </div>`;
+                            $(htmlResult).insertAfter(
+                                ".card .form-select .row-select"
+                            );
+                        }
                     }
                 },
                 error: function (data, textStatus, errorThrown) {
                     console.log(data);
                 },
             });
+        } else {
+            $(".alert-dismissible").remove();
+            $(".card-body .table-striped tbody").remove();
+            var htmlResult = `<div class="alert alert-warning alert-dismissible mt-3" style="margin-bottom: 0;">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Thông báo!</strong> Vui lòng chọn ngày để xếp lịch chiếu (ô 'Chọn ngày xếp lịch:' ở phía trên)!.
+                        </div>`;
+            $(htmlResult).insertAfter(".card .form-select .row-select");
         }
     });
     //TÌM KIẾM LỊCH

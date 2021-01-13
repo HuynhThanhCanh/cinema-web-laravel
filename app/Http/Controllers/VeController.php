@@ -46,4 +46,17 @@ class VeController extends Controller
         $ve->save();
         return response()->json(['message' => $ve]);
     }
+
+    public function layDanhSachVeThanhVien(Request $request, $maTV, $maDsVe = null)
+    {
+        $maTV = $request->maTV;
+        $maDsVe = $request->maDsVe;
+        $result = DsVe::where('MaTV', $maTV)->get();
+        if ($maDsVe == null) {
+            return response()->json(['dsVe' => $result]);
+        } else {
+            $result = Ve::where('MaDsVe', $maDsVe)->get();
+        }
+        return response()->json(['dsVe' => $result]);
+    }
 }

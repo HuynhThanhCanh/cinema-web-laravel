@@ -78,4 +78,7 @@ Route::get('/phimSapChieu', 'PhimController@getPhimSapChieu'); // lấy tất c�
 // Thêm danh sách vé ?SoLuong=&TongThanhTien=&MaTV=&TrangThai=
 Route::get('/themdanhsachve', 'VeController@DanhSachVe');
 // Thêm danh sách vé: ?maDsVe=&ThanhTien=&ThoiGianMua=&MaLichChieu=&MaGhe=
-Route::get('/themve', 'VeController@DatVe');// thêm vé
+Route::get('/themve', 'VeController@DatVe'); // thêm vé
+// dsVe?maTV=1&maDsVe= (lấy list ds vé của thành viên)
+// dsVe?maTV=1&maDsVe=1 (lấy list vé the ds vé)
+Route::get('/dsVe', 'VeController@layDanhSachVeThanhVien');
