@@ -29,7 +29,7 @@ $(document).ready(function () {
                                                 <td>${stt}</td>
                                                 <td>${ve.TenVe}</td>
                                                 <td>${ve.HoTenTV}</td>
-                                                <td>DS${ve.MaDsVe}</td>
+                                                <td>DSV${ve.MaDsVe}</td>
                                                 <td>${ve.TenPhim}</td>
                                                 <td>${ve.ThanhTien}</td>
                                                 <td>${ve.ThoiGianMua}</td>

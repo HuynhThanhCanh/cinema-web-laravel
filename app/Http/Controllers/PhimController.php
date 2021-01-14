@@ -121,7 +121,9 @@ class PhimController extends Controller
     }
     public function getAPIPhimbyID($MaPhim)
     {
-        $phim = DB::select('select * from phims where MaPhim =?', [$MaPhim]);
+        $phim = DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
+        FROM phims , loai_phims , gioi_han_tuois
+        WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.MaPhim=? ', [$MaPhim]);
         return response()->json($phim);
     }
     public function insertAPIPhim(Request $request)
@@ -147,8 +149,6 @@ class PhimController extends Controller
     }
     public function getPhimDangChieu()
     {
-        // $phim=Phim::where('TrangThai','1')->get();
-        // return response()->json($phim);
         $phim = DB::select('SELECT phims.`*`,loai_phims.TenLoaiPhim,gioi_han_tuois.TenGioiHan
        FROM phims , loai_phims , gioi_han_tuois
        WHERE phims.MaLoaiPhim = loai_phims.MaLoaiPhim AND phims.Nhan=gioi_han_tuois.MaGioiHan AND phims.TrangThai=1');
