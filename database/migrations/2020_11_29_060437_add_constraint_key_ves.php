@@ -17,7 +17,7 @@ class AddConstraintKeyVes extends Migration
             //
             $table->foreign('MaLichChieu')->references('MaLichChieu')->on('lich_chieus');
             $table->foreign('MaGhe')->references('MaGhe')->on('ghes');
-            $table->foreign('MaDsve')->references('MaDsVe')->on('ds_ves');
+            $table->foreign('MaDsVe')->references('MaDsVe')->on('ds_ves');
         });
     }
 
