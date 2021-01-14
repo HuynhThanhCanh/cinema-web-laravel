@@ -24,6 +24,6 @@ class DanhSachVeController extends Controller
     function layMaDsVeCuoiCung()
     {
         $dsVe = DsVe::orderby('MaDsVe', 'desc')->limit(1)->select('MaDsVe')->get();
-        return json_encode($dsVe);
+        return response()->json($dsVe[0]->MaDsVe);
     }
 }
