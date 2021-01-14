@@ -54,19 +54,6 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm..."
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Messages Dropdown Menu -->
@@ -249,7 +236,7 @@
                         </li>
                         <li class="nav-item menu-item has-treeview">
                             <a href="{{ url('quan-ly-ve') }}" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
+                                <i class="nav-icon fas fa-ticket-alt"></i>
                                 <p>
                                     Vé
                                 </p>
@@ -309,6 +296,7 @@
     <script src={{ asset('js/handler-submit-them.js') }}></script>
     <script src={{ asset('ajax/xep-lich-ajax.js') }}></script>
     <script src={{ asset('ajax/suat-chieu-ajax.js') }}></script>
+    <script src={{ asset('ajax/ve-ajax.js') }}></script>
     <script src={{ asset('js/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.js') }}></script>
     <script>
         $(function() {

@@ -58,7 +58,10 @@ Route::get('/so-do-rap', 'RapController@laySoDoRap');
 Route::get('/cap-nhat-thanh-vien', 'ThanhVienController@capNhatThanhVien');
 // thêm thành viên (?Avatar=&HoTenTV=&NgaySinh=&SDT=&Email=&Password=&DiaChi=&TrangThai=)
 Route::get('/savethanhvien', 'ThanhVienController@insertThanhVien');
-Route::get('/thanhvien', 'ThanhVienController@getThanhVien'); // Lấy danh sách tất cả thành viên
+// Lấy danh sách tất cả thành viên
+Route::get('/thanhvien', 'ThanhVienController@getThanhVien');
+// Lấy thành viên theo MaTV
+Route::get('/thanhvien/{maTv}', 'ThanhVienController@getThanhVienTheoId');
 // Check đăng nhập dưới App (?User=&Pass=)
 Route::get('/loginApp', 'ThanhVienController@LoginApp');
 
@@ -73,12 +76,22 @@ Route::get('/phimDangChieu', 'PhimController@getPhimDangChieu'); // lấy tất 
 Route::get('/phimSapChieu', 'PhimController@getPhimSapChieu'); // lấy tất cả phim sắp chiếu
 
 /**
- * VÉ
+ * DS VÉ
  */
 // Thêm danh sách vé ?SoLuong=&TongThanhTien=&MaTV=&TrangThai=
-Route::get('/themdanhsachve', 'VeController@DanhSachVe');
-// Thêm danh sách vé: ?maDsVe=&ThanhTien=&ThoiGianMua=&MaLichChieu=&MaGhe=
+Route::get('/themdanhsachve', 'DanhSachVeController@themDanhSachVe');
+// Lấy mã của danh sách vé được thêm vào cuối cùng trong database
+Route::get('/layMaDsVeCuoi', 'DanhSachVeController@layMaDsVeCuoiCung');
+
+/**
+ * VÉ
+ */
+// Thêm vé: ?maDsVe=&ThanhTien=&ThoiGianMua=&MaLichChieu=&MaGhe=
 Route::get('/themve', 'VeController@DatVe'); // thêm vé
 // dsVe?maTV=1&maDsVe= (lấy list ds vé của thành viên)
-// dsVe?maTV=1&maDsVe=1 (lấy list vé the ds vé)
+// dsVe?maTV=1&maDsVe=1 (lấy list vé theo ds vé)
 Route::get('/dsVe', 'VeController@layDanhSachVeThanhVien');
+// /ve/1 (lấy ds vé của thành viên)
+Route::get('/ve/{maTV}', 'VeController@layVeThanhVien');
+//check ghế đã được đặt hay chưa
+Route::get('/check-ghe', 'VeController@checkGhe');

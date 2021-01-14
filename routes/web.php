@@ -22,8 +22,7 @@ Route::post('/', function () {
 /**
  * PHIM
  */
-Route::group(['prefix' => 'quan-ly-phim'], function () 
-{
+Route::group(['prefix' => 'quan-ly-phim'], function () {
     Route::get('/', 'PhimController@index')->middleware('checklogin::class');
     Route::post('/', 'PhimController@index');
     Route::get('/them-phim', 'PhimController@themPhim')->middleware('checklogin::class');
@@ -41,7 +40,7 @@ Route::group(['prefix' => 'quan-ly-the-loai-phim'], function () {
     Route::post('/', 'TheLoaiPhimController@index');
     Route::get('/them-the-loai-phim', 'TheLoaiPhimController@themLoaiPhim')->middleware('checklogin::class');
     Route::get('/cap-nhat-the-loai-phim/{MaLoaiPhim}', 'TheLoaiPhimController@capNhatLoaiPhim')->middleware('checklogin::class');
-    Route::post('/formSua/{MaLoaiPhim}','TheLoaiPhimController@suaLoaiPhim' );
+    Route::post('/formSua/{MaLoaiPhim}', 'TheLoaiPhimController@suaLoaiPhim');
     Route::post('/formAdd', 'TheLoaiPhimController@addLoaiPhim');
     Route::get('/xoatheloaiphim/{MaLoaiPhim}', 'TheLoaiPhimController@XoaLoaiPhim')->middleware('checklogin::class');
 });
@@ -89,17 +88,18 @@ Route::group(['prefix' => 'quan-ly-suat-chieu'], function () {
     Route::get('/xoa-suat-chieu-ajax', 'XuatChieuController@DeleteAjax');
     Route::post('/UpdateAjax', 'XuatChieuController@UpdateAjax');
     Route::post('/AddAjax', 'XuatChieuController@AddAjax')->name('AddSuatChieuAjax');
-
 });
 
 /**
  * VÉ
  */
-Route::get('/quan-ly-ve', 'VeController@index');
+Route::group(['prefix' => '/quan-ly-ve'], function () {
+    Route::get('/', 'VeController@index')->middleware('checklogin::class');
+    Route::get('/tim-kiem-ve', 'VeController@timKiemVe')->middleware('checklogin::class');
+});
 /**
  * ĐĂNG NHẬP
  */
 Route::get('/dang-nhap', 'TrangChuController@formDangNhap');
 Route::post('/login', 'TrangChuController@dangnhap');
 Route::get('/dangxuat', 'TrangChuController@dangxuat')->middleware('checklogin::class');
-
