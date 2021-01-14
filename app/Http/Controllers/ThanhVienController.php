@@ -19,7 +19,7 @@ class ThanhVienController extends Controller
         $thanhvien->NgaySinh = $request->NgaySinh;
         $thanhvien->SDT = $request->SDT;
         $thanhvien->Email = $request->Email;
-        $thanhvien->Password = bcrypt($request->Password);
+        $thanhvien->Password = md5($request->Password);
         $thanhvien->DiaChi = $request->DiaChi;
         $thanhvien->TrangThai = $request->TrangThai = 1;
         $thanhvien->save();

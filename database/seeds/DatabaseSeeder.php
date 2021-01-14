@@ -300,8 +300,8 @@ class thanh_viens extends Seeder
     public function run()
     {
         DB::table('thanh_viens')->insert([
-            ['HoTenTV' => 'Huỳnh Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => '12345', 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
-            ['HoTenTV' => 'Phạm Minh Nhựt', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => '12345', 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV' => 'Huỳnh Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => md5('12345'), 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
+            ['HoTenTV' => 'Phạm Minh Nhựt', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
         ]);
     }
 }
