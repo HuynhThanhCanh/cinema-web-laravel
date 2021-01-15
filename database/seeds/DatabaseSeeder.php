@@ -22,12 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call(chi_nhanhs::class);
         $this->call(raps::class);
         $this->call(thanh_viens::class);
-        $this->call(ds_ves::class);
         $this->call(loai_ghes::class);
         $this->call(ghes::class);
         $this->call(thoi_gian_chieus::class);
         $this->call(lich_chieus::class);
-        $this->call(ves::class);
     }
 }
 
@@ -123,18 +121,6 @@ class raps extends Seeder
         DB::table('raps')->insert([
             ['TenRap' => 'Rap1', 'SoLuongGhe' => 50, 'MaChiNhanh' => 1, 'TrangThai' => 1],
             ['TenRap' => 'Rap2', 'SoLuongGhe' => 50, 'MaChiNhanh' => 1, 'TrangThai' => 1],
-        ]);
-    }
-}
-class ds_ves extends Seeder
-{
-    public function run()
-    {
-        DB::table('ds_ves')->insert([
-            ['SoLuong' => 2, 'TongThanhTien' => 500000, 'MaTV' => 1, 'TrangThai' => 1],
-            ['SoLuong' => 5, 'TongThanhTien' => 1000000, 'MaTV' => 1, 'TrangThai' => 1],
-            ['SoLuong' => 5, 'TongThanhTien' => 1000000, 'MaTV' => 2, 'TrangThai' => 1],
-            ['SoLuong' => 10, 'TongThanhTien' => 2000000, 'MaTV' => 2, 'TrangThai' => 1]
         ]);
     }
 }
@@ -302,18 +288,6 @@ class thanh_viens extends Seeder
         DB::table('thanh_viens')->insert([
             ['HoTenTV' => 'Huỳnh Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => md5('12345'), 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
             ['HoTenTV' => 'Phạm Minh Nhựt', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
-        ]);
-    }
-}
-
-class ves extends Seeder
-{
-    public function run()
-    {
-        DB::table('ves')->insert([
-            ['TenVe' => 'Vé Xem Phim', 'MaDsVe' => 1, 'ThanhTien' => 50000, 'MaLichChieu' => 1, 'MaGhe' => 'RAP1-A1', 'TrangThai' => 1],
-            ['TenVe' => 'Vé Xem Phim', 'MaDsVe' => 1, 'ThanhTien' => 50000, 'MaLichChieu' => 1, 'MaGhe' => 'RAP1-A2', 'TrangThai' => 1],
-            ['TenVe' => 'Vé Xem Phim', 'MaDsVe' => 1, 'ThanhTien' => 50000, 'MaLichChieu' => 1, 'MaGhe' => 'RAP1-A3', 'TrangThai' => 1],
         ]);
     }
 }
