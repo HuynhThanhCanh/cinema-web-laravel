@@ -73,7 +73,10 @@ class RapController extends Controller
         $lichChieu = DB::select("SELECT *
                                 FROM lich_chieus lc
                                 WHERE lc.MaLichChieu = $maLichChieu");
-        $argsGhe = Ghe::where('MaRap', $lichChieu[0]->MaRap)->get();
+        $argsGhe = DB::table('ghes')
+            ->join('loai_ghes', 'loai_ghes.MaLoaiGhe', '=', 'ghes.MaLoaiGhe')
+            ->join('gias', 'gias.MaGia', '=', 'loai_ghes.MaGia')
+            ->get();
         $argsVe = DB::select("SELECT *
                                 FROM ves v
                                 WHERE v.MaLichChieu = $maLichChieu");

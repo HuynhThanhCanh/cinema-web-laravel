@@ -50,7 +50,6 @@ class VeController extends Controller
         $ve->TenVe = "ve xem phim";
         $ve->MaDsVe = $request->MaDsVe;
         $ve->ThanhTien = $request->ThanhTien;
-        $ve->ThoiGianMua = $request->ThoiGianMua;
         $ve->MaLichChieu = $request->MaLichChieu;
         $ve->MaGhe = $request->MaGhe;
         $ve->TrangThai = 1;
@@ -98,5 +97,34 @@ class VeController extends Controller
             return response()->json(true);
         }
         return response()->json(false);
+    }
+
+    public function tongChiTieuTrongNam(Request $request)
+    {
+        $nam = $request->nam;
+        $maTV = $request->maTV;
+        $tongChiTieu = DB::table('ves')
+            ->join('ds_ves', 'ds_ves.MaDsVe', '=', 'ves.MaDsVe')
+            ->where('ds_ves.MaTV', $maTV)
+            ->where('ds_ves.TrangThai', 1)
+            ->where('ves.TrangThai', 1)
+            ->whereYear('ves.ThoiGianMua', $nam)
+            ->sum('ves.ThanhTien');
+        return $tongChiTieu;
+    }
+
+    public function tongChiTieuTrongKhoangThoiGian(Request $request)
+    {
+        $ngayBatDau = $request->ngayBatDau;
+        $ngayKetThuc = $request->ngayKetThuc;
+        $maTV = $request->maTV;
+        $tongChiTieu = DB::table('ves')
+            ->join('ds_ves', 'ds_ves.MaDsVe', '=', 'ves.MaDsVe')
+            ->where('ds_ves.MaTV', $maTV)
+            ->where('ds_ves.TrangThai', 1)
+            ->where('ves.TrangThai', 1)
+            ->whereBetween('ves.ThoiGianMua', [$ngayBatDau, $ngayKetThuc])
+            ->sum('ves.ThanhTien');
+        return $tongChiTieu;
     }
 }

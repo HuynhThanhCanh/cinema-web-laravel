@@ -64,10 +64,33 @@ class ThanhVienController extends Controller
         $hoTenTV = $request->hoTenTV;
         $sdt = $request->sdt;
         $diaChi = $request->diaChi;
-        ThanhVien::where("MaThanhVien", $maThanhVien)
+        $update = ThanhVien::where("MaThanhVien", $maThanhVien)
             ->update(['DiaChi' => $diaChi, 'SDT' => $sdt, 'HoTenTV' => $hoTenTV]);
 
-        $thanhVien = ThanhVien::get();
-        return $thanhVien;
+        return strval($update);
+    }
+
+    public function CheckEmailTrung(Request $request)
+    {
+        $email = $request->Email;
+        $thanhvien = ThanhVien::get();
+        foreach ($thanhvien as $item) {
+            if ($email == $item->Email) {
+                return response('true');
+            }
+        }
+        return response('false');
+    }
+
+    public function CheckSDTTrung(Request $request)
+    {
+        $email = $request->sdt;
+        $thanhvien = ThanhVien::get();
+        foreach ($thanhvien as $item) {
+            if ($email == $item->SDT) {
+                return response('true');
+            }
+        }
+        return response('false');
     }
 }

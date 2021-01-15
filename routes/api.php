@@ -78,7 +78,7 @@ Route::get('/phimSapChieu', 'PhimController@getPhimSapChieu'); // lấy tất c�
 /**
  * DS VÉ
  */
-// Thêm danh sách vé ?SoLuong=&TongThanhTien=&MaTV=&TrangThai=
+// Thêm danh sách vé ?SoLuong=&TongThanhTien=&MaTV=
 Route::get('/themdanhsachve', 'DanhSachVeController@themDanhSachVe');
 // Lấy mã của danh sách vé được thêm vào cuối cùng trong database
 Route::get('/layMaDsVeCuoi', 'DanhSachVeController@layMaDsVeCuoiCung');
@@ -95,3 +95,11 @@ Route::get('/dsVe', 'VeController@layDanhSachVeThanhVien');
 Route::get('/ve/{maTV}', 'VeController@layVeThanhVien');
 //check ghế đã được đặt hay chưa
 Route::get('/check-ghe', 'VeController@checkGhe');
+//tổng chi tiêu của năm (?nam=)
+Route::get('/tong-chi-tieu-trong-nam', 'VeController@tongChiTieuTrongNam');
+//tổng chi tiêu trong khoảng thời gian (?nam=&maTV=&ngayBatDau=&ngayKetThuc=)
+Route::get('/tong-chi-tieu-trong-khoang-thoi-gian', 'VeController@tongChiTieuTrongKhoangThoiGian');
+//check email trùng (?Email=)
+Route::get('/check-email', 'ThanhVienController@CheckEmailTrung');
+//check sdt trùng (?sdt=)
+Route::get('/check-sdt', 'ThanhVienController@CheckSDTTrung');
