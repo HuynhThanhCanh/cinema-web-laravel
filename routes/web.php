@@ -68,7 +68,7 @@ Route::group(['prefix' => 'quan-ly-lich-chieu'], function () {
     Route::post('/xep-lich', 'LichChieuController@xepLichAJAX');
     Route::post('/them-lich', 'LichChieuController@themLich');
     Route::post('/tim-kiem-lich-theo-ngay-chieu', 'LichChieuController@timKiemLichTheoNgayChieu');
-    Route::post('/xoa-lich-theo-ngay-chieu', 'LichChieuController@xoaLichTheoNgayChieu');
+    //Route::post('/xoa-lich-theo-ngay-chieu', 'LichChieuController@xoaLichTheoNgayChieu');
 });
 
 /**

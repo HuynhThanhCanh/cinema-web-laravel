@@ -65,7 +65,6 @@ class RapController extends Controller
 
     /**
      * API
-     * Author: Huỳnh Thanh Cảnh
      */
     function laySoDoRap(Request $request)
     {
@@ -76,6 +75,8 @@ class RapController extends Controller
         $argsGhe = DB::table('ghes')
             ->join('loai_ghes', 'loai_ghes.MaLoaiGhe', '=', 'ghes.MaLoaiGhe')
             ->join('gias', 'gias.MaGia', '=', 'loai_ghes.MaGia')
+            ->where('ghes.MaRap', $lichChieu[0]->MaRap)
+            ->orderBy('ghes.MaGhe', 'asc')
             ->get();
         $argsVe = DB::select("SELECT *
                                 FROM ves v

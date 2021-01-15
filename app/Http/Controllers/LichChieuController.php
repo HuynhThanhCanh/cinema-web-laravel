@@ -155,21 +155,21 @@ class LichChieuController extends Controller
         return response()->json(['success' => 'Gọi data thành công.', 'dataResponse' => $dsLichChieu]);
     }
 
-    function xoaLichTheoNgayChieu(Request $req)
-    {
-        $ngayChieu = $req->input('_ngayChieu');
-        try {
-            $deleteAfter = LichChieu::where('NgayChieu', $ngayChieu)->get();
-            if (count($deleteAfter) == 0) {
-                return response()->json(['success' => false]);
-            }
-            LichChieu::where("NgayChieu", $ngayChieu)->update(['TrangThai' => 0]);
-            $this->lichChieus = DB::select($this->queryLichChieu);
-            return response()->json(['success' => true, "dataResponse" => $this->lichChieus]);
-        } catch (QueryException $err) {
-            return response()->json(['success' => false]);
-        }
-    }
+    // function xoaLichTheoNgayChieu(Request $req)
+    // {
+    //     $ngayChieu = $req->input('_ngayChieu');
+    //     try {
+    //         $deleteAfter = LichChieu::where('NgayChieu', $ngayChieu)->get();
+    //         if (count($deleteAfter) == 0) {
+    //             return response()->json(['success' => false]);
+    //         }
+    //         LichChieu::where("NgayChieu", $ngayChieu)->update(['TrangThai' => 0]);
+    //         $this->lichChieus = DB::select($this->queryLichChieu);
+    //         return response()->json(['success' => true, "dataResponse" => $this->lichChieus]);
+    //     } catch (QueryException $err) {
+    //         return response()->json(['success' => false]);
+    //     }
+    // }
 
     //API
     function lichChieu($trangThai = null)

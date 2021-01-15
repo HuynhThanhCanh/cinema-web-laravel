@@ -91,17 +91,17 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.dataResponse == "") {
                     $(".alert-dismissible").remove();
-                    $(".table-tim-kiem-lich tbody").remove();
+                    $(".table-lich-chieu tbody").remove();
                     var htmlResult = `<div class="alert alert-info alert-dismissible" style="margin-bottom: 0;">
                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                         <strong>Thông báo!</strong> Không tìm thấy lịch chiếu của ngày ${ngayChieu}.
                                     </div>`;
                     $(htmlResult).insertAfter(
-                        ".card .card-header .btn-xoa-lich-chieu"
+                        ".card .card-header .btn-xep-lich"
                     );
                 } else {
                     $(".alert-dismissible").remove();
-                    $(".table-tim-kiem-lich tbody").remove();
+                    $(".table-lich-chieu tbody").remove();
                     var setDataInHTML = "<tbody>";
                     if (response != null) {
                         var dataLich = response.dataResponse;
@@ -118,7 +118,7 @@ $(document).ready(function () {
                                             </tr>`;
                         });
                         setDataInHTML += "</tbody>";
-                        $(".table-tim-kiem-lich").append(setDataInHTML);
+                        $(".table-lich-chieu").append(setDataInHTML);
                     }
                 }
             },
@@ -126,85 +126,5 @@ $(document).ready(function () {
                 console.log(data);
             },
         });
-    });
-
-    //XÓA LỊCH
-    $(".btn-xac-nhan-xoa-lich-chieu").click(function () {
-        var ngayChieu = $("#input-ngay-chieu").val();
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-        });
-
-        if (ngayChieu == "") {
-            $(".alert-dismissible").remove();
-            //insert warning notification
-            var htmlResult = `<div class="alert alert-warning alert-dismissible" style="margin-bottom: 0;">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Cảnh báo!</strong> Vui lòng chọn ngày của lịch chiếu.
-                            </div>`;
-            $(htmlResult).insertAfter(".card .card-header .btn-xoa-lich-chieu");
-        } else {
-            $.ajax({
-                url: "quan-ly-lich-chieu/xoa-lich-theo-ngay-chieu",
-                type: "POST",
-                datatype: "json",
-                data: {
-                    _ngayChieu: ngayChieu,
-                },
-                success: function (response) {
-                    var check = response.success;
-                    var htmlResult;
-                    $(".alert-dismissible").remove();
-                    if (check == true) {
-                        //insert success notification
-                        htmlResult = `<div class="alert alert-success alert-dismissible" style="margin-bottom: 0;">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>Thành công!</strong> Đã xóa thành công lịch chiếu của ngày ${ngayChieu}.
-                                    </div>`;
-                        $(".card-body .table-tim-kiem-lich tbody").remove();
-
-                        //Reload list lich chieu
-                        $(
-                            ".card-body #table-danh-sach-lich-chieu tbody"
-                        ).remove();
-                        var setDataInHTML = "<tbody>";
-                        if (response != null) {
-                            var dataLich = response.dataResponse;
-                            console.log(dataLich);
-                            var stt = 0;
-                            dataLich.forEach((lich) => {
-                                stt++;
-                                setDataInHTML += `<tr>
-                                                    <td>${stt}</td>
-                                                    <td>LC${lich.MaLichChieu}</td>
-                                                    <td>${lich.TenPhim}</td>
-                                                    <td>${lich.TenRap}</td>
-                                                    <td>${lich.ThoiGianChieu}</td>
-                                                    <td>${lich.NgayChieu}</td>
-                                                </tr>`;
-                            });
-                            setDataInHTML += "</tbody>";
-                            $(".card-body #table-danh-sach-lich-chieu").append(
-                                setDataInHTML
-                            );
-                        }
-                    } else {
-                        //insert error notification
-                        htmlResult = `<div class="alert alert-danger alert-dismissible" style="margin-bottom: 0;">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>Thất bại!</strong> Không thể thực hiện yêu cầu này, vui lòng kiểm tra và thử lại.
-                                    </div>`;
-                    }
-                    $(htmlResult).insertAfter(
-                        ".card .card-header .btn-xoa-lich-chieu"
-                    );
-                },
-                error: function (data, textStatus, errorThrown) {
-                    console.log(data);
-                },
-            });
-        }
     });
 });
