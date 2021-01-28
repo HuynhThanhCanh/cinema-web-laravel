@@ -103,3 +103,13 @@ Route::get('/tong-chi-tieu-trong-khoang-thoi-gian', 'VeController@tongChiTieuTro
 Route::get('/check-email', 'ThanhVienController@CheckEmailTrung');
 //check sdt trùng (?sdt=)
 Route::get('/check-sdt', 'ThanhVienController@CheckSDTTrung');
+
+/**
+ * BÌNH LUẬN
+ */
+//lấy danh sách bình luận dựa vào mã phim
+// .../binh-luan?maPhim=?
+Route::get('/binh-luan', 'BinhLuanController@layDanhSachBinhLuan');
+// thêm bình luận mới
+// .../them-binh-luan?maTV=&maPhim=$noiDung=
+Route::get('/them-binh-luan', 'BinhLuanController@themBinhLuanMoi');

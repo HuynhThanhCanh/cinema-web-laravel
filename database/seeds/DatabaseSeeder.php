@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ghes::class);
         $this->call(thoi_gian_chieus::class);
         $this->call(lich_chieus::class);
+        $this->call(binh_luans::class);
     }
 }
 
@@ -288,6 +289,31 @@ class thanh_viens extends Seeder
         DB::table('thanh_viens')->insert([
             ['HoTenTV' => 'Huỳnh Thanh Cảnh', 'NgaySinh' => '2000-10-02', 'SDT' => '0947479207', 'Email' => 'huynhthanhcanh.top@gmail.com', 'Password' => md5('12345'), 'DiaChi' => 'Bình Thạnh', 'TrangThai' => 1],
             ['HoTenTV' => 'Phạm Minh Nhựt', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'phamminhnhut@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV' => 'Đặng Thái Bình', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'dangthaibinh@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV' => 'Trần Huỳnh Thạch Thảo', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'tranhuynhthachthao@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+            ['HoTenTV' => 'Vũ Thị Trang', 'NgaySinh' => '2000-10-10', 'SDT' => '0911079197', 'Email' => 'vuthitrang@gmail.com', 'Password' => md5('12345'), 'DiaChi' => "Nhà Bè",  'TrangThai' => 1],
+        ]);
+    }
+}
+
+class binh_luans extends Seeder
+{
+    public function run()
+    {
+        DB::table('binh_luans')->insert([
+            ['MaTV' => 1, 'MaPhim' => 1, 'NoiDungBinhLuan' => 'Phim rất hay', 'TrangThai' => 1],
+            ['MaTV' => 2, 'MaPhim' => 1, 'NoiDungBinhLuan' => 'Phim rất hay quá hà <3', 'TrangThai' => 1],
+            ['MaTV' => 3, 'MaPhim' => 1, 'NoiDungBinhLuan' => 'Toẹt zời', 'TrangThai' => 1],
+            ['MaTV' => 4, 'MaPhim' => 1, 'NoiDungBinhLuan' => 'rất hay', 'TrangThai' => 1],
+            ['MaTV' => 5, 'MaPhim' => 1, 'NoiDungBinhLuan' => 'phim suất sắc', 'TrangThai' => 1],
+            ['MaTV' => 1, 'MaPhim' => 2, 'NoiDungBinhLuan' => 'phim suất sắc', 'TrangThai' => 1],
+            ['MaTV' => 2, 'MaPhim' => 2, 'NoiDungBinhLuan' => 'phim toẹt zời', 'TrangThai' => 1],
+            ['MaTV' => 3, 'MaPhim' => 3, 'NoiDungBinhLuan' => 'phim toẹt zời', 'TrangThai' => 1],
+            ['MaTV' => 4, 'MaPhim' => 3, 'NoiDungBinhLuan' => 'phim hay quá', 'TrangThai' => 1],
+            ['MaTV' => 1, 'MaPhim' => 4, 'NoiDungBinhLuan' => 'phim hay quá', 'TrangThai' => 1],
+            ['MaTV' => 1, 'MaPhim' => 4, 'NoiDungBinhLuan' => 'phim hay quá', 'TrangThai' => 1],
+            ['MaTV' => 3, 'MaPhim' => 4, 'NoiDungBinhLuan' => 'phim hay quá hihi', 'TrangThai' => 1],
+            ['MaTV' => 5, 'MaPhim' => 4, 'NoiDungBinhLuan' => 'phim hay quá trời hihi', 'TrangThai' => 1],
         ]);
     }
 }
